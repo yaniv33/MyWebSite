@@ -22,6 +22,15 @@ UPDATE VERSION :&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; npm install typescript@latest</p
 <p>&nbsp;&nbsp; &nbsp;f:\Program Files\nodejs\<br />
 &nbsp;&nbsp;&nbsp; %AppData%\Roaming\npm</p>
 
+<p><u>angular working order </u></p>
+
+<p style="margin-left: 40px;">main.js &gt; main module &gt; routes adn components &gt; children</p>
+
+<p><u>file structure</u></p>
+
+<p style="margin-left: 40px;">package.json - holds shortcuts for scripts and dependencies<br />
+angular.json - holds the styles and assest</p>
+
 <p><u>Deploy angular </u></p>
 
 <p style="margin-left: 40px;">add lines to angular.json<br />
@@ -33,45 +42,73 @@ UPDATE VERSION :&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; npm install typescript@latest</p
 
 <p style="margin-left: 40px;">upload the folder to&nbsp; WEB-APP</p>
 
-<p>&nbsp;</p>
+<p><u>enviorment</u></p>
+
+<p><u>set proxy</u></p>
+
+<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
+1. IN package.json &gt; &quot;start&quot;: &quot;ng serve --host 0.0.0.0 --proxy-config proxy.conf.json -o --port 4204&quot;,
+   set for each URI the proxy needed for it in proxy.conf.json
+
+2. set Environments
+  IN angular.json add configurations
+            &quot;production&quot;: {
+              &quot;fileReplacements&quot;: [
+                {
+                  &quot;replace&quot;: &quot;src/environments/environment.ts&quot;,
+                  &quot;with&quot;: &quot;src/environments/environment.prod.ts&quot;
+                }
+              ],
+              &quot;optimization&quot;: true,
+              &quot;outputHashing&quot;: &quot;all&quot;,
+              &quot;sourceMap&quot;: false,
+              &quot;extractCss&quot;: true,
+              &quot;namedChunks&quot;: false,
+              &quot;extractLicenses&quot;: true,
+              &quot;vendorChunk&quot;: false,
+              &quot;buildOptimizer&quot;: true,
+              &quot;budgets&quot;: [
+                {
+                  &quot;type&quot;: &quot;initial&quot;,
+                  &quot;maximumWarning&quot;: &quot;4mb&quot;,
+                  &quot;maximumError&quot;: &quot;5mb&quot;
+                },
+                {
+                  &quot;type&quot;: &quot;anyComponentStyle&quot;,
+                  &quot;maximumWarning&quot;: &quot;6kb&quot;
+                }
+              ]
+            },
+</pre>
 
 <p>&nbsp;</p>
 
-<p>create project<br />
---------------<br />
-ng new [name]</p>
+<p><u>Common commands </u></p>
 
-<p>ng serve<br />
-ng serve --port 4201</p>
+<p style="margin-left: 40px;">ng new [name]&nbsp;&nbsp;&nbsp; - create new project<br />
+ng serve - run project<br />
+ng serve --port 4201<br />
+ng generate component (short ng g c )<br />
+npm config list<br />
+npm install<br />
+ng update<br />
+npm outdated</p>
 
-<p>ng generate component (short ng g c )</p>
+<p><u>Q&amp;A</u></p>
 
-<p>&nbsp;&nbsp; &nbsp;npm config list<br />
-&nbsp;&nbsp; &nbsp;ng update<br />
-&nbsp;&nbsp; &nbsp;npm outdated<br />
-&nbsp;&nbsp; &nbsp;https://update.angular.io<br />
-&nbsp;&nbsp; &nbsp;ng location : %APPDATA%\npm\node_modules\@angular\cli\bin<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;if ng is missing - npm install -g @angular/cli@latest<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<br />
-ERRORS GOT WHILE UPDATED ANGULAR FROM 13 TO 14<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;err - module not found readable-stream<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm uninstall -g @angular/cli@latest<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm cache clear --force<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm install -g @angular/cli@latest</p>
+<p style="margin-left: 40px;">angular positive ?- fully featured , long term support , typescript<br />
+angular negative ?- complax<br />
+life cycle hook ?- methods in different life cycle of the component : ngOnInit , ngAfterInit, ngOnDestroy<br />
+difference between compunents and directives ?- directive add behavior to existing elements in component<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; component have markup , directives has business logic that work with the element itself</p>
 
-<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;uninstall nodejs<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;deleta %appdata%\npm .. npm_chace<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;err - yarn not exists<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;got to f:\Program Files\nodejs\<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;run yarn.bat , yarnpkg.bat<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ng update @angular/core@14 @angular/cli@14<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
-&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;err- agm creates issue so i used force&nbsp;&nbsp; &nbsp;</p>
+<p style="margin-left: 40px;">what is async pipe ?- allows getting a value and unsbscibe<br />
+angular ivy ?- new angular engine , fast recompiling , bundle is smaller</p>
 
-<p>installation folders location of NPM<br />
+<p>&nbsp;
+<p>&nbsp;<br />
 <br />
 &nbsp;&nbsp; &nbsp;</p>
+</p>
 
 <p>&nbsp;</p>
