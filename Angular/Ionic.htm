@@ -1,0 +1,41 @@
+<p>APP on angular<br />
+--------------------<br />
+ng build<br />
+ionic capacitor add android<br />
+npx cap open android</p>
+
+<p>run ionic cordova<br />
+-----------<br />
+https://ionicframework.com/docs/v3/developer-resources/platform-setup/windows-setup.html<br />
+set GRADLE_HOME=&quot;F:\Program Files\Android\Android Studio\gradle\gradle-4.6&quot;<br />
+set ANDROID_HOME=&quot;F:\Users\yaniv\AppData\Local\Android\sdk&quot;<br />
+set PATH=%PATH%;%ANDROID_HOME%\tools;%ANDROID_HOME%\platform-tools</p>
+
+<p>set PYTHON=C:\Users\yaniv\AppData\Local\Programs\Python\Python38\python.exe</p>
+
+<p>add variable - _JAVA_OPTIONS &gt; -Xmx512M</p>
+
+<p>npm i -g cordova<br />
+npm i -g cordova-res<br />
+ionic cordova platform add android<br />
+ionic cordova build android<br />
+ionic cordova run android<br />
+cordova build -release android</p>
+
+<p>npm install --global --production windows-build-tools (run in cmd admin)</p>
+
+<p><br />
+capcam example capacitor<br />
+-----------------<br />
+ionic start capCamera blank<br />
+cd capCamera<br />
+npm run build&nbsp;&nbsp; &nbsp;- create www folder<br />
+npm install --save @capacitor/cli @capacitor/core (globally)<br />
+npm uninstall --save cordova-plugin-splashscreen<br />
+npx cap init capacitor com.ph.camera<br />
+npx cap add android</p>
+
+<p>&nbsp;&nbsp; &nbsp;sync on android<br />
+&nbsp;&nbsp; &nbsp;--------------<br />
+&nbsp;&nbsp; &nbsp;npm run build &amp; npx cap sync android<br />
+&nbsp;&nbsp; &nbsp;npx cap open android</p>

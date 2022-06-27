@@ -1,0 +1,260 @@
+<p>ERRORS GOT WHILE UPDATED ANGULAR FROM 13 TO 14<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="background-color:#ff8c00">err </span>- module not found readable-stream<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm uninstall -g @angular/cli@latest<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm cache clear --force<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm install -g @angular/cli@latest</p>
+
+<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;uninstall nodejs<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;deleta %appdata%\npm .. npm_chace<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="background-color:#ff8c00">err </span>- yarn not exists<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;got to f:\Program Files\nodejs\<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;run yarn.bat , yarnpkg.bat<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ng update @angular/core@14 @angular/cli@14<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<span style="background-color:#ff8c00">err</span>- agm creates issue so i used force&nbsp;&nbsp; &nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>Could not find module &quot;@angular-devkit/build-angular&quot;<br />
+--------------------------------------------------<br />
+npm install --save-dev @angular-devkit/build-angular</p>
+
+<p>&nbsp;Cannot find module &#39;angular-in-memory-web-api&#39;<br />
+-----------------------------------------------<br />
+npm install angular-in-memory-web-api --save &nbsp;&nbsp; &nbsp;- did not work</p>
+
+<p>npm install --save-dev @angular/http&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;- did not work</p>
+
+<p>&quot;^0.2.4&quot;<br />
+&quot;angular-in-memory-web-api&quot;: &quot;github:brandonroberts/in-memory-web-api-bazel#50a34d8&quot;,<br />
+&quot;zone.js&quot;: &quot;~0.8.26&quot;</p>
+
+<p>ERROR - Could not install from &quot;@angular&quot; as it does not contain a package.json file.<br />
+------------------------------------------------------------------------------<br />
+package.json holds a lot of info about the project , in it info about the dependencies<br />
+first try : npm update<br />
+* did not work for me , had to copy manually the list of dependencies and devDependencies from POS project</p>
+
+<p><br />
+- Refused to load the image &#39;http://localhost:4200/favicon.ico&#39; because it violates the following Content Security Policy directive: &quot;default-src &#39;none&#39;&quot;. Note that &#39;img-src&#39; was not explicitly set, so &#39;default-src&#39; is used as a fallback.<br />
+need to change from @ViewChild(GraphInnerComponent) child; to&nbsp; @ViewChild(GraphInnerComponent, {static: true}) child;</p>
+
+<p>Can&#39;t bind to &#39;options&#39; since it isn&#39;t a known property of &#39;input&#39;<br />
+------------------------------------------------------------------<br />
+&lt;!--[options]=&quot;{ prefix: &#39;? &#39;, thousands: &#39;,&#39;, decimal: &#39;.&#39; }&quot;--&gt; - to ask<br />
+https://www.npmjs.com/package/ng2-currency-mask</p>
+
+<p>Cannot find module &#39;@angular/material-moment-adapter&#39;<br />
+------------------------------------------------------<br />
+npm i moment<br />
+npm i @angular/material-moment-adapter</p>
+
+<p>ERROR - npm WARN tarball tarball data for<br />
+-----------------------------------------<br />
+npm install -g yarn<br />
+npm install -g @angular/cli<br />
+ng config -g cli.packageManager yarn</p>
+
+<p>npm install</p>
+
+<p>PWA on firebase<br />
+-----------------------<br />
+create new project on firebase</p>
+
+<p>npm install -g firebase-tools<br />
+firebase init</p>
+
+<p>firebase deploy</p>
+
+<p><br />
+ng build --prod --base-href=&quot;/systemhandler/&quot;</p>
+
+<p>functions RxJS<br />
+--------------<br />
+shareReplay&nbsp;&nbsp; &nbsp;- add this to http request , to have the request run once and be cached.</p>
+
+<p><br />
+ngrx store</p>
+
+<p>&nbsp; imports: [<br />
+&nbsp;&nbsp;&nbsp; BrowserModule,<br />
+&nbsp;&nbsp;&nbsp; StoreModule.forRoot({<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; tutorial: reducer<br />
+&nbsp;&nbsp;&nbsp; })</p>
+
+<p>&nbsp;&nbsp; &nbsp;export function reducer(state: Tutorial[] = [initialState], action: TutorialActions.Actions) {</p>
+
+<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Section 3<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;switch(action.type) {<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case TutorialActions.ADD_TUTORIAL:<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return [...state, action.payload];</p>
+
+<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Add this case:<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;case TutorialActions.REMOVE_TUTORIAL:<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;state.splice(action.payload, 1)<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return state;</p>
+
+<p>&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;default:<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;return state;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;}<br />
+&nbsp;&nbsp; &nbsp;}<br />
+&nbsp;&nbsp; &nbsp;<br />
+sound<br />
+-------<br />
+ionic cordova plugin add cordova-plugin-nativeaudio<br />
+npm install @ionic-native/native-audio<br />
+npm i -g cordova<br />
+ionic cordova plugin add cordova-plugin-nativeaudio</p>
+
+<p>&nbsp;&nbsp;&nbsp;<br />
+Err : You seem to not be depending on &quot;@angular/core&quot; and/or &quot;rxjs&quot;. This is an error.<br />
+-----------------------------------------------------------------------------------------<br />
+npm link<br />
+npm audit fix<br />
+&nbsp;&nbsp; &nbsp;result with : An unhandled exception occurred: Job name &quot;..getProjectMetadata&quot; does not exist.<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm i @angular-devkit/build-angular &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;- not work<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm i @angular-devkit/build-angular@0.900.1&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;- not work<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ng update @angular/cli @angular/core<br />
+&nbsp;&nbsp; &nbsp;results with : Incompatible peer dependencies found<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;ng update @angular/cli @angular/core -- force<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;got to&nbsp; : Cannot find module &#39;@angular-devkit/core&#39;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;delete changed node_modules &nbsp;&nbsp; &nbsp;.. AND npm update -g @angular/cli<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;got Cannot find module &#39;typescript&#39;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm install -g typescript<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm link typescript<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;got&nbsp; Cannot find module &#39;@angular/compiler-cli&#39;&nbsp;&nbsp; &nbsp;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm remove -g angulat-cli<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;npm install -g @angular/cli<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;then tried<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$ npm uninstall angular-cli<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;$ npm install @angular/cli --save-dev<br />
+&nbsp;&nbsp; &nbsp;<br />
+create nav bar<br />
+------------------<br />
+ng generate @angular/material:material-nav --name=main_nav<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+styling missing<br />
+------------------<br />
+on angular.json &gt;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;styles&quot;: [<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;src/styles.scss&quot;<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ],</p>
+
+<p>on&nbsp; add @import &#39;~@angular/material/prebuilt-themes/deeppurple-amber.css&#39;;</p>
+
+<p>https://material.angular.io/components/sidenav/overview&nbsp;&nbsp; &nbsp;</p>
+
+<p>* Error - No compiler is provided in this environment / &nbsp;&nbsp; &nbsp;Could not find or load main class com.sun.tools.javac.Main<br />
+&nbsp;&nbsp; &nbsp;Issue with running javac - had to reinstall JDK<br />
+&nbsp;&nbsp; &nbsp;<br />
+**<br />
+remarks - start over</p>
+
+<p>npm i bootstarp<br />
+npm i @material/theme<br />
+npm i @angular/animations<br />
+npm i @angular/cdk<br />
+npm i @angular/common<br />
+npm i @angular/common<br />
+npm i @angular/material<br />
+npm i angularx-qrcode<br />
+npm i moment --save<br />
+npm i @agm/core --legacy-peer-deps<br />
+npm i @types/googlemaps@3.39.13<br />
+npm i angular-audio-context<br />
+npm i ngx-cookie-service<br />
+npm i ng2-currency-mask<br />
+npm i angular-google-charts</p>
+
+<p>npm i rxjs-compat --save</p>
+
+<p>ng add @ng-bootstarp/ng-bootstarp</p>
+
+<p>angular json &gt;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &quot;styles&quot;: [<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &quot;src/styles.scss&quot;,<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &quot;src/theme.scss&quot;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;, &quot;node_modules/@covalent/core/common/platform.scss&quot;,<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &quot;node_modules/bootstrap/dist/css/bootstrap.min.css&quot;<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;],<br />
+add src/theme.scss&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;</p>
+
+<p>*** issues with upgrate fix<br />
+(change)=&quot;setCouponService($event?.target)&quot;&gt;<br />
+(change)=&quot;setCouponService($any($event.target))&quot;&gt;</p>
+
+<p>choice: string;<br />
+choice!: string;<br />
+&nbsp;&nbsp; &nbsp;<br />
+setOnTimerFinishedEvent($event) {&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// need to stand on the event to see the type of the event<br />
+setOnTimerFinishedEvent($event: MouseEvent) {&nbsp;&nbsp; &nbsp;KeyboardEvent</p>
+
+<p>userActivity!: NodeJS.Timeout ;&nbsp;&nbsp; &nbsp;Cannot find namespace &#39;NodeJS&#39;.<br />
+tsconfig.app.json<br />
+&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+const id = +this.route!.snapshot!.paramMap.get(&#39;id&#39;);&nbsp;&nbsp; &nbsp; &gt; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Object is possibly &#39;null&#39; or &#39;undefined&#39;&quot;?<br />
+added&nbsp;&nbsp; &nbsp;// @ts-ignore</p>
+
+<p>import {toPromise} from &#39;rxjs-compat/operator/toPromise&#39;;&nbsp; - npm install --save rxjs-compat</p>
+
+<p>this.name = route.snapshot.params.name;<br />
+this.name = route.snapshot.params[&#39;name&#39;];</p>
+
+<p>import {BehaviorSubject} from &#39;rxjs/BehaviorSubject&#39;;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; old<br />
+import {BehaviorSubject} from &#39;rxjs&#39;;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; new</p>
+
+<p>import {Observable} from &#39;rxjs/Observable&#39;;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; old<br />
+import {Observable} from &#39;rxjs&#39;;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; new</p>
+
+<p>private PreviousCarts$$ = new BehaviorSubject&lt;UIFullOrder&gt;(null);&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; old<br />
+private PreviousCarts$$ = new BehaviorSubject&lt;UIFullOrder&gt;(null null as unknown as UIFullOrder);&nbsp;&nbsp; &nbsp;&gt; new<br />
+&nbsp;&nbsp; &nbsp;<br />
+&lt;mat-error *ngIf=&quot;formControl.firstName.hasError(&#39;required&#39;)&quot;&gt;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; old&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&lt;mat-error *ngIf=&quot;formControl[&#39;firstName&#39;]?.hasError(&#39;required&#39;)&quot;&gt;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; new</p>
+
+<p>&lt;mat-horizontal-stepper&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; old&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+&lt;mat-stepper&nbsp; orientation=&quot;horizontal&quot;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&gt; new</p>
+
+<p><br />
+@Input() userName;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;<br />
+@Input() userName!: string; &nbsp;<br />
+or do ..<br />
+add to tsconfig.json &gt; compilerOptions &gt;&nbsp; &quot;noImplicitAny&quot;: false,</p>
+
+<p>const mhero: Hero = (hero as Hero);<br />
+const mhero: Hero = hero;</p>
+
+<p>this.display(hero , &#39;storage&#39;);<br />
+this.display(hero&nbsp; as Hero , &#39;storage&#39;);</p>
+
+<p>import {AsyncLocalStorage} from &#39;angular-async-local-storage&#39;; // old<br />
+import { LocalStorage } from &#39;@ngx-pwa/local-storage&#39;;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// new</p>
+
+<p>this.nString.next();&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// &lt;-- Expected 1 arguments, but got 0.<br />
+this.nString.next(true);&nbsp;&nbsp; &nbsp;// solution - pass fake value</p>
+
+<p>[label]=&quot;m.label&quot;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;// Type &#39;undefined&#39; is not assignable to type &#39;string | MarkerLabel&#39;<br />
+[label]=&quot;m.label!&quot;</p>
+
+<p>import {Observable} from &quot;rxjs/Observable&quot;; // old<br />
+import { Observable } from &#39;rxjs&#39;</p>
+
+<p>window.sessionStorage.getItem(this.sessionName))&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Argument of type &#39;string | null&#39; is not assignable to parameter of type &#39;string&#39;<br />
+window.sessionStorage.getItem(this.sessionName)&nbsp; || &#39;{}&#39;)</p>
+
+<p>&lt;h5 *ngIf=&quot;userDirectDebitCardsList?.length==0&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;Object is possibly &#39;undefined&#39;.<br />
+&lt;h5 *ngIf=&quot;userDirectDebitCardsList!.length==0</p>
+
+<p>theme not working</p>
+
+<p>npm install @ngrx/store --save<br />
+https://stackblitz.com/edit/ngrx-store-full-example?file=src%2Fapp%2Fapp.module.ts</p>
+
+<p>No provider for HttpClient!<br />
+------------------------------<br />
+https://stackoverflow.com/questions/47236963/no-provider-for-httpclient</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
