@@ -41,6 +41,10 @@ can add lasy load for modules , if route is used will load the additional module
 <pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
 <span style="color:#0033b3">this</span>.route.<span style="color:#871094">snapshot</span>.<span style="color:#871094">paramMap</span>.<span style="color:#7a7a43">get</span>(<span style="color:#067d17">&#39;id&#39;</span>); - THIS WILL RETURN THE DATA SENT WITH THE URL</pre>
 
+<p><u>Bind</u></p>
+
+<p>&nbsp;</p>
+
 <p><u>onPush strategy </u></p>
 
 <p style="margin-left: 40px;">each change to a component results with the whole component being rednered<br />
@@ -71,3 +75,20 @@ with the onPush stratigy , the component will only render on the following<br />
 <span style="color:#0033b3">this</span>.<span style="color:#871094">cd</span>.<span style="color:#7a7a43">markForCheck</span>();</pre>
 
 <p><u>Storage</u></p>
+
+<p style="margin-left: 40px;">locale storage ,5M, data kept localy<br />
+<span style="color:#0033b3">constructor</span>( <span style="color:#0033b3">private </span><span style="color:#871094">localStorage</span>: <span style="color:#000000">LocalStorage</span>) { }<br />
+<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#0033b3">[json value]</span>)<br />
+<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">[key]</span>).<span style="color:#7a7a43">subscribe</span>([value] =&gt; { <span style="color:#0033b3">console.log</span>});</p>
+
+<p style="margin-left: 40px;"><br />
+Cookie, 4K , sent to server on every request, 20 coockies per domain<br />
+<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">Cookie</span>: <span style="color:#000000">CookieService</span>) { }<br />
+<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">set</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>));<br />
+<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">cookieName</span>))</p>
+
+<p style="margin-left: 40px;">Session storage, 5M, data only available per window, per session<br />
+<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>)));<br />
+<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">sessionName</span>) || <span style="color:#067d17">&#39;{}&#39;</span>))</p>
+
+<p>&nbsp;</p>

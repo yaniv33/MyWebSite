@@ -1,90 +1,54 @@
-<p><u>Module </u></p>
+<p><u>JS array functions</u></p>
 
-<p style="margin-left: 40px;">holds lists of</p>
+<p><span style="background-color:#ffff00">map </span>- goes by each item and makes a change&nbsp; , returns new array</p>
 
-<p style="margin-left: 80px;">declarations :&nbsp;&nbsp; components under this module<br />
-imports :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libs and modules to be used<br />
-providers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; services to be used by components<br />
-bootstrap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; holds the parent component</p>
+<p><span style="background-color:#ffff00">forEach</span>- do for each item in array<br />
+<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for</span>(<span style="color:#0033b3">const</span>[<span style="color:#248f8f">i</span>, item] <span style="color:#0033b3">of this</span>.itemArray.<span style="color:#7a7a43">entries</span>())</p>
 
-<p><u>Routing </u></p>
+<p><span style="background-color:#ffff00">slice (start , end)</span> - returns array with items from start to end , if end is minus returns from end of list<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * if need to clone array , simply use slice()</p>
 
-<p style="margin-left: 40px;">the routing is called by the module in imports as such :<span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RouterModule</span>.<em style="color:#00627a; font-style:italic">forChild</em>(<span style="color:#248f8f">routes</span>),</p>
+<p><span style="background-color:#ffff00">splice(start, end, items)</span> - removes items from start to end and injects the items instaid, changes original list and returns the item removed</p>
 
-<p style="margin-left: 40px;">const routes: Routes =&nbsp; [<br />
-&nbsp; { path:&nbsp; &#39;graph&#39; ,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; component: GraphComponent },<br />
-&nbsp; { path:&nbsp; &#39;url-get/:name&#39; , component: UrlGetComponent }<br />
-]<br />
-can add lasy load for modules , if route is used will load the additional module:</p>
+<p><span style="background-color:#ffff00">sort</span> - changes the current array to be sorted by condition(condition of int , not boolean)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
+<span style="color:#871094">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array</span>.<span style="color:#7a7a43">sort</span>((a, b) =&gt; a.<span style="color:#871094">launches </span>- b.<span style="color:#871094">launches</span>);</p>
 
-<p style="margin-left: 40px;">const routes: Routes =&nbsp; [<br />
-&nbsp; { path:&nbsp; &#39;graph&#39; , component: GraphComponent , <span style="color:#7a7a43">loadChildren</span>: () =&gt; <span style="color:#0033b3">import</span>(<span style="color:#067d17">&#39;./work.module&#39;</span>).<span style="color:#7a7a43">then</span>(m =&gt; m.<span style="color:#000000">SubNetworkModule</span>)},<br />
-&nbsp; { path:&nbsp; &#39;url-get/:name&#39; , component: UrlGetComponent , <span style="color:#7a7a43">loadChildren</span>: () =&gt; <span style="color:#0033b3">import</span>(<span style="color:#067d17">&#39;./sub.module&#39;</span>).<span style="color:#7a7a43">then</span>(m =&gt; m.<span style="color:#000000">SubModule</span>)},<br />
-]</p>
+<p><span style="background-color:#ffff00">reduce (accumulate , current)</span>- returns one object of the array, as calculated.. on first go accumulated gets first object of array<br />
+<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array</span>.<span style="color:#7a7a43">reduce</span>((accumulate , current ) =&gt;{</p>
 
-<p style="margin-left: 40px;">can jump to routes from</p>
+<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
+<em style="color:#8c8c8c; font-style:italic">        </em><span style="color:#0033b3">if </span>(accumulate.<span style="color:#871094">launches </span>&lt; current.<span style="color:#871094">launches</span>)
+          accumulate = current;
+         <span style="color:#0033b3">return </span>rocket_accumulate;
+      });</pre>
 
-<p style="margin-left: 40px;">by html<br />
-&lt;<span style="color:#0033b3">a </span><span style="color:#871094">[routerLink]</span><span style="color:#067d17">=&#39;</span><span style="background-color:#f7faff; color:#067d17">&quot;../route-pos&quot;</span><span style="color:#067d17">&#39; </span><span style="color:#871094">[fragment]</span><span style="color:#067d17">=&quot;</span><span style="background-color:#f7faff; color:#067d17">&#39;part1&#39;</span><span style="color:#067d17">&quot;</span>&gt;fragment 1&lt;/<span style="color:#0033b3">a</span>&gt;<br />
-&nbsp;</p>
+<p><span style="background-color:#ffff00">filter </span>- returns array only with the values that apply to the condition<br />
+<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this</span>.valueArray.<span style="color:#7a7a43">filter</span>((value: <span style="color:#0033b3">any</span>) =&gt; !value.<span style="color:#871094">isHide</span>)<br />
+<span style="background-color:#ffff00">some </span>- return Boolean , true if some values apply to the condition given<br />
+<span style="background-color:#ffff00">every </span>- return Boolean , true if all values apply to the condition given<br />
+<span style="background-color:#ffff00">includes</span>- return Boolean , true if array includes the value given</p>
 
-<p style="margin-left: 40px;">by ts file</p>
-
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">route</span>: <span style="color:#000000">ActivatedRoute</span>, <span style="color:#0033b3">private </span><span style="color:#871094">router</span>: <span style="color:#000000">Router</span>)
-</pre>
-
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
- <span style="color:#0033b3">this</span>.<span style="color:#871094">router</span>.<span style="color:#7a7a43">navigate</span>([<span style="color:#067d17">&#39;/Route/route&#39;</span>], { <span style="color:#871094">queryParams</span>: { <span style="color:#871094">link</span>: <span style="color:#1750eb">4 </span>},  <span style="color:#871094">queryParamsHandling</span>: <span style="color:#067d17">&#39;preserve&#39;</span>});
-</pre>
-
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#0033b3">this</span>.route.<span style="color:#871094">snapshot</span>.<span style="color:#871094">paramMap</span>.<span style="color:#7a7a43">get</span>(<span style="color:#067d17">&#39;id&#39;</span>); - THIS WILL RETURN THE DATA SENT WITH THE URL</pre>
-
-<p><u>onPush strategy </u></p>
-
-<p style="margin-left: 40px;">each change to a component results with the whole component being rednered<br />
-with the onPush stratigy , the component will only render on the following<br />
-@<span class="pl-smi">Component</span><span class="pl-kos">({</span><br />
-<span class="pl-c1">changeDetection</span>: <span class="pl-smi">ChangeDetectionStrategy</span><span class="pl-kos">.</span><span class="pl-c1">OnPush</span><span class="pl-kos">,</span></p>
-
-<p style="margin-left: 40px;">with this strategy we will trigger on with the following</p>
+<p><u>RXJS observable functions</u></p>
 
 <ul>
-	<li>
-	<p style="margin-left: 40px;">The input reference changed</p>
-	</li>
-	<li>
-	<p style="margin-left: 40px;">An event from the component or one of its children.</p>
-	</li>
-	<li>
-	<p style="margin-left: 40px;">Async pipe linked to the template emits a new value.</p>
-	</li>
+	<li>function for observables&nbsp; , included in a pipe , changes the observable to a different observable</li>
 </ul>
 
-<p style="margin-left: 40px;">can manually set the component rendered with this service</p>
+<p style="margin-left: 80px;"><span style="background-color:#ffa500">map&nbsp; </span>- allows changing information given by observable</p>
 
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">cd</span>: <span style="color:#000000">ChangeDetectorRef</span>) { }</pre>
+<p>* (mergeMap , concatMap, switchMap, exhaustMap) - strategy to deal with multi observable events</p>
 
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#0033b3">this</span>.<span style="color:#871094">cd</span>.<span style="color:#7a7a43">markForCheck</span>();</pre>
-
-<p><u>Storage</u></p>
-
-<p style="margin-left: 40px;">locale storage ,5M, data kept localy<br />
-<span style="color:#0033b3">constructor</span>( <span style="color:#0033b3">private </span><span style="color:#871094">localStorage</span>: <span style="color:#000000">LocalStorage</span>) { }<br />
-<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#0033b3">[json value]</span>)<br />
-<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">[key]</span>).<span style="color:#7a7a43">subscribe</span>([value] =&gt; { <span style="color:#0033b3">console.log</span>});</p>
-
-<p style="margin-left: 40px;"><br />
-Cookie, 4K , sent to server on every request, 20 coockies per domain<br />
-<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">Cookie</span>: <span style="color:#000000">CookieService</span>) { }<br />
-<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">set</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>));<br />
-<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">cookieName</span>))</p>
-
-<p style="margin-left: 40px;">Session storage, 5M, data only available per window, per session<br />
-<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>)));<br />
-<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">sessionName</span>) || <span style="color:#067d17">&#39;{}&#39;</span>))</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="background-color:#ffa07a">mergeMap </span>- when reciving new observable , unsubscribes automatically from the old observer ..<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="background-color:#ffa07a">concatMap </span>- deals with observables synchronously, unsbscribes from observable on finish</p>
 
 <p>&nbsp;</p>
+
+<ul>
+	<li>function that returns obsarvable</li>
+</ul>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Of() - takes any array and converts it to an array</p>
+
+<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
+
+&nbsp;</pre>
