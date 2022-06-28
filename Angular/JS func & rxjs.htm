@@ -1,197 +1,90 @@
-<p>list of icons : https://www.angularjswiki.com/angular/angular-material-icons-list-mat-icon-list/</p>
+<p><u>Module </u></p>
 
-<p><u>Forms</u></p>
+<p style="margin-left: 40px;">holds lists of</p>
 
-<p style="margin-left: 40px;">Form types : Data driven&nbsp; - unstructured , Asynchronous<br />
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Reactive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - more scalabe</p>
+<p style="margin-left: 80px;">declarations :&nbsp;&nbsp; components under this module<br />
+imports :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; libs and modules to be used<br />
+providers:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; services to be used by components<br />
+bootstrap:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; holds the parent component</p>
 
-<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#0033b3">import </span>{<span style="color:#000000">UntypedFormBuilder</span>, <span style="color:#000000">UntypedFormGroup</span>, <span style="color:#000000">UntypedFormArray</span>, <span style="color:#000000">Validators</span>} <span style="color:#0033b3">from </span><span style="color:#067d17">&#39;@angular/forms&#39;</span>;
+<p><u>Routing </u></p>
 
-Form components -
- <a class="code-anchor" href="https://angular.io/api/forms/FormControl" style="font-size: 14.4px; line-height: 3.2rem; font-family: &quot;Roboto Mono&quot;, monospace; font-weight: 400; text-decoration: none; color: rgb(22, 105, 187); cursor: pointer; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.3px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">FormControl</a>   <span style="-webkit-text-stroke-width:0px; background-color:#ffffff; color:rgba(0, 0, 0, 0.87); display:inline !important; float:none; font-family:Roboto,&quot;Helvetica Neue Light&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,&quot;Lucida Grande&quot;,sans-serif; font-size:16px; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:0.3px; orphans:2; text-align:left; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px">Tracks the value and validation status of an individual form control.</span> 
- <a class="code-anchor" href="https://angular.io/api/forms/FormGroup" style="font-size: 14.4px; line-height: 3.2rem; font-family: &quot;Roboto Mono&quot;, monospace; font-weight: 400; text-decoration: none; color: rgb(22, 105, 187); cursor: pointer; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.3px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">FormGroup</a>  <span style="-webkit-text-stroke-width:0px; background-color:#ffffff; color:rgba(0, 0, 0, 0.87); display:inline !important; float:none; font-family:Roboto,&quot;Helvetica Neue Light&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,&quot;Lucida Grande&quot;,sans-serif; font-size:16px; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:0.3px; orphans:2; text-align:left; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px">Tracks the same values and status for a collection of form controls.</span> 
- <a class="code-anchor" href="https://angular.io/api/forms/FormArray" style="font-size: 14.4px; line-height: 3.2rem; font-family: &quot;Roboto Mono&quot;, monospace; font-weight: 400; text-decoration: none; color: rgb(22, 105, 187); cursor: pointer; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.3px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">FormArray</a>  <span style="-webkit-text-stroke-width:0px; background-color:#ffffff; color:rgba(0, 0, 0, 0.87); display:inline !important; float:none; font-family:Roboto,&quot;Helvetica Neue Light&quot;,&quot;Helvetica Neue&quot;,Helvetica,Arial,&quot;Lucida Grande&quot;,sans-serif; font-size:16px; font-style:normal; font-variant-caps:normal; font-variant-ligatures:normal; font-weight:400; letter-spacing:0.3px; orphans:2; text-align:left; text-decoration-color:initial; text-decoration-style:initial; text-decoration-thickness:initial; text-indent:0px; text-transform:none; white-space:normal; widows:2; word-spacing:0px">Tracks the same values and status for an array of form controls.</span> 
- <a class="code-anchor" href="https://angular.io/api/forms/ControlValueAccessor" style="font-size: 14.4px; line-height: 3.2rem; font-family: &quot;Roboto Mono&quot;, monospace; font-weight: 400; text-decoration: none; color: rgb(22, 105, 187); cursor: pointer; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: 0.3px; orphans: 2; text-align: left; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px;">ControlValueAccessor</a> 
-</pre>
+<p style="margin-left: 40px;">the routing is called by the module in imports as such :<span style="color:#000000">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RouterModule</span>.<em style="color:#00627a; font-style:italic">forChild</em>(<span style="color:#248f8f">routes</span>),</p>
 
-<p>data driven form uses two way bind ngmodel</p>
+<p style="margin-left: 40px;">const routes: Routes =&nbsp; [<br />
+&nbsp; { path:&nbsp; &#39;graph&#39; ,&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; component: GraphComponent },<br />
+&nbsp; { path:&nbsp; &#39;url-get/:name&#39; , component: UrlGetComponent }<br />
+]<br />
+can add lasy load for modules , if route is used will load the additional module:</p>
 
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">input</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">type</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;text&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">class</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;form-control&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">name</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;firstName&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">[(ngModel)]</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;model.firstName&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">#firstName</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;ngModel&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">[ngClass]</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;{&nbsp;&#39;is-invalid&#39;:&nbsp;f.submitted&nbsp;&amp;&amp;&nbsp;firstName.invalid&nbsp;}&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">required</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#ff00ff">/&gt;</span></div>
-</div>
+<p style="margin-left: 40px;">const routes: Routes =&nbsp; [<br />
+&nbsp; { path:&nbsp; &#39;graph&#39; , component: GraphComponent , <span style="color:#7a7a43">loadChildren</span>: () =&gt; <span style="color:#0033b3">import</span>(<span style="color:#067d17">&#39;./work.module&#39;</span>).<span style="color:#7a7a43">then</span>(m =&gt; m.<span style="color:#000000">SubNetworkModule</span>)},<br />
+&nbsp; { path:&nbsp; &#39;url-get/:name&#39; , component: UrlGetComponent , <span style="color:#7a7a43">loadChildren</span>: () =&gt; <span style="color:#0033b3">import</span>(<span style="color:#067d17">&#39;./sub.module&#39;</span>).<span style="color:#7a7a43">then</span>(m =&gt; m.<span style="color:#000000">SubModule</span>)},<br />
+]</p>
 
-<p>reactive form ts</p>
+<p style="margin-left: 40px;">can jump to routes from</p>
 
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#a79873">import</span><span style="color:#d4d4d4">&nbsp;{</span><span style="color:#dd6a6f">FormGroup</span><span style="color:#d4d4d4">,</span><span style="color:#dd6a6f">FormControl</span><span style="color:#d4d4d4">,</span><span style="color:#dd6a6f">Validators</span><span style="color:#d4d4d4">,</span><span style="color:#dd6a6f">FormArray</span><span style="color:#d4d4d4">}&nbsp;</span><span style="color:#a79873">from</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#569cd6">&#39;@angular/forms&#39;</span><span style="color:#d4d4d4">; </span></div>
+<p style="margin-left: 40px;">by html<br />
+&lt;<span style="color:#0033b3">a </span><span style="color:#871094">[routerLink]</span><span style="color:#067d17">=&#39;</span><span style="background-color:#f7faff; color:#067d17">&quot;../route-pos&quot;</span><span style="color:#067d17">&#39; </span><span style="color:#871094">[fragment]</span><span style="color:#067d17">=&quot;</span><span style="background-color:#f7faff; color:#067d17">&#39;part1&#39;</span><span style="color:#067d17">&quot;</span>&gt;fragment 1&lt;/<span style="color:#0033b3">a</span>&gt;<br />
+&nbsp;</p>
 
-<div>&nbsp;</div>
-
-<div>
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">SignupForm</span><span style="color:#d4d4d4">:</span><span style="color:#808080">FormGroup</span><span style="color:#d4d4d4">; CREATE FORMGROUP</span></div>
-
-<div>&nbsp;</div>
-
-<div>
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;</span><span style="color:#f44747">ngOnInit</span><span style="color:#d4d4d4">(){</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#9cdcfe">this</span><span style="color:#d4d4d4">.</span><span style="color:#800000"><span style="background-color:#ffffe0">SignupForm&nbsp;</span></span><span style="color:#d4d4d4">=&nbsp;</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormGroup</span><span style="color:#d4d4d4">({ SET FIELDS OF FORM GROUP</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#569cd6">&#39;<span style="background-color:#fff0f5">userData</span>&#39;</span><span style="color:#dd6a6f">:</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormGroup</span><span style="color:#d4d4d4">({</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#569cd6">&#39;</span><span style="color:#0000ff"><span style="background-color:#ffa07a">username</span></span><span style="color:#569cd6">&#39;</span><span style="color:#dd6a6f">:</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormControl</span><span style="color:#d4d4d4">([default value]</span><span style="color:#d4d4d4">,[</span><span style="color:#dd6a6f">Validators</span><span style="color:#d4d4d4">.</span><span style="color:#dd6a6f">required</span><span style="color:#d4d4d4">,</span><span style="color:#9cdcfe">this</span><span style="color:#d4d4d4">.</span><span style="color:#dd6a6f">forbiddenNames</span><span style="color:#d4d4d4">.</span><span style="color:#f44747">bind</span><span style="color:#d4d4d4">(</span><span style="color:#9cdcfe">this</span><span style="color:#d4d4d4">)]),</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#569cd6">&#39;email&#39;</span><span style="color:#dd6a6f">:</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormControl</span><span style="color:#d4d4d4">([default value],[</span><span style="color:#dd6a6f">Validators</span><span style="color:#d4d4d4">.</span><span style="color:#dd6a6f">required</span><span style="color:#d4d4d4">,</span><span style="color:#dd6a6f">Validators</span><span style="color:#d4d4d4">.</span><span style="color:#dd6a6f">email</span><span style="color:#d4d4d4">],</span><span style="color:#9cdcfe">this</span><span style="color:#d4d4d4">.</span><span style="color:#dd6a6f">forbiddenEmails</span><span style="color:#d4d4d4">),</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}),</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#569cd6">&#39;gender&#39;</span><span style="color:#dd6a6f">:</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormControl</span><span style="color:#d4d4d4">(</span><span style="color:#569cd6">&#39;female&#39;</span><span style="color:#d4d4d4">),</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#569cd6">&#39;hobbies&#39;</span><span style="color:#dd6a6f">:</span><span style="color:#9cdcfe">new</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#f44747">FormArray</span><span style="color:#d4d4d4">([])</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;});</span>&nbsp;</div>
-
-<div>&nbsp;</div>
-
-<div>
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;</span><span style="color:#f44747">onSubmit</span><span style="color:#d4d4d4">(){</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#dd6a6f">console</span><span style="color:#d4d4d4">.</span><span style="color:#f44747">log</span><span style="color:#d4d4d4">(</span><span style="color:#9cdcfe">this</span><span style="color:#d4d4d4">.</span><span style="color:#800000"><span style="background-color:#ffffe0">SignupForm</span></span><span style="color:#d4d4d4">);</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;}</span></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; html</p>
-
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">form</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">[formGroup]</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;</span><span style="color:#800000"><span style="background-color:#faebd7">SignupForm</span></span><span style="color:#569cd6">&quot;</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">(ngSubmit)</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;onSubmit()&quot;</span><span style="color:#ff00ff">&gt;</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">div</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">formGroupName</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;<span style="background-color:#fff0f5">userData</span>&quot;</span><span style="color:#ff00ff">&gt;</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">div</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">class</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;form-group&quot;</span><span style="color:#ff00ff">&gt;</span></div>
-
-<div>
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">mat-label</span><span style="color:#ff00ff">&gt;&lt;</span><span style="color:#9cdcfe">span</span><span style="color:#ff00ff">&gt;</span><span style="color:#d4d4d4">email</span><span style="color:#ff00ff">&lt;/</span><span style="color:#9cdcfe">span</span><span style="color:#ff00ff">&gt;&lt;/</span><span style="color:#9cdcfe">mat-label</span><span style="color:#ff00ff">&gt;</span></div>
-</div>
-<span style="color:#ff00ff">&lt;mat-form-field&gt;</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">input</span><span style="color:#d4d4d4">&nbsp;</span>matInput</div>
-
-<div><span style="color:#dd6a6f">type</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;text&quot;</span><span style="color:#d4d4d4">&nbsp;</span></div>
-
-<div><span style="color:#dd6a6f">class</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;form-control&quot;</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span><span style="color:#dd6a6f">id</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;email</span><span style="color:#569cd6">&quot;</span><span style="color:#d4d4d4">&nbsp;</span></div>
-
-<div><span style="color:#d4d4d4">placeholder=&quot;user name&quot;</span></div>
-
-<div><span style="color:#dd6a6f">formControlName</span><span style="color:#d4d4d4">&nbsp;=&nbsp;</span><span style="color:#569cd6">&quot;email</span><span style="color:#569cd6">&quot;</span><span style="color:#ff00ff">&gt;</span></div>
-
-<div><span style="color:#ff00ff">&lt;/mat-form-field&gt;</span></div>
-
-<div>
-<div style="color: #d4d4d4;background-color: #1e1e1e;font-family: Menlo, Cascadia Code, Consolas, Liberation Mono, monospace, Consolas, 'Courier New', monospace;font-weight: normal;font-size: 12px;line-height: 18px;white-space: pre;">
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">mat-hint</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#909090">align</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;end&quot;</span><span style="color:#ff00ff">&gt;</span><span style="color:#d4d4d4">Must&nbsp;fill</span><span style="color:#ff00ff">&lt;/</span><span style="color:#9cdcfe">mat-hint</span><span style="color:#ff00ff">&gt;</span></div>
-<span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;</span><span style="color:#9cdcfe">mat-error</span><span style="color:#d4d4d4">&nbsp;</span><span style="color:#dd6a6f">*ngIf</span><span style="color:#d4d4d4">=</span><span style="color:#569cd6">&quot;email?.invalid&nbsp;||&nbsp;email?.touched&quot;</span><span style="color:#ff00ff">&gt;</span>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your&nbsp;email&nbsp;does&nbsp;not</span></div>
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;/</span><span style="color:#9cdcfe">mat-error</span><span style="color:#ff00ff">&gt;</span></div>
-</div>
-</div>
-&nbsp;
-
-<div><span style="color:#d4d4d4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color:#ff00ff">&lt;/</span><span style="color:#9cdcfe">div</span><span style="color:#ff00ff">&gt;</span></div>
-</div>
-
-<p>validator types :</p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<span style="color:#871094">age</span>: [<span style="color:#0033b3">null</span>, [
-  <span style="color:#000000">Validators</span>.<em style="color:#00627a; font-style:italic">required</em>,
-  <span style="color:#000000">Validators</span>.<em style="color:#00627a; font-style:italic">minLength</em>(<span style="color:#1750eb">2</span>),
-  <span style="color:#000000">Validators</span>.<em style="color:#00627a; font-style:italic">min</em>(<span style="color:#1750eb">18</span>),
-  <span style="color:#000000">Validators</span>.<em style="color:#00627a; font-style:italic">max</em>(<span style="color:#1750eb">65</span>),
-<span style="color:#000000">  Validators</span>.<em style="color:#00627a; font-style:italic">pattern</em>(<span style="color:#067d17">&#39;[a-d]&#39;</span>)</pre>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-
-]],</pre>
-
-<p><u>Dialogs</u></p>
-
-<p>on parent component</p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<span style="color:#0033b3">import </span>{ <span style="color:#000000">MatDialog </span>} <span style="color:#0033b3">from </span><span style="color:#067d17">&#39;@angular/material/dialog&#39;</span>;
-<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">public </span><span style="color:#871094">dialog</span>: <span style="color:#000000">MatDialog</span>) {}</pre>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<span style="color:#7a7a43">openDialog</span>(): <span style="color:#0033b3">void </span>{
-  <span style="color:#0033b3">let </span><span style="color:#248f8f">dialogRef </span>= <span style="color:#0033b3">this</span>.<span style="color:#871094">dialog</span>.<span style="color:#7a7a43">open</span>(<span style="color:#000000"><span style="background-color:#fff0f5">ExampleDialogComponent</span></span>, {
-    <span style="color:#871094">width</span>: <span style="color:#067d17">&#39;450px&#39;</span>,
-    <span style="color:#871094">data</span>: { <span style="color:#871094">name</span>: <span style="color:#0033b3">this</span>.<span style="color:#871094">name</span>, <span style="color:#871094">animal</span>: <span style="color:#0033b3">this</span>.<span style="color:#871094">animal </span>}
-  });
-
-  <span style="color:#248f8f">dialogRef</span>.<span style="color:#7a7a43">afterClosed</span>().<span style="color:#7a7a43">subscribe</span>(result =&gt; {
-    <span style="color:#830091">console</span>.<span style="color:#7a7a43">log</span>(<span style="color:#067d17">&#39;The dialog was closed&#39;</span>);
-    <span style="color:#0033b3">this</span>.<span style="color:#871094">animal </span>= result; // THE RESULT RETURNED BY THE DIALOG
-  });
-}</pre>
-
-<p>on component dialog <span style="color:#000000"><span style="background-color:#fff0f5">ExampleDialogComponent</span></span></p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<span style="color:#0033b3">import </span>{<span style="color:#830091">MAT_DIALOG_DATA</span>, <span style="color:#000000">MatDialogRef</span>} <span style="color:#0033b3">from </span><span style="color:#067d17">&quot;@angular/material/dialog&quot;</span>;
-</pre>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">public </span><span style="color:#871094">dialogRef</span>: <span style="color:#000000">MatDialogRef</span>&lt;<span style="color:#000000">ExampleDialogComponent</span>&gt;,
-            <span style="color:#9e880d">@Inject</span>(<span style="color:#830091">MAT_DIALOG_DATA</span>) <span style="color:#0033b3">public </span><span style="color:#871094">data</span>: <span style="color:#0033b3">any</span>) {
-}
-<span style="color:#7a7a43">onClose</span>(): <span style="color:#0033b3">void </span>{
-  <span style="color:#0033b3">this</span>.<span style="color:#871094">dialogRef</span>.<span style="color:#7a7a43">close</span>();
-}</pre>
-
-<p>on the html</p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-&lt;<span style="color:#0033b3">div </span><span style="color:#174ad4">mat-dialog-actions</span>&gt;
-  &lt;<span style="color:#0033b3">button </span><span style="color:#174ad4">mat-button </span><span style="color:#871094">(click)</span><span style="color:#067d17">=&quot;onClose</span><span style="background-color:#f7faff">()</span><span style="color:#067d17">&quot;</span>&gt;No Thanks&lt;/<span style="color:#0033b3">button</span>&gt;
-  &lt;<span style="color:#0033b3">button </span><span style="color:#174ad4">mat-button </span><span style="color:#871094">[mat-dialog-close]</span><span style="color:#067d17">=&quot;</span><span style="background-color:#f7faff; color:#871094">data</span><span style="background-color:#f7faff">.animal</span><span style="color:#067d17">&quot; </span><span style="color:#174ad4">cdkFocusInitial</span>&gt;Ok&lt;/<span style="color:#0033b3">button</span>&gt; // SET THE VALUE TO BE RETURNED
-&lt;/<span style="color:#0033b3">div</span>&gt;</pre>
-
-<p>&nbsp;</p>
-
-<p><u>Date format</u></p>
-
-<p><u>Flex</u></p>
-
-<p style="margin-left: 40px;">https://tburleson-layouts-demos.firebaseapp.com/#/docs</p>
+<p style="margin-left: 40px;">by ts file</p>
 
 <pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
-<span style="color:#174ad4">fxLayout =&quot;row | column&quot;
-fxLayoutGap = &quot; % | dp&quot;
-fxLayoutAlign =&quot;[center][center]&quot;
-fxFill=  ?[&quot; % | dp&quot;]
-fxFlex=  ?[&quot; % | dp&quot;]
-fxLayoutWrap &gt; make items drop naturally to next row
-fxFlex = [&quot;nogrow&quot;|&quot;grow&quot;|&quot;auto&quot;|&quot;noshrink&quot;]
-fxFlexOffset=&quot;%&quot;
-fxFlexAlign=&quot;start | end | stretch&quot;</span>
+<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">route</span>: <span style="color:#000000">ActivatedRoute</span>, <span style="color:#0033b3">private </span><span style="color:#871094">router</span>: <span style="color:#000000">Router</span>)
 </pre>
 
-<p><u>Animations</u></p>
+<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
+ <span style="color:#0033b3">this</span>.<span style="color:#871094">router</span>.<span style="color:#7a7a43">navigate</span>([<span style="color:#067d17">&#39;/Route/route&#39;</span>], { <span style="color:#871094">queryParams</span>: { <span style="color:#871094">link</span>: <span style="color:#1750eb">4 </span>},  <span style="color:#871094">queryParamsHandling</span>: <span style="color:#067d17">&#39;preserve&#39;</span>});
+</pre>
+
+<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
+<span style="color:#0033b3">this</span>.route.<span style="color:#871094">snapshot</span>.<span style="color:#871094">paramMap</span>.<span style="color:#7a7a43">get</span>(<span style="color:#067d17">&#39;id&#39;</span>); - THIS WILL RETURN THE DATA SENT WITH THE URL</pre>
+
+<p><u>onPush strategy </u></p>
+
+<p style="margin-left: 40px;">each change to a component results with the whole component being rednered<br />
+with the onPush stratigy , the component will only render on the following<br />
+@<span class="pl-smi">Component</span><span class="pl-kos">({</span><br />
+<span class="pl-c1">changeDetection</span>: <span class="pl-smi">ChangeDetectionStrategy</span><span class="pl-kos">.</span><span class="pl-c1">OnPush</span><span class="pl-kos">,</span></p>
+
+<p style="margin-left: 40px;">with this strategy we will trigger on with the following</p>
+
+<ul>
+	<li>
+	<p style="margin-left: 40px;">The input reference changed</p>
+	</li>
+	<li>
+	<p style="margin-left: 40px;">An event from the component or one of its children.</p>
+	</li>
+	<li>
+	<p style="margin-left: 40px;">Async pipe linked to the template emits a new value.</p>
+	</li>
+</ul>
+
+<p style="margin-left: 40px;">can manually set the component rendered with this service</p>
+
+<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
+<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">cd</span>: <span style="color:#000000">ChangeDetectorRef</span>) { }</pre>
+
+<pre style="background-color: rgb(255, 255, 255); color: rgb(8, 8, 8); font-family: &quot;Consolas&quot;, monospace; font-size: 10.5pt; margin-left: 40px;">
+<span style="color:#0033b3">this</span>.<span style="color:#871094">cd</span>.<span style="color:#7a7a43">markForCheck</span>();</pre>
+
+<p><u>Storage</u></p>
+
+<p style="margin-left: 40px;">locale storage ,5M, data kept localy<br />
+<span style="color:#0033b3">constructor</span>( <span style="color:#0033b3">private </span><span style="color:#871094">localStorage</span>: <span style="color:#000000">LocalStorage</span>) { }<br />
+<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#0033b3">[json value]</span>)<br />
+<span style="color:#0033b3">this</span>.<span style="color:#871094">localStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">[key]</span>).<span style="color:#7a7a43">subscribe</span>([value] =&gt; { <span style="color:#0033b3">console.log</span>});</p>
+
+<p style="margin-left: 40px;"><br />
+Cookie, 4K , sent to server on every request, 20 coockies per domain<br />
+<span style="color:#0033b3">constructor</span>(<span style="color:#0033b3">private </span><span style="color:#871094">Cookie</span>: <span style="color:#000000">CookieService</span>) { }<br />
+<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">set</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>));<br />
+<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">cookieName</span>))</p>
+
+<p style="margin-left: 40px;">Session storage, 5M, data only available per window, per session<br />
+<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">setItem</span>(<span style="color:#0033b3">[key]</span>, <span style="color:#830091">JSON</span>.<span style="color:#7a7a43">stringify</span>(<span style="color:#0033b3">[json value]</span>)));<br />
+<span style="color:#830091">JSON</span>.<span style="color:#7a7a43">parse</span>(<span style="color:#871094">Cookie</span>.<span style="color:#7a7a43">get</span>(<span style="color:#830091">window</span>.<span style="color:#871094">sessionStorage</span>.<span style="color:#7a7a43">getItem</span>(<span style="color:#0033b3">this</span>.<span style="color:#871094">sessionName</span>) || <span style="color:#067d17">&#39;{}&#39;</span>))</p>
 
 <p>&nbsp;</p>
