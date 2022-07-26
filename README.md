@@ -1,4 +1,4 @@
-https://yaniv33.github.io/MyWebSite/Points.htm
+https://yaniv33.github.io/MyWebSite/index.htm
 
 
 Edit here
