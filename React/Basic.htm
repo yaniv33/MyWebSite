@@ -6,32 +6,69 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
 	<META NAME="CREATED" CONTENT="0;0">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
-	<META NAME="CHANGED" CONTENT="20220726;10202545">
+	<META NAME="CHANGED" CONTENT="20221020;16513152">
 	<STYLE TYPE="text/css">
 	<!--
 		PRE.cjk { font-family: "NSimSun", monospace }
 	-->
 	</STYLE>
 </HEAD>
-<BODY LANG="zh-CN" DIR="LTR">
-<PRE CLASS="ctl" STYLE="margin-left: 1.16cm"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><B>My start - npm run start-pc</B></SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">use https://react.semantic-ui.com/usage</SPAN></FONT></FONT></FONT></PRE>
+<BODY LANG="en-US" DIR="LTR">
+<PRE CLASS="western" STYLE="margin-left: 1.16cm">
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><U><B>Starting with React</B></U></SPAN></FONT></FONT></FONT>
+</PRE>
 <OL>
-	<LI><PRE CLASS="ctl" STYLE="background: #ffffff; page-break-before: auto"><SPAN LANG="en-US"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">npm install semantic-ui-react semantic-ui-css</FONT></FONT></FONT></SPAN></PRE>
+	<LI><PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><B><SPAN LANG="en-US">public\index.html calls to scripts and </SPAN><FONT SIZE=2 STYLE="font-size: 10pt">&lt;</FONT><FONT COLOR="#0033b3"><FONT SIZE=2 STYLE="font-size: 10pt">div </FONT></FONT><FONT COLOR="#174ad4"><FONT SIZE=2 STYLE="font-size: 10pt">id</FONT></FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">=&quot;root&quot;</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">&gt;</FONT></B></FONT></FONT></FONT></PRE>
+	<LI><PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><B>index js creates element root and calls App</B></FONT></FONT></FONT>
+
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><B><SPAN STYLE="background: #cccccc"><FONT COLOR="#0033b3">const </FONT><FONT COLOR="#248f8f">root </FONT>= ReactDOM.<I>createRoot</I>(<FONT COLOR="#830091">document</FONT>.<FONT COLOR="#7a7a43">getElementById</FONT>(<FONT COLOR="#067d17">'root'</FONT>));</SPAN></B></SPAN></FONT></FONT></FONT></PRE>
 </OL>
-<PRE CLASS="ctl" STYLE="margin-left: 0.95cm; text-indent: 0.03cm; background: #ffffff"><FONT COLOR="#080808">   <SPAN LANG="en-US"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">import 'semantic-ui-css/semantic.min.css'; would not work so added to index.html</FONT></FONT></SPAN></FONT></PRE>
+<PRE CLASS="western" STYLE="margin-left: 2.41cm; background: #ffffff"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc"><FONT COLOR="#248f8f">root</FONT>.<FONT COLOR="#7a7a43">render</FONT>(</SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&lt;</FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">React.StrictMode</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&gt;</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">    <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&lt;</FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">App </FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">/&gt;</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&lt;/</FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">React.StrictMode</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&gt;</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc">);</SPAN></FONT></FONT></FONT></PRE>
+<OL START=3>
+	<LI><PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><B>App.js creates function App that returns the html of the site</B></FONT></FONT></FONT></PRE>
+</OL>
+<PRE CLASS="western" STYLE="margin-left: 2.38cm; page-break-before: auto">
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><B><SPAN STYLE="background: #cccccc"><FONT COLOR="#0033b3">function </FONT><I>App</I>() {</SPAN></B></SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">return </FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">...</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">);</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc">}</SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc"><FONT COLOR="#0033b3">export default </FONT><I>App</I>;</SPAN></FONT></FONT></FONT>
+</PRE>
+<OL START=4>
+	<LI><PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><B>passing a class is with </B></SPAN></FONT></FONT></FONT></PRE>
+	<OL>
+		<PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc">&lt;</SPAN></FONT><FONT COLOR="#0033b3"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc">TodoApp</SPAN></FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN STYLE="background: #cccccc">/&gt;</SPAN></FONT></FONT></FONT></FONT></PRE>
+	</OL>
+	<LI><PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><B>passing a class with data is </B></SPAN></FONT></FONT></FONT></PRE>
+	<OL>
+		<PRE CLASS="western"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN STYLE="background: #cccccc"><FONT SIZE=2 STYLE="font-size: 10pt">&lt;</FONT><FONT COLOR="#0033b3"><FONT SIZE=2 STYLE="font-size: 10pt">TodoApp </FONT></FONT><FONT COLOR="#174ad4"><FONT SIZE=2 STYLE="font-size: 10pt">element</FONT></FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">=</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">{&lt;</FONT><FONT COLOR="#0033b3"><FONT SIZE=2 STYLE="font-size: 10pt">PokedexHeader </FONT></FONT><FONT COLOR="#174ad4"><FONT SIZE=2 STYLE="font-size: 10pt">name</FONT></FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">=</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">{</FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;Greg&quot;</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">} </FONT><FONT COLOR="#174ad4"><FONT SIZE=2 STYLE="font-size: 10pt">author</FONT></FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">=</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">{</FONT><FONT COLOR="#067d17"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;Yaniv&quot;</FONT></FONT><FONT SIZE=2 STYLE="font-size: 10pt">}/&gt;}/&gt;</FONT></SPAN></FONT></FONT></FONT></PRE>
+	</OL>
+</OL>
+<PRE CLASS="western">
+
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><B>in package.json set the scripts to start the app as </B></SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US"><B><SPAN STYLE="background: #cccccc"><FONT COLOR="#871094">&quot;scripts&quot;</FONT>: {</SPAN></B></SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT COLOR="#871094"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;start&quot;</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;react-scripts start&quot;</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">,</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><SPAN STYLE="background: #cccccc">  <FONT COLOR="#871094"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;start-pc&quot;</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&quot;set PORT=3021&amp;&amp; react-scripts start&quot;</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">,</FONT></FONT></SPAN></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><B>Run the project with - </B></SPAN><FONT SIZE=2 STYLE="font-size: 10pt">npm run start-pc</FONT></FONT></FONT></FONT>
+
+
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><U><B>Installing outside packages</B></U></SPAN></FONT></FONT></FONT>
+</PRE>
 <OL>
-	<LI><PRE CLASS="ctl" STYLE="background: #ffffff"><SPAN LANG="en-US"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">npm install react-router-dom@5    </FONT></FONT></FONT></SPAN></PRE>
+	<LI><PRE CLASS="western" STYLE="margin-bottom: 0.2cm; background: #ffffff; font-weight: normal; page-break-before: auto; page-break-after: auto"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2>npm install semantic-ui-react semantic-ui-css</FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">find info on <A HREF="https://react.semantic-ui.com/usage">https://react.semantic-ui.com/usage</A></SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">can also add import 'semantic-ui-css/semantic.min.css'; to index.html</SPAN></FONT></FONT></FONT></PRE>
+	<LI><PRE CLASS="western" STYLE="margin-bottom: 0.2cm; background: #ffffff; page-break-before: auto"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US"><SPAN STYLE="font-weight: normal">npm install react-router-dom@5 </SPAN></SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">navbar holds href</SPAN></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">app.js holds router</SPAN></FONT></FONT></FONT></PRE>
 </OL>
-<PRE CLASS="ctl" STYLE="background: #ffffff"><FONT COLOR="#080808">      <SPAN LANG="en-US"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">navbar holds href</FONT></FONT></SPAN></FONT>
-<FONT COLOR="#080808">      <SPAN LANG="en-US"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">app.js holds router</FONT></FONT></SPAN></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">3.http  - https://jasonwatmore.com/post/2020/01/27/react-fetch-http-get-request-examples</SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">Issues faced</SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">problems with eslint file  &gt; had to upgrade InteliJ</SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">https://www.youtube.com/watch?v=hQAHSlTtcmY</SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">// npm i uuid</SPAN></FONT></FONT></FONT>
-<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><SPAN LANG="en-US">// local storage useEffect(() &gt; {})</SPAN></FONT></FONT></FONT></PRE><P STYLE="margin-left: 1.16cm">
-<BR><BR>
-</P>
+<PRE CLASS="western" STYLE="margin-left: 1.16cm">
+</PRE>
 </BODY>
 </HTML>
