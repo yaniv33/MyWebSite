@@ -1,54 +1,78 @@
-<p><u>JS array functions</u></p>
-
-<p><span style="background-color:#ffff00">map </span>- goes by each item and makes a change&nbsp; , returns new array</p>
-
-<p><span style="background-color:#ffff00">forEach</span>- do for each item in array<br />
-<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; for</span>(<span style="color:#0033b3">const</span>[<span style="color:#248f8f">i</span>, item] <span style="color:#0033b3">of this</span>.itemArray.<span style="color:#7a7a43">entries</span>())</p>
-
-<p><span style="background-color:#ffff00">slice (start , end)</span> - returns array with items from start to end , if end is minus returns from end of list<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * if need to clone array , simply use slice()</p>
-
-<p><span style="background-color:#ffff00">splice(start, end, items)</span> - removes items from start to end and injects the items instaid, changes original list and returns the item removed</p>
-
-<p><span style="background-color:#ffff00">sort</span> - changes the current array to be sorted by condition(condition of int , not boolean)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-<span style="color:#871094">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array</span>.<span style="color:#7a7a43">sort</span>((a, b) =&gt; a.<span style="color:#871094">launches </span>- b.<span style="color:#871094">launches</span>);</p>
-
-<p><span style="background-color:#ffff00">reduce (accumulate , current)</span>- returns one object of the array, as calculated.. on first go accumulated gets first object of array<br />
-<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; array</span>.<span style="color:#7a7a43">reduce</span>((accumulate , current ) =&gt;{</p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-<em style="color:#8c8c8c; font-style:italic">        </em><span style="color:#0033b3">if </span>(accumulate.<span style="color:#871094">launches </span>&lt; current.<span style="color:#871094">launches</span>)
-          accumulate = current;
-         <span style="color:#0033b3">return </span>rocket_accumulate;
-      });</pre>
-
-<p><span style="background-color:#ffff00">filter </span>- returns array only with the values that apply to the condition<br />
-<span style="color:#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; this</span>.valueArray.<span style="color:#7a7a43">filter</span>((value: <span style="color:#0033b3">any</span>) =&gt; !value.<span style="color:#871094">isHide</span>)<br />
-<span style="background-color:#ffff00">some </span>- return Boolean , true if some values apply to the condition given<br />
-<span style="background-color:#ffff00">every </span>- return Boolean , true if all values apply to the condition given<br />
-<span style="background-color:#ffff00">includes</span>- return Boolean , true if array includes the value given</p>
-
-<p><u>RXJS observable functions</u></p>
-
-<ul>
-	<li>function for observables&nbsp; , included in a pipe , changes the observable to a different observable</li>
-</ul>
-
-<p style="margin-left: 80px;"><span style="background-color:#ffa500">map&nbsp; </span>- allows changing information given by observable</p>
-
-<p>* (mergeMap , concatMap, switchMap, exhaustMap) - strategy to deal with multi observable events</p>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="background-color:#ffa07a">mergeMap </span>- when reciving new observable , unsubscribes automatically from the old observer ..<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="background-color:#ffa07a">concatMap </span>- deals with observables synchronously, unsbscribes from observable on finish</p>
-
-<p>&nbsp;</p>
-
-<ul>
-	<li>function that returns obsarvable</li>
-</ul>
-
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Of() - takes any array and converts it to an array</p>
-
-<pre style="background-color:#ffffff;color:#080808;font-family:'Consolas',monospace;font-size:10.5pt;">
-
-&nbsp;</pre>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGED" CONTENT="20221205;15170154">
+	<STYLE TYPE="text/css">
+	<!--
+		PRE.cjk { font-family: "NSimSun", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P><U>JS array functions</U></P>
+<P><SPAN STYLE="background: #ffff00">map </SPAN>- goes by each item
+and makes a change&nbsp; , returns new array</P>
+<P><SPAN STYLE="background: #ffff00">forEach</SPAN>- do for each item
+in array<BR><FONT COLOR="#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+for</FONT>(<FONT COLOR="#0033b3">const</FONT>[<FONT COLOR="#248f8f">i</FONT>,
+item] <FONT COLOR="#0033b3">of this</FONT>.itemArray.<FONT COLOR="#7a7a43">entries</FONT>())</P>
+<P><SPAN STYLE="background: #ffff00">slice (start , end)</SPAN> -
+returns array with items from start to end , if end is minus returns
+from end of list<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+* if need to clone array , simply use slice()</P>
+<P><SPAN STYLE="background: #ffff00">splice(start, end, items)</SPAN>
+- removes items from start to end and injects the items instaid,
+changes original list and returns the item removed</P>
+<P><SPAN STYLE="background: #ffff00">sort</SPAN> - changes the
+current array to be sorted by condition(condition of int , not
+boolean)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<BR><FONT COLOR="#871094">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+array</FONT>.<FONT COLOR="#7a7a43">sort</FONT>((a, b) =&gt;
+a.<FONT COLOR="#871094">launches </FONT>- b.<FONT COLOR="#871094">launches</FONT>);</P>
+<P><SPAN STYLE="background: #ffff00">reduce (accumulate , current)</SPAN>-
+returns one object of the array, as calculated.. on first go
+accumulated gets first object of array<BR><FONT COLOR="#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+array</FONT>.<FONT COLOR="#7a7a43">reduce</FONT>((accumulate ,
+current ) =&gt;{</P>
+<PRE CLASS="western" STYLE="background: #ffffff"><EM><FONT COLOR="#8c8c8c">        </FONT></EM><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">if </FONT></FONT></FONT><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(accumulate.</FONT></FONT></FONT><FONT COLOR="#871094"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">launches </FONT></FONT></FONT><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">&lt; current.</FONT></FONT></FONT><FONT COLOR="#871094"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">launches</FONT></FONT></FONT><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">)</FONT></FONT></FONT>
+<FONT COLOR="#080808">          <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">accumulate = current;</FONT></FONT></FONT>
+<FONT COLOR="#080808">         <FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">return </FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">rocket_accumulate;</FONT></FONT></FONT>
+<FONT COLOR="#080808">      <FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">});</FONT></FONT></FONT></PRE><P>
+<SPAN STYLE="background: #ffff00">filter </SPAN>- returns array only
+with the values that apply to the condition<BR><FONT COLOR="#0033b3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+this</FONT>.valueArray.<FONT COLOR="#7a7a43">filter</FONT>((value:
+<FONT COLOR="#0033b3">any</FONT>) =&gt; !value.<FONT COLOR="#871094">isHide</FONT>)<BR><SPAN STYLE="background: #ffff00">some
+</SPAN>- return Boolean , true if some values apply to the condition
+given<BR><SPAN STYLE="background: #ffff00">every </SPAN>- return
+Boolean , true if all values apply to the condition given<BR><SPAN STYLE="background: #ffff00">includes</SPAN>-
+return Boolean , true if array includes the value given</P>
+<P><U>RXJS observable functions</U></P>
+<UL>
+	<LI><P>function for observable , included in a pipe , changes the
+	observable to a different observable 
+	</P>
+</UL>
+<P STYLE="margin-left: 2.12cm"><SPAN STYLE="background: #ffa500">map&nbsp;
+</SPAN>- allows changing information given by observable</P>
+<P>* (mergeMap , concatMap, switchMap, exhaustMap) - strategy to deal
+with multi observable events</P>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN STYLE="background: #ffa07a">mergeMap </SPAN>- when reciving new
+observable , unsubscribes automatically from the old observer
+..<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<SPAN STYLE="background: #ffa07a">concatMap </SPAN>- deals with
+observables synchronously, unsbscribes from observable on finish</P>
+<P>&nbsp;</P>
+<UL>
+	<LI><P>function that returns observable 
+	</P>
+</UL>
+<P>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Of() - takes any array and converts it to an  observable</P>
+<PRE CLASS="western" STYLE="margin-bottom: 0.5cm; background: #ffffff"></PRE>
+</BODY>
+</HTML>

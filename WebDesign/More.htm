@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGED" CONTENT="20221031;12520027">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<STYLE TYPE="text/css">
+	<!--
+		PRE.cjk { font-family: "NSimSun", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<P STYLE="margin-left: 2.12cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.12cm"><A HREF="https://www.youtube.com/watch?v=3elGSZSWTbM"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 15pt"><B>Grid
+vs Flex</B></FONT></FONT></A></P>
+<P STYLE="margin-left: 2.12cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 15pt"><B>Grid</B></FONT></FONT></P>
+<P STYLE="margin-left: 2.12cm; font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>use
+if needs fixed columns length </FONT></FONT>
+</P>
+<P STYLE="margin-left: 2.12cm; font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>does
+not deal well with long data</FONT></FONT></P>
+<P STYLE="margin-left: 2.12cm; font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>control
+is from the parent </FONT></FONT>
+</P>
+<PRE CLASS="western" STYLE="margin-left: 2.12cm; font-weight: normal"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><FONT COLOR="#0033b3">grid-container </FONT>{</FONT></FONT></FONT>
+<FONT COLOR="#080808">    <FONT COLOR="#174ad4"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">grid-template-columns</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">repeat</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(</FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">4</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">, </FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">1</FONT></FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fr</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">);</FONT></FONT></FONT>
+<FONT COLOR="#080808">    <FONT COLOR="#174ad4"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">grid-template-columns</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">repeat</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(</FONT></FONT><FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">auto-fit</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">, </FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">minmax</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">(</FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">300</FONT></FONT></FONT><FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">px</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">, </FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">1</FONT></FONT></FONT><FONT COLOR="#0033b3"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">fr</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">));</FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}</FONT></FONT></FONT></PRE><P STYLE="margin-left: 2.12cm; font-weight: normal">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 2.12cm"><FONT FACE="Times New Roman, serif"><FONT SIZE=4 STYLE="font-size: 15pt"><B>Flex</B></FONT></FONT></P>
+<P STYLE="margin-left: 2.12cm; font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>used
+mostly for flex (each component takes as much and needed)</FONT></FONT></P>
+<P STYLE="margin-left: 2.12cm; font-weight: normal"><FONT FACE="Times New Roman, serif"><FONT SIZE=3>needs
+to impact children to get the full effect</FONT></FONT></P>
+<PRE CLASS="western" STYLE="margin-left: 2.12cm"><FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><I><FONT COLOR="#0033b3">flex-container</FONT>{</I></FONT></FONT></FONT>
+<FONT COLOR="#080808">    <FONT COLOR="#174ad4"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">display</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">flex</FONT></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}</FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt"><FONT COLOR="#0033b3">flex-container </FONT>&gt; <FONT COLOR="#0033b3">* </FONT>{</FONT></FONT></FONT>
+<FONT COLOR="#080808">    <FONT COLOR="#174ad4"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">flex-grow</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">:</FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">1</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">;</FONT></FONT></FONT>
+<FONT COLOR="#080808">    <FONT COLOR="#174ad4"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">flex-basis</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">: </FONT></FONT><FONT COLOR="#1750eb"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">33</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">%</FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2 STYLE="font-size: 10pt">}</FONT></FONT></FONT></PRE><P STYLE="margin-left: 2.12cm">
+<BR><BR>
+</P>
+<P STYLE="margin-left: 2.12cm"><BR><BR>
+</P>
+<P STYLE="margin-left: 2.12cm"><BR><BR>
+</P>
+</BODY>
+</HTML>

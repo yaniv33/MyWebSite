@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGED" CONTENT="20221204;14064432">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<STYLE TYPE="text/css">
+	<!--
+		PRE.cjk { font-family: "NSimSun", monospace }
+		CODE.cjk { font-family: "NSimSun", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE CLASS="western" STYLE="margin-left: 1.16cm">/* formatted*/
+
+
+
+JAVA
+
+
+fundamentals 
+        programming language  , uses JVM for compatibility with different OS,OOP (poliomyelitis,implements,inheritance,abstract)
+        wora &ndash; write once , read anywhere .. , runs on multiple OS.
+        Class loaders  - bootstrap , system , application
+
+threads
+        concarency  - Executing more than one task as the same time
+        deallock   - thread gets stuck ,not executing 
+          livelock  - threads being executed , with not progress
+        starving    - low priority process , not executed due to higher priority 
+        memory leaks
+        join
+        isAlive
+interrupt - <CODE CLASS="western">Thread.interrupted()</CODE> will block thread until t instance called interped 
+
+<SPAN LANG="en-US">daemon- low priority , JVM will exist if daemon only are running</SPAN>
+
+
+
+                heap is for process , stack is for short lived threads points to function location in heap
+                synchronized types : procedure , block , static 
+                extend Thread does not allow other extensions , implement runnable does not limit ..
+
+String
+        java String pool - since string is mutteble , JVM creates pool of strings to save memory in case of identical
+        String buffer
+        String builder
+        
+Collections
+        Iterable &ndash; Interface &gt; holds for each loop 
+        Collection  - implements Iratable  , collection of elements , allow duplicate
+        list       &ndash; implements collection
+        Arraylist  &ndash; holds list , fast on access , slow on manipulation
+        Linkedlist &ndash; doubly linked lists , fast on manipulation, slow on  access , not sync
+        Stack&lt;T&gt; - acts as stack
+
+        Set        - interface ,  list of keys , no values. 
+        Hashset    -  no duplicate keys..  key can be null
+<CODE CLASS="western">SortedSet</CODE>  -  sorted
+
+        Map        - interface &ndash; key &gt; value pairs ,   
+        Hashtable  - key != null , value != null , thread safe
+        hashmap    - implements HashTable  , single key can be null , multiple values can be null 
+        
+        functions
+                Collections.swap(vector, 0, 4);  swap object in location 4 with location 0
+                Collections.synchronizedList(new LinkedList(...));
+                Collections.sort , copy, fill, revarse , addAll
+        
+Inharit
+        clone - implements Cloneable  , in case of object the referance to the object would be cloned so they would share the object .. 
+        serialize &ndash; convert to byte for sending to other JVM 
+        hibernate - allows working with databases as OOP
+        
+        
+Design pattern
+        Singaleton - eager , static(block, try-catch) , lasy , sync thread
+        Factory Pattern - class returns instance according to input (String, ENUM)
+        Builder Pattern - Assign fileds to object with a build function
+        ObserverPatternTest - commuincate between tasks but subscribing and notifing (publish)
+
+        
+
+        Application 3 layers -  client &gt; logic &gt; data
+        MVC &ndash; Model , View , Controller &ndash; client &gt; C &gt; M &gt; C &gt; V &gt; C &gt; client
+        MVVM &ndash; Model , View , View model &gt; M(activity) &gt; V (task) &gt; VM(dao)
+        EJB Container   - EJB is a specification of JAVA EE , while Spring is a framework (share beans )                
+
+
+HTTP requests 
+GET(select) , POST(insert) ,DELETE,  PUT(update) , PATCH (partial update)
+                
+
+Common lines
+
+<CODE CLASS="western">    </CODE><CODE CLASS="western">ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;scopes.xml&quot;);</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">Person personSingletonA = (Person) applicationContext.getBean(&quot;personSingleton&quot;);</CODE>
+<CODE CLASS="western">        </CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">Logger log = Logger.getLogger(Class.class.getName())</CODE>
+<CODE CLASS="western">SortedSet&lt;Integer&gt; ts = new TreeSet&lt;Integer&gt;();</CODE>
+
+
+        
+Lingo
+        mutable , 
+tdd &ndash; test driven development
+        
+        
+SPRING
+--------
+
+fundamentals 
+web , orm(hibernate) , dao
+
+        IOC  - Inversion of Control
+        DI   - Dependency injection 
+        File description - web xml
+
+annotation
+FILE DESC
+
+        @Qualifier  - in the case of autowire of a interface , we need to use the qualifier to determine the instance to use
+        
+        @Configuration &ndash; the class contains one or more beans
+        
+        @WebServlet - - points to the servlet to use (servlet is a part of the J2EE framework and every Java application server )
+        @Scope(value=&quot;prototype&quot;) - sets the scope of the component
+        
+        ** used to auto detract and configure beans (SPRING will create the bean for you)
+        @Component &ndash; declares a file to be used as bean by spring  
+        @Service -  same as component , by information that this is a service layer class
+        @Repository &ndash; used for the database layer , allows exception to be converted to spring data access exception
+        ** differ from bean
+        @Bean  - declares a bean (SPRING will use the bean you created )
+
+        @Controller &ndash; creates a spring mvc controller ,combine request handling with response body
+<A NAME="__DdeLink__54_620516948"></A>        @CrossOrigin() - defines from where access is allowed to resources if blank or * from anywhere
+        @RestContoller - @Controller + @ResponseBody    
+        
+TOP     
+        @RequestMapping &ndash; comes with contorller of rest controler , point to contorller to user (MVC controller is a library built upon the servlet )
+        @GetMapping  =&gt; @RequestMapping(method = RequestMethod.GET)
+        @ResponseBody - states that the response is an object 
+
+
+        
+FUNCTION
+         @RequestBody Hero hero  - gets object 
+         @PathVariable - gets tamplate described in mapping   @RequestMapping(method = RequestMethod.DELETE , value = &quot;/{id}&quot;)
+         @RequestParam(value = &quot;id&quot;  , required = false) Integer id   gets URL/?id=12
+         @RequestHeader(&quot;index&quot;) String system_id  - gets field from header 
+        
+        
+
+        send request body with more fields  - OK 
+        send request body with less fields  - OK , if field has defualt value, 
+                                                field has wrapper type gets null
+                                                field has primitive type gets defualt value .. 0
+<A NAME="__DdeLink__50_620516948"></A>                                only problem when sending string to int and so on ..  
+
+
+spring bean scope       @Bean   @Scope(&quot;singleton&quot;)  / @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
+        singleton (default)     - container creates single bean , all requests will return this bean.
+        prototype               - retrun differnt instance on every request
+        request                 - (@RequestScope ) instance for a single HTTP request
+        session                 - (@SessionScope ) instance for a entire session
+        application             - (@ApplicationScope) instance for a entire servletcontext lifecycle
+        websocket                       - instance for a entire websocket lifecycle     
+        
+Security
+        
+jwt token process - send user and pass &gt; 
+                                        create UsernamePasswordAuthenticationToken      (springframework.security) &gt;
+                                        run in AuthenticationManager  &gt;
+                                        store in UserDetailsService &gt; 
+                                        JwtTokenUtil create token with (secret ,info(claim) , exp, issueTime)sends to client ...
+
+spring session id 
+
+
+Servlets
+
+Used to create web app , deployed on the server tc create dynamic web page
+CGI &ndash; Common Web Interface , does not work well with load , thread for each request , 
+
+lifecycle &ndash; Load, Create , Init , Service , Destroy
+
+SendRedirect (HttpServletResponse )     - redirects to other location \ server 
+forward (RequestDispatcher ) - redirects to location in the same server (server side redirect )
+
+servlet container &ndash; implements jakarta servlet specification such as tomcat
+
+servlet is java code , jsp is html converted to java 
+jsp only work with HTTP 
+jsp lifecycle &ndash; init , service , destroy 
+
+RequestDispatcher -  interface for dispatching requests in (html, servlet , jsp)
+
+DB 
+                clustered indexing 
+                sharding - spilting table to smaller tables to increase speed and managability 
+                        horizontal - if schema is identical , table is devided between multiple machines that will run queries simultaniacly 
+                        vertical - deviding the schema to a few tables (make 6 column table to 2 * 3 column tables , with a shared primary key)
+                                
+                
+
+/* formatted end*/
+
+
+
+
+Application 3 layers
+client &gt; logic &gt; data
+
+copy constractor
+deadlock 
+starving ? 
+Distractor
+swap types 
+memory leak
+
+tree question &gt; 
+
+mutable &ndash; <SPAN LANG="hi-IN"><SPAN LANG="he-IL">&#1502;&#1513;&#1514;&#1504;&#1492;</SPAN></SPAN>
+<SPAN LANG="en-US">synchronized</SPAN>
+<SPAN LANG="en-US">privileges </SPAN>
+
+
+<CODE CLASS="western"><SPAN LANG="en-US">Collections.swap(vector, 0, 4);</SPAN></CODE><SPAN LANG="en-US">  swap object in location 4 with location 0</SPAN>
+
+String - + operator will use string buffer  , <SPAN LANG="en-US">any change creates new string creation</SPAN>
+<SPAN LANG="en-US">string buffer &ndash; thread safe due to all function being synchronized </SPAN>
+<SPAN LANG="en-US">string builder &ndash; not thread safe , but faster</SPAN>
+
+
+
+design patterns for singlton
+eaget  - private final static aa instance = new aa();
+static &ndash; block in static {} and add try catch
+lasy &ndash; init the class only if getinstance  == null 
+thread &ndash; add synchronized to the get instance
+
+
+
+<A NAME="__DdeLink__48_620516948"></A>Iterable &ndash; Interface &gt; holds for each loop 
+Collection  - implements Iratable  , collection of elements , allow duplicate
+list &ndash; implements collection
+Arraylist  &ndash; holds list , fast on access , slow on manipulation
+Linkedlist - holds links , fast on manipulation, slow on  access
+
+Set        - interface ,  list of keys , no values. 
+Hashset    -  no duplicate keys..  key can be null
+
+Map        - interface &ndash; key &gt; value pairs ,   
+Hashtable  - key != null , value != null , thread safe
+hashmap    - implements HashTable  , single key can be null , multiple values can be null 
+
+
+clone - implements Cloneable  , in case of object the referance to the object would be cloned so they would share the object .. 
+serialize &ndash; (Q &ndash; make sure some info would not be passed in data ?? serialize&lt;&gt;write to object)
+hibernate 
+application servers
+IoC    - Inversion of Control  <SPAN LANG="hi-IN"><SPAN LANG="he-IL">&#1492;&#1506;&#1489;&#1512;&#1492; &#1513;&#1500; &#1492;&#1513;&#1500;&#1497;&#1496;&#1492; &#1502;&#1492;&#1511;&#1500;&#1488;&#1505; &#1500;&#1505;&#1508;&#1512;&#1497;&#1504;&#1490; &#1506;&#1500; &#1497;&#1491;&#1497; &#1492;&#1494;&#1512;&#1511;&#1492;</SPAN></SPAN>
+  <SPAN LANG="en-US">In the xml we create bean records that allow initialization by spring , we provide id (name) and class(package)</SPAN>
+  <SPAN LANG="en-US">those beans would be accessible from anywhere in our code with the @Autowired annotation </SPAN>
+  <SPAN LANG="en-US">if we will to create </SPAN>
+DI -     Dependency Injection 
+
+Spring annotation
+@Component &ndash; marks a class to be availible in the spring container (context.getBean(class))
+@Scope(value=&rdquo;prototype&rdquo;) - will only create instance by demend (not by defualt)
+@Q<SPAN LANG="en-US">ualifier(&ldquo;lap1&rdquo;)</SPAN>
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@</SPAN>RestController &ndash; <SPAN LANG="en-US">allows creating of maps </SPAN></FONT></FONT></FONT>
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@GetMapping     - creates a map</SPAN></FONT></FONT></FONT>
+
+<CODE CLASS="western"><SPAN LANG="en-US">used to auto detract and configure beans (SPRING will create the bean for you)</SPAN></CODE>
+<CODE CLASS="western"><SPAN LANG="en-US">@Component</SPAN></CODE> &ndash; <CODE CLASS="western"><SPAN LANG="en-US">declares a file to be used as bean by spring  </SPAN></CODE>
+<CODE CLASS="western"><SPAN LANG="en-US">@Service</SPAN></CODE> <SPAN LANG="en-US">-  s</SPAN><CODE CLASS="western"><SPAN LANG="en-US">ame as component , by information that this is a service layer class</SPAN></CODE>
+<CODE CLASS="western"><SPAN LANG="en-US">@Repository &ndash; used for the database layer , allows exception to be converted to spring data access exception</SPAN></CODE>
+
+
+<CODE CLASS="western"><SPAN LANG="en-US">declares a bean (SPRING will use the bean you created )</SPAN></CODE>
+<CODE CLASS="western"><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@Bean</SPAN></FONT></FONT></FONT></CODE><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2> </FONT></FONT></FONT>
+
+<CODE CLASS="western"><SPAN LANG="en-US">@</SPAN></CODE><CODE CLASS="western"><FONT COLOR="#9e880d"><FONT SIZE=2><SPAN LANG="en-US">Qualifier</SPAN></FONT></FONT></CODE><CODE CLASS="western">  </CODE><CODE CLASS="western"><SPAN LANG="en-US">- in the case of autowire of a interface , we need to use the qualifier to determine the instance to use</SPAN></CODE>
+
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@RestController &ndash; creates a spring mvc controller ,combine request handling with response body</SPAN></FONT></FONT></FONT>
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@Configuration &ndash; the class contains one or more beans</SPAN></FONT></FONT></FONT>
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@RequestMapping &ndash; comes with contorller of restcontroler , point to contorller to user (</SPAN></FONT></FONT></FONT><FONT COLOR="#9e880d"><SPAN LANG="en-US">MVC controller is a library built upon the servlet </SPAN></FONT><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">)</SPAN></FONT></FONT></FONT>
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@WebServlet - - points to the servlet to use (servlet is a part of the J2EE framework and every Java application server )</SPAN></FONT></FONT></FONT>
+
+
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">*** MVC  binary form management, form parameter to bean conversion, parameter validation </SPAN></FONT></FONT></FONT>
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">spring boot cli tool</SPAN></FONT></FONT></FONT>
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">spring-boot-starter-security </SPAN></FONT></FONT></FONT>
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">spring layers (Presentation layer, Business layer, Persistence layer, and the Database layer. )</SPAN></FONT></FONT></FONT>
+<FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">(Model, View, Controller, Front Controller, or DispatcherServlet Class )</SPAN></FONT></FONT></FONT>
+
+<A HREF="https://www.youtube.com/@oreillymediavideo/search?query=java%20ee">https://www.youtube.com/@oreillymediavideo/search?query=java%20ee</A> &ndash; <SPAN LANG="en-US">watch java ee</SPAN>
+
+
+Thread
+        join -    the main would wait for the thread to complete
+        isAlive- it thread running currenty 
+concarency - Executing more than one task as the same time  , sharing a thread
+Multi threading - parallel 
+
+
+virtual function - actuall override function in java , term from C++
+
+
+<A NAME="__DdeLink__5_620516948"></A>EJB Container
+JDBC DATA SOURCE
+XA
+java connection string 
+MVVM
+
+https://www.youtube.com/watch?v=rk2zcyzeK3U
+
+Q
+<A NAME="__DdeLink__46_620516948"></A>handle json in serialization 
+access value in json location and change it 
+save to json file seri .. 
+types for json 
+
+
+classloader part of the jvm - loads classes
+
+design patterns
+
+Singleton Pattern
+factory Pattern
+Builder Pattern
+ObserverPatternTest
+
+java String pool - since string is mutteble , JVM creates pool of strings to save memory in case of identical
+
+spring session id 
+
+
+
+** Logger log = Logger.getLogger(Class.class.getName())
+
+<A NAME="__DdeLink__64_620516948"></A><A HREF="https://www.geeksforgeeks.org/look-and-say-sequence/">https://www.geeksforgeeks.org/look-and-say-sequence/</A>
+
+
+hash &ndash; input &gt; function &gt; fix length &gt; always the same
+salt &ndash; added value + password
+hmac &ndash; hash based authentication code
+keypairs &ndash; (jwt)private public 
+singing - 
+asymmetric encryption
+
+md5 obselete 
+
+
+
+tls -transport layer security 
+
+jwt &ndash; share password to decript 
+
+symetric - 
+
+rsa &ndash; private public
+
+sining &ndash; hash rsh-sha256
+
+microservices
+Thread read multiple , write sync
+</PRE>
+</BODY>
+</HTML>
