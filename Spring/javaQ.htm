@@ -6,7 +6,8 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
 	<META NAME="CREATED" CONTENT="0;0">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
-	<META NAME="CHANGED" CONTENT="20221204;14064432">
+	<META NAME="CHANGED" CONTENT="20221215;13580918">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<STYLE TYPE="text/css">
 	<!--
@@ -16,42 +17,40 @@
 	</STYLE>
 </HEAD>
 <BODY LANG="en-US" DIR="LTR">
-<PRE CLASS="western" STYLE="margin-left: 1.16cm">/* formatted*/
+<PRE CLASS="western" STYLE="margin-left: 1.16cm"><SPAN STYLE="background: #ffff00">JAVA</SPAN>
 
 
-
-JAVA
-
-
-fundamentals 
+<SPAN STYLE="background: #ffff00">fundamentals</SPAN> 
         programming language  , uses JVM for compatibility with different OS,OOP (poliomyelitis,implements,inheritance,abstract)
         wora &ndash; write once , read anywhere .. , runs on multiple OS.
         Class loaders  - bootstrap , system , application
 
-threads
+<SPAN STYLE="background: #ffff00">threads</SPAN>
         concarency  - Executing more than one task as the same time
-        deallock   - thread gets stuck ,not executing 
-          livelock  - threads being executed , with not progress
+        deadlock   - thread gets stuck ,not executing 
+        livelock  - threads being executed , with not progress
         starving    - low priority process , not executed due to higher priority 
         memory leaks
-        join
+        join  &ndash; current thread will wait for the specify thread to finish
         isAlive
-interrupt - <CODE CLASS="western">Thread.interrupted()</CODE> will block thread until t instance called interped 
-
+interrupt - <CODE CLASS="western">Thread.interrupted()</CODE> will block thread until the instance called interaped 
 <SPAN LANG="en-US">daemon- low priority , JVM will exist if daemon only are running</SPAN>
+<A NAME="__DdeLink__18_1766730714"></A>wait &ndash; in synchronized , allow other thread to acquire intrinsic lock
+notifyAll &ndash; in synchronized , notify other thread in wait that you finished with the intrinsic lock, and they can exit wait ..
+* static sync functions lock all static sync functions in the class , but not the non-static since its different lock (static , nonstatic)
 
-
+CountDownLatch vs CyclicBarrier
 
                 heap is for process , stack is for short lived threads points to function location in heap
                 synchronized types : procedure , block , static 
                 extend Thread does not allow other extensions , implement runnable does not limit ..
 
-String
+<SPAN STYLE="background: #ffff00">String</SPAN>
         java String pool - since string is mutteble , JVM creates pool of strings to save memory in case of identical
         String buffer
         String builder
         
-Collections
+<SPAN STYLE="background: #ffff00">Collections</SPAN>
         Iterable &ndash; Interface &gt; holds for each loop 
         Collection  - implements Iratable  , collection of elements , allow duplicate
         list       &ndash; implements collection
@@ -65,17 +64,18 @@ Collections
 
         Map        - interface &ndash; key &gt; value pairs ,   
         Hashtable  - key != null , value != null , thread safe
-        hashmap    - implements HashTable  , single key can be null , multiple values can be null 
+        hashmap    - implements HashTable  , single key can be null , multiple values can be null, not sync
         
         functions
                 Collections.swap(vector, 0, 4);  swap object in location 4 with location 0
                 Collections.synchronizedList(new LinkedList(...));
                 Collections.sort , copy, fill, revarse , addAll
         
-Inharit
+<SPAN STYLE="background: #ffff00">Inharit</SPAN>
         clone - implements Cloneable  , in case of object the referance to the object would be cloned so they would share the object .. 
         serialize &ndash; convert to byte for sending to other JVM 
-        hibernate - allows working with databases as OOP
+Externalizable &ndash; same as serialize , but needs to implement readExternal and writeExterenal
+        hibernate - allows working with databases as OOP (JPA)
         
         
 Design pattern
@@ -98,8 +98,8 @@ GET(select) , POST(insert) ,DELETE,  PUT(update) , PATCH (partial update)
 
 Common lines
 
-<CODE CLASS="western">    </CODE><CODE CLASS="western">ApplicationContext applicationContext = new ClassPathXmlApplicationContext(&quot;scopes.xml&quot;);</CODE>
-<CODE CLASS="western">        </CODE><CODE CLASS="western">Person personSingletonA = (Person) applicationContext.getBean(&quot;personSingleton&quot;);</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">ApplicationContext </CODE><CODE CLASS="western"><SPAN LANG="">appc</SPAN></CODE><CODE CLASS="western"> = new ClassPathXmlApplicationContext(&quot;scopes.xml&quot;);</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">Person personSingletonA = (Person) </CODE><CODE CLASS="western"><SPAN LANG="">appc</SPAN></CODE><CODE CLASS="western">.getBean(&quot;personSingleton&quot;);</CODE>
 <CODE CLASS="western">        </CODE>
 <CODE CLASS="western">        </CODE><CODE CLASS="western">Logger log = Logger.getLogger(Class.class.getName())</CODE>
 <CODE CLASS="western">SortedSet&lt;Integer&gt; ts = new TreeSet&lt;Integer&gt;();</CODE>
@@ -115,7 +115,7 @@ SPRING
 --------
 
 fundamentals 
-web , orm(hibernate) , dao
+<A NAME="__DdeLink__20_1378284990"></A>web , <SPAN LANG="">orm\jpa(hibernate)</SPAN> , dao , 
 
         IOC  - Inversion of Control
         DI   - Dependency injection 
@@ -231,7 +231,7 @@ mutable &ndash; <SPAN LANG="hi-IN"><SPAN LANG="he-IL">&#1502;&#1513;&#1514;&#150
 <SPAN LANG="en-US">privileges </SPAN>
 
 
-<CODE CLASS="western"><SPAN LANG="en-US">Collections.swap(vector, 0, 4);</SPAN></CODE><SPAN LANG="en-US">  swap object in location 4 with location 0</SPAN>
+<CODE CLASS="western"><SPAN LANG="en-US">Collections.swap(vector, 0, 4);</SPAN></CODE>  <SPAN LANG="en-US">swap object in location 4 with location 0</SPAN>
 
 String - + operator will use string buffer  , <SPAN LANG="en-US">any change creates new string creation</SPAN>
 <SPAN LANG="en-US">string buffer &ndash; thread safe due to all function being synchronized </SPAN>
@@ -286,7 +286,7 @@ Spring annotation
 
 
 <CODE CLASS="western"><SPAN LANG="en-US">declares a bean (SPRING will use the bean you created )</SPAN></CODE>
-<CODE CLASS="western"><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@Bean</SPAN></FONT></FONT></FONT></CODE><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2> </FONT></FONT></FONT>
+<CODE CLASS="western"><FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@Bean</SPAN></FONT></FONT></FONT></CODE><FONT COLOR="#9e880d"> </FONT>
 
 <CODE CLASS="western"><SPAN LANG="en-US">@</SPAN></CODE><CODE CLASS="western"><FONT COLOR="#9e880d"><FONT SIZE=2><SPAN LANG="en-US">Qualifier</SPAN></FONT></FONT></CODE><CODE CLASS="western">  </CODE><CODE CLASS="western"><SPAN LANG="en-US">- in the case of autowire of a interface , we need to use the qualifier to determine the instance to use</SPAN></CODE>
 
@@ -377,6 +377,6 @@ sining &ndash; hash rsh-sha256
 
 microservices
 Thread read multiple , write sync
-</PRE>
+MORE TO COVER</PRE>
 </BODY>
 </HTML>

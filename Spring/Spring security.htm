@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGED" CONTENT="20221226;15060526">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<STYLE TYPE="text/css">
+	<!--
+		PRE.cjk { font-family: "NSimSun", monospace }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE CLASS="western" STYLE="margin-left: 1.16cm">https://www.youtube.com/watch?v=sm-8qfMWEV8&amp;list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE
+
+Spring gives us 
+User password authentication
+sso / okta / ldap
+app level authrization
+intra app authrization in Oauth
+microservice security
+method level security
+
+5 concepts 
+
+<A NAME="__DdeLink__34_1766730714"></A><A NAME="__DdeLink__6_1766730714"></A><SPAN STYLE="background: #ffff00">1. authentication</SPAN> - 
+ * possession based authentication (phone , keycard )
+ * multi factor authentication
+
+<A NAME="__DdeLink__36_1766730714"></A><A NAME="__DdeLink__8_1766730714"></A><SPAN STYLE="background: #ffff00">2. authorization</SPAN>
+<A NAME="__DdeLink__38_1766730714"></A><A NAME="__DdeLink__10_1766730714"></A><SPAN STYLE="background: #ffff00">3. principle</SPAN> &ndash; the currently logged in user 
+4. granted authority (actions allowed)
+5. Role &ndash; authorities are assigned to a role .. (role manager allowed &hellip; )  
+
+
+Filters core servlate technology 
+
+spring security defualt behavior 
+* add mandatory authentication of url
+* addes log in form
+* handles login error
+* <SPAN STYLE="background: #ffff00">default</SPAN> password
+
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#9e880d">@SpringBootApplication</FONT>(scanBasePackages = {<FONT COLOR="#067d17">&quot;com.example.securityBasics&quot;</FONT>,</FONT></FONT></FONT>
+<FONT COLOR="#080808">                                           <FONT COLOR="#067d17"><FONT FACE="Consolas, monospace"><FONT SIZE=2>&quot;com.example.springbootdemo&quot;</FONT></FONT></FONT><FONT FACE="Consolas, monospace"><FONT SIZE=2>})</FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#9e880d">@RestController    </FONT><FONT COLOR="#8c8c8c"><I>// ADD THIS TO CREATE REST CONTROLLER</I></FONT></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#9e880d">@EnableWebSecurity  </FONT><FONT COLOR="#8c8c8c"><I>// THIS WILL CREATE A LOGIN PAGE !!</I></FONT></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#083080"><I>spring.security.user.name</I></FONT><FONT COLOR="#8c8c8c"><I>=</I></FONT><FONT COLOR="#067d17"><I>user</I></FONT></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#083080">spring.security.user.password</FONT>=<FONT COLOR="#067d17">pass</FONT></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>Authentication manager </I></FONT></FONT></FONT>
+
+
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#9e880d"><I>@EnableWebSecurity </I></FONT><FONT COLOR="#8c8c8c"><I>// this is a web security configuration</I></FONT></FONT></FONT></FONT>
+<FONT COLOR="#080808"><FONT FACE="Consolas, monospace"><FONT SIZE=2><FONT COLOR="#0033b3">public class </FONT><FONT COLOR="#000000">SecurityConfiguration </FONT><FONT COLOR="#0033b3">extends </FONT><FONT COLOR="#000000">WebSecurityConfigurerAdapter</FONT>{ <FONT COLOR="#8c8c8c"><I>// is depricated use </I></FONT></FONT></FONT></FONT>
+<A HREF="https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter"><FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter</I></FONT></FONT></FONT></A>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>lesson 5</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>in security configuration </I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>authentication manager builder- provides authentication</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>HttpSecurity &ndash; provides authorization</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>antMatchers(&ldquo;/**).hasAnyRole</I></FONT></FONT></FONT>
+<A HREF="http://localhost:8080/login?logout">http://localhost:8080/login?logout</A>
+
+
+lesson 6
+
+filters 
+
+to be used in the non spring boot in the file descriptor 
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;!--&lt;filter-mapping&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">      <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;filter-name&gt;sessionValidityFilter&lt;/filter-name&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">      <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;url-pattern&gt;/rest/*&lt;/url-pattern&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">      <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;url-pattern&gt;/html/*&lt;/url-pattern&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">   <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;/filter-mapping&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">   <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;filter-mapping&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">      <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;filter-name&gt;SessionValidityFilter&lt;/filter-name&gt; </I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">      <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;url-pattern&gt;/SessionValidityFilter&lt;/url-pattern&gt;</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c">   <FONT FACE="Consolas, monospace"><FONT SIZE=2><I>&lt;/filter-mapping&gt; --&gt;</I></FONT></FONT></FONT>
+authentication provider &ndash; authenticate()
+getCridentio
+sso or ldap ?? 
+the authentication manager 
+the providermanager implements authenticationManager connected to the different providers 
+If gets a authentication type goes to all providers until matching a provider that allows the method of authentication 
+sends authentication and replies authentication 
+user details service of type user details 
+
+process
+authentication filter &gt; 
+authentication object &amp; credentials &gt; 
+authentication manager &gt; 
+finds the provider to handle the request (isSupport) &gt; 
+pass authentication object &gt; 
+the provider looks up the user in the system in the user detail service &gt;
+user detail service return the user detail instance &gt;
+the provider verifies the instance &gt;
+if not successful , throw exception .. 
+if successful , return authentication with principle and authorities all the way back to the filter&gt;
+the filter takes the object and savesl it in the thread context 
+ 
+on every request since already authenticated , a second filter would be used , for authenticated sessions 
+
+lesson 7
+
+spring web , spring security , h2 , jdbc api , 
+HomeResource
+
+<A HREF="https://docs.spring.io/spring-security/reference/6.0.0-M7/servlet/appendix/database-schema.html#page-title">https://docs.spring.io/spring-security/reference/6.0.0-M7/servlet/appendix/database-schema.html#page-title</A>
+
+creates the project + h2 database , 
+the schema.sql and the data.sql file should be located in the resources folder ..
+
+* for some reason could not have the spring to construct my tables and data .. 
+set info in application.properties
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>#spring.datasource.url=jdbc:mysql://localhost:3306/jpayment2</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>#spring.datasource.username=root</I></FONT></FONT></FONT>
+<FONT COLOR="#8c8c8c"><FONT FACE="Consolas, monospace"><FONT SIZE=2><I>#spring.datasource.password=123454321</I></FONT></FONT></FONT>
+lesson 8 
+to new project add &ndash; web starter , security starter , jpa , mysql driver 
+
+lesson JWT
+session token , JSON web token
+header &gt;  defines the cipher and type of the token
+payload &gt; the data in json format
+verify signature () - takes the header + payload and creates a hash with a shared secret ..   
+Oauth - 
+
+check the new system as well - <A HREF="https://stackoverflow.com/questions/49348551/could-not-autowire-authentication-manager-in-spring-boot-2-0-0">https://stackoverflow.com/questions/49348551/could-not-autowire-authentication-manager-in-spring-boot-2-0-0</A>
+
+Oauth
+Resource , protected resource &gt; the information we need to access
+Resource owner &gt; the user that can grant access to the resource .. 
+Resource server &gt; the server that is holding the resource 
+client &gt; the service that needs the access 
+flow 1 &gt;&gt;  Authorization code flow
+  1. Resource owner to client
+2.client to Authorization server 
+3.Authorization server to  Resource owner
+4.Resource owner allows Authorization server
+5.Authorization server sends to client Auth token
+6.Client sent Auth token to get a second token called Access token
+7.the client can access the resource directly with the access token 
+
+<A NAME="__DdeLink__24_781122215"></A>flow 2 &gt;&gt;  Implicit flow (less secure)
+5. Authorization server sends to client Access token DIRECTLY
+6. the client can access the resource directly with the access token 
+
+flow 3 &gt;&gt;  client cridential flow &gt; Authorization between microservices
+1. micro service 1 connects to micro service 2 auth server for authentication
+2. auth server returns access token to specific data
+3. micro service uses the token to access the correct micro services to corrent resource
+
+<SPAN LANG="">Oauth 1 &amp; Oauth 1.1 are the old versions , Oath2 is the current and is a </SPAN> 
+
+</PRE>
+</BODY>
+</HTML>
