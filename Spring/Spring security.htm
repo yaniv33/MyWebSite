@@ -6,13 +6,15 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
 	<META NAME="CREATED" CONTENT="0;0">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
-	<META NAME="CHANGED" CONTENT="20221226;15060526">
+	<META NAME="CHANGED" CONTENT="20221229;13493663">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<STYLE TYPE="text/css">
 	<!--
 		PRE.cjk { font-family: "NSimSun", monospace }
+		CODE.cjk { font-family: "NSimSun", monospace }
 	-->
 	</STYLE>
 </HEAD>
@@ -155,7 +157,45 @@ flow 3 &gt;&gt;  client cridential flow &gt; Authorization between microservices
 2. auth server returns access token to specific data
 3. micro service uses the token to access the correct micro services to corrent resource
 
-<SPAN LANG="">Oauth 1 &amp; Oauth 1.1 are the old versions , Oath2 is the current and is a </SPAN> 
+Oauth 1 &amp; Oauth 1.1 are the old versions , Oath2 is the current and is a  
+Angular they call it XSRF , the front end would like the server to send it a cookie called &quot;XSRF-TOKEN&quot; 
+
+</PRE><P STYLE="margin-left: 0.33cm; page-break-before: auto">
+Since we are not using a higher level framework in this sample,
+you&rsquo;ll need to explicitly add the CSRF token, which you just
+made available as a cookie from the backend. To make the code a bit
+simpler, include the <CODE CLASS="western">js-cookie</CODE> library:</P>
+<P>pom.xml 
+</P>
+<PRE CLASS="western"><CODE CLASS="western">&lt;dependency&gt;</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">&lt;groupId&gt;org.webjars&lt;/groupId&gt;</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">&lt;artifactId&gt;js-cookie&lt;/artifactId&gt;</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">&lt;version&gt;2.1.0&lt;/version&gt;</CODE>
+<CODE CLASS="western">&lt;/dependency&gt;</CODE></PRE><P>
+And then, you can reference it in your HTML:</P>
+<P>index.html 
+</P>
+<PRE CLASS="western" STYLE="margin-bottom: 0.5cm"><CODE CLASS="western">&lt;script type=&quot;text/javascript&quot; src=&quot;/webjars/js-cookie/js.cookie.js&quot;&gt;&lt;/script&gt;</CODE></PRE><P STYLE="margin-left: 1.16cm">
+Finally, you can use <CODE CLASS="western">Cookies</CODE> convenience
+methods in XHR:</P>
+<P>index.html 
+</P>
+<PRE CLASS="western"><CODE CLASS="western">$.ajaxSetup({</CODE>
+<CODE CLASS="western">  </CODE><CODE CLASS="western">beforeSend : function(xhr, settings) {</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">if (settings.type == 'POST' || settings.type == 'PUT'</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">|| settings.type == 'DELETE') {</CODE>
+<CODE CLASS="western">      </CODE><CODE CLASS="western">if (!(/^http:.*/.test(settings.url) || /^https:.*/</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">.test(settings.url))) {</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">// Only send the token to relative URLs i.e. locally.</CODE>
+<CODE CLASS="western">        </CODE><CODE CLASS="western">xhr.setRequestHeader(&quot;X-XSRF-TOKEN&quot;,</CODE>
+<CODE CLASS="western">          </CODE><CODE CLASS="western">Cookies.get('XSRF-TOKEN'));</CODE>
+<CODE CLASS="western">      </CODE><CODE CLASS="western">}</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">}</CODE>
+<CODE CLASS="western">  </CODE><CODE CLASS="western">}</CODE>
+<CODE CLASS="western">});</CODE>
+google oauth : <A HREF="https://console.cloud.google.com/apis/dashboard?pli=1&amp;project=quixotic-elf-354516">https://console.cloud.google.com/apis/dashboard?pli=1&amp;project=quixotic-elf-354516</A>
+set redirect uri to http://localhost:8080/login/oauth2/code/google
+<SPAN LANG="">convert properties to yaml : https://env.simplestep.ca/</SPAN>
 
 </PRE>
 </BODY>
