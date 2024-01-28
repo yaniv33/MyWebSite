@@ -6,7 +6,9 @@
 	<META NAME="GENERATOR" CONTENT="OpenOffice 4.1.11  (Win32)">
 	<META NAME="CREATED" CONTENT="0;0">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
-	<META NAME="CHANGED" CONTENT="20221215;13580918">
+	<META NAME="CHANGED" CONTENT="20230628;16210706">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
+	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<META NAME="CHANGEDBY" CONTENT="Yaniv Mano">
 	<STYLE TYPE="text/css">
@@ -87,9 +89,11 @@ Design pattern
         
 
         Application 3 layers -  client &gt; logic &gt; data
-        MVC &ndash; Model , View , Controller &ndash; client &gt; C &gt; M &gt; C &gt; V &gt; C &gt; client
-        MVVM &ndash; Model , View , View model &gt; M(activity) &gt; V (task) &gt; VM(dao)
+        MVC &ndash; Model , View , Controller &ndash; client &gt; C &gt; M &gt; C &gt; V &gt; C &gt; client (view is in the middle)
+        MVVM &ndash; Model , View , View model &gt; M(activity) &gt; V (task) &gt; VM(dao) (view model in the middle)
         EJB Container   - EJB is a specification of JAVA EE , while Spring is a framework (share beans )                
+
+MVVM &ndash; the view asks from the view model , but gets the answers with events .. model is the persistence .
 
 
 HTTP requests 
@@ -97,11 +101,10 @@ GET(select) , POST(insert) ,DELETE,  PUT(update) , PATCH (partial update)
                 
 
 Common lines
-
-<CODE CLASS="western">    </CODE><CODE CLASS="western">ApplicationContext </CODE><CODE CLASS="western"><SPAN LANG="">appc</SPAN></CODE><CODE CLASS="western"> = new ClassPathXmlApplicationContext(&quot;scopes.xml&quot;);</CODE>
-<CODE CLASS="western">        </CODE><CODE CLASS="western">Person personSingletonA = (Person) </CODE><CODE CLASS="western"><SPAN LANG="">appc</SPAN></CODE><CODE CLASS="western">.getBean(&quot;personSingleton&quot;);</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">ApplicationContext appc = new ClassPathXmlApplicationContext(&quot;scopes.xml&quot;);</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">Person personSingletonA = (Person) appc.getBean(&quot;personSingleton&quot;);</CODE>
 <CODE CLASS="western">        </CODE>
-<CODE CLASS="western">        </CODE><CODE CLASS="western">Logger log = Logger.getLogger(Class.class.getName())</CODE>
+<CODE CLASS="western">    </CODE><CODE CLASS="western">Logger log = Logger.getLogger(Class.class.getName())</CODE>
 <CODE CLASS="western">SortedSet&lt;Integer&gt; ts = new TreeSet&lt;Integer&gt;();</CODE>
 
 
@@ -115,7 +118,7 @@ SPRING
 --------
 
 fundamentals 
-<A NAME="__DdeLink__20_1378284990"></A>web , <SPAN LANG="">orm\jpa(hibernate)</SPAN> , dao , 
+<A NAME="__DdeLink__20_1378284990"></A>web , orm\jpa(hibernate) , dao , 
 
         IOC  - Inversion of Control
         DI   - Dependency injection 
@@ -205,7 +208,7 @@ DB
                 clustered indexing 
                 sharding - spilting table to smaller tables to increase speed and managability 
                         horizontal - if schema is identical , table is devided between multiple machines that will run queries simultaniacly 
-                        vertical - deviding the schema to a few tables (make 6 column table to 2 * 3 column tables , with a shared primary key)
+                        vertical - dividing the schema to a few tables (make 6 column table to 2 * 3 column tables , with a shared primary key)
                                 
                 
 
@@ -221,7 +224,7 @@ copy constractor
 deadlock 
 starving ? 
 Distractor
-swap types 
+
 memory leak
 
 tree question &gt; 
@@ -240,7 +243,7 @@ String - + operator will use string buffer  , <SPAN LANG="en-US">any change crea
 
 
 design patterns for singlton
-eaget  - private final static aa instance = new aa();
+eager  - private final static aa instance = new aa();
 static &ndash; block in static {} and add try catch
 lasy &ndash; init the class only if getinstance  == null 
 thread &ndash; add synchronized to the get instance
@@ -272,8 +275,8 @@ IoC    - Inversion of Control  <SPAN LANG="hi-IN"><SPAN LANG="he-IL">&#1492;&#15
 DI -     Dependency Injection 
 
 Spring annotation
-@Component &ndash; marks a class to be availible in the spring container (context.getBean(class))
-@Scope(value=&rdquo;prototype&rdquo;) - will only create instance by demend (not by defualt)
+@Component &ndash; marks a class to be available in the spring container (context.getBean(class))
+@Scope(value=&rdquo;prototype&rdquo;) - will only create instance by demand (not by default)
 @Q<SPAN LANG="en-US">ualifier(&ldquo;lap1&rdquo;)</SPAN>
 
 <FONT COLOR="#9e880d"><FONT FACE="Consolas, monospace"><FONT SIZE=2><SPAN LANG="en-US">@</SPAN>RestController &ndash; <SPAN LANG="en-US">allows creating of maps </SPAN></FONT></FONT></FONT>

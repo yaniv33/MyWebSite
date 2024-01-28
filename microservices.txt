@@ -1,0 +1,114 @@
+
+presentation > logic > 
+
+https://www.youtube.com/watch?v=mPPhcU7oWDU
+
+pruduct service
+order service 
+inventory service
+other service , inventory service , notification service
+
+kafka > rabbit MQ 
+
+lombok
+mongodb 
+
+@ResponseStatus(HttpStatus.NOT_FOUND) - return this if exception occur
+
+Lombok  annotation
+
+@Document(value = "product")	- declares a mongoDB document
+@AllArgsConstructor		- create constractor with all fields
+@NoArgsConstructor		- create empty constractor
+@Builder			- generate builder pattern
+@Data				- generate geter and setter , equals , hashcode , to string
+@Slf4j				-  generate a logger field for a class
+
+
+testcontainers - package for testing , integration test .. docucontainers .. 
+testcontainers.org
+bill of materials - give one version and all dependencies would accept this version
+@TestContainers
+@Container
+@DynamicPropertySource
+@AutoConfigureMockMvc
+
+@EnableEurekaClient -  enables a Spring Boot application to register itself with a Eureka server
+	Eureka is a service discovery tool that allows microservices to register themselves and discover each other
+ 
+        List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsDtoList()
+                .stream()
+                .map(this::mapToDto)
+                .toList();
+
+
+@CircuitBreaker	- provided by the Spring Cloud Circuit Breaker , opens a circuit if the failure threshold is reached
+		basically , when the function throw exception to many times ,use fallback option instaid
+
+@Transactional - if ecxetpion occur, rollback would revarse all db changes 
+@SneakyThrows
+
+Bean -> return args { ... } - running a bean to run on startup
+spring.jpa.hibernate.ddl-auto=update > does not prevent insert from bean on every startup
+			create-crop > delete all db,start from scratch , not for deployment
+			none - do not run insert on startup 	 
+
+1:22 > creating a project with modules , practice
+
+pom issues 
+
+dependencyManagment in pom could be set on main microservice project and apply to all modules ..
+
+
+in project pom set parent to <groupId>org.springframework.boot</groupId>
+in module pom set parent to the project artifact and group id
+
+mvn cleav verify - clean build without install , just to check code is compiling 
+
+WebClient  comes from webflux dependency , a more advance option then RestTamplte that comes with Spring framework
+	allows communicating with different modules ..
+
+            boolean allProductsInStock = Arrays.stream(inventoryResponsArray)
+                    .allMatch(InventoryResponse::isInStock);
+
+discovery service - Eureka server > spring cloud netflix
+each module gets dependency > eureka client
+
+@EnableEurekaClient
+@LoadBalanced - add the loader ballancing capabilities to the client
+
+api gateway
+
+
+intellij shortcut > psvm > generate main function
+
+spring cound gateway 2:35 > build on webflux
+	gate
+
+ the gateway routes to all services and the discovery server
+in discovery , need to switch /eureka/web to localhost:8761 
+
+security - keycloak
+3:02
+https://www.youtube.com/watch?v=t9O99l4gjAc
+	Auth2 with Keycloak
+resource owner  > resource server> client(service asking for resource , public /confidential)
+authorization server aws cognito , OKTA, key cloak
+oidc - open id connect - identity layer > id token+ accesss token 
+
+https://www.keycloak.org/getting-started/getting-started-docker > 
+docker run -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.0.1 start-dev
+change local port to prevent cullogion
+docker run -p 8181:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.0.1 start-dev
+ https://github.com/SaiUpadhyayula/spr
+ 
+pkce - proor of key 
+query string parameters : state , session state , code
+ 
+
+spring-security-oauth2-jose > javascript object sighing and encryption framework
+
+create realm > create client > {public , confidential}
+
+
+3:31
