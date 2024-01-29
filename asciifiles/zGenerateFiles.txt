@@ -1,0 +1,11 @@
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\angularDemo\README_PROXY.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Angular_proxy.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\demo_jpa\README_JPA.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_jpa.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\demo_jpa\README_JPQL.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_jpql.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\exception\README_ExceptionHandle.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_exception_handle.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\graphql\README_GraphQL.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_graphql.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\webpages\thymeleaf\README_Themeleaf.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_themeleaf.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springBootDemo\src\main\java\com\example\websocketJS\README_SocketJS.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_socketjs.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springDemo\src\main\java\com\otot\demo_graphql\README_GraphQL.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_graphql2.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springDemo\src\main\java\com\otot\demo_jwt\README_JWT.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_jwt.html
+asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\microservice\README.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_microservices1.html
+asciidoctor -b xhtml5 E:\buffer\TMP\TUTORIALS\SPRING_\microservice_pom\README.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_microservices2.html
