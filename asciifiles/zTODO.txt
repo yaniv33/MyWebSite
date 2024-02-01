@@ -1,0 +1,11 @@
+
+
+this refers to react 
+F:\WEB_PROJECTS\angular2\myDemo\springDemo\src\main\java\com\otot\demo_graphql\README_GraphQL.adoc
+
+go over logic of jwt once more
+F:\WEB_PROJECTS\angular2\myDemo\springDemo\src\main\java\com\otot\demo_jwt\README_JWT.adoc
+
+give more info of multi project + using dependencies 
+
+reset up info on microservices

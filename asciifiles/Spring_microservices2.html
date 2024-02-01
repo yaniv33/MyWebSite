@@ -443,61 +443,36 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_use_links">Use links :</a>
-<ul class="sectlevel3">
-<li><a href="#_split_gateway_and_security">Split gateway and security</a></li>
-<li><a href="#_run_test">run test</a></li>
-</ul>
-</li>
-<li><a href="#_in_short">IN SHORT</a>
-<ul class="sectlevel3">
-<li><a href="#_1_create_multi_project">1. Create multi project</a></li>
-<li><a href="#_2_project_short_description">2. Project, short description</a></li>
-</ul>
-</li>
-<li><a href="#_1_set_multi_module_project_with_dependency_management">1. SET MULTI MODULE PROJECT WITH DEPENDENCY MANAGEMENT</a>
+<li><a href="#_introduction">Introduction :</a>
 <ul class="sectlevel2">
-<li><a href="#_with_maven">with maven</a></li>
-<li><a href="#_with_gradle">with gradle</a></li>
+<li><a href="#_use_links">Use links</a></li>
+<li><a href="#_microservices_in_project">Microservices in project</a></li>
 </ul>
 </li>
-<li><a href="#_2_modules_description">2. MODULES DESCRIPTION</a>
-<ul class="sectlevel2">
-<li><a href="#_project_product_service">PROJECT Product-service</a></li>
-<li><a href="#_project_invenroty_service">PROJECT Invenroty-service</a></li>
-<li><a href="#_project_order_service">PROJECT Order-service</a></li>
-<li><a href="#_project_discovery_server">PROJECT discovery-server</a></li>
-<li><a href="#_project_api_gateway">PROJECT api-gateway</a></li>
-<li><a href="#_secure_api_gateway_with_spring_security_and_keycloak">Secure api-gateway with spring security and keycloak</a></li>
-<li><a href="#_project_configuration_service">PROJECT configuration service</a></li>
-</ul>
-</li>
-<li><a href="#_3_adding_security_to_gateway">3. ADDING SECURITY TO GATEWAY</a></li>
-<li><a href="#_4_generate_auth_with_postman">4. GENERATE AUTH WITH POSTMAN</a></li>
-<li><a href="#_allow_access_to_eureka_webpage_via_security_discovery_service">Allow access to eureka webpage via security (DISCOVERY SERVICE)</a>
+<li><a href="#_implementing_gateway_in_front_of_security_micorservices">implementing gateway in-front of security micorservices</a>
 <ul class="sectlevel3">
-<li><a href="#_working_with_circut">working with circut</a></li>
-<li><a href="#_distributed_tracing">Distributed tracing</a></li>
+<li><a href="#_set_approch_to_filter_on_gateway">set approch to filter on gateway</a></li>
 </ul>
 </li>
-<li><a href="#_kafka">KAFKA</a></li>
-<li><a href="#_docker_and_docker_composs">Docker and Docker composs</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_use_links">Use links :</h2>
+<h2 id="_introduction">Introduction :</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_use_links">Use links</h3>
 <div class="paragraph">
 <p><strong><em>LINKS</em></strong> :<br/>
 <a href="https://www.youtube.com/watch?v=HFl2dzhVuUo&amp;t=3366s">Youtube</a></p>
 </div>
-<div class="paragraph">
-<p><strong>Folder description</strong> - create a maven / yml microservice demo</p>
 </div>
+<div class="sect2">
+<h3 id="_microservices_in_project">Microservices in project</h3>
 <div class="paragraph">
-<p><strong>components</strong> -</p>
+<p>In the project we will create microservice to access Rest api securely<br/>
+here is the list of microservices their needed dependencies ..</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -510,9 +485,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ol>
 </div>
-</li>
-<li>
-<p><strong>a-zipkin</strong> - this project can run in docker form, or simply a jar file ..</p>
 </li>
 <li>
 <p><strong>a-eureka-server</strong> - holds all config files of microservices</p>
@@ -550,17 +522,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </li>
 <li>
-<p><strong>b-security</strong></p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>spring web + spring security</p>
-</li>
-<li>
-<p>JWT &gt;  io.jsonwebtoken &gt; jjwt-api , jjwt-impl , jjwt-jackson : 0.11.5 (<strong>Optional</strong>)</p>
-</li>
-</ol>
-</div>
+<p><strong>b-security</strong><br/>
+<em>THIS PROJECT MAY USE DIFFERENT TYPES OF SECURITY, THIS WOULD BE COVERED BELLOW</em></p>
 </li>
 <li>
 <p><strong>c-service-[A-C]</strong> - micro services , with web access , db access and all that is needed..</p>
@@ -576,7 +539,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>spring zipkin + spring boot actuator</p>
 </li>
 <li>
-<p>micrometer+ prometheus + grafana</p>
+<p>micrometer + prometheus + grafana</p>
 </li>
 <li>
 <p>spring web</p>
@@ -592,1155 +555,127 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_implementing_gateway_in_front_of_security_micorservices">implementing gateway in-front of security micorservices</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p><strong>b-security-auth2</strong><br/>
-.. eureka discovery client (spring cloud discovery)<br/>
-.. config client (spring cloud config)<br/>
-.. spring zipkin + spring boot actuator<br/>
-.. spring web<br/>
-.. spring security<br/>
-.. Auth2 client</p>
+<p>In the following example we would separate gateway from security<br/>
+this is not always the case and in some cases gateway and security would be implemented together<br/>
+In many examples gateway service would also implement the security<br/>
+However in this project the gateway and security are seperated, so that we could include many types of security.</p>
+</div>
+<div class="paragraph">
+<p>The gateway microservice would implement a filter , and Rest requests would authenticate in that filter.<br/>
+Each of our security microservices would have to implement the following Rest calls.</p>
 </div>
 <div class="sect3">
-<h4 id="_split_gateway_and_security">Split gateway and security</h4>
-<div class="paragraph">
-<p>gateway will also point to security<br/>
-security would implement the following function</p>
-</div>
+<h4 id="_set_approch_to_filter_on_gateway">set approch to filter on gateway</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>register - register new users.</p>
-</li>
-<li>
-<p>token - generate token for existing users.</p>
-</li>
-<li>
-<p>validate -  return whether the token is valid or not</p>
+<p>in the properties file set path to security auth , with no filter<br/>
+so that all request going to auth do not need to pass the filter</p>
 </li>
 </ol>
 </div>
 <div class="paragraph">
-<p>the process would work as following :</p>
+<p>all other microservices that should be approached by the user should go via the filter</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">        - id: b-security
+          uri: lb://b-security
+          predicates:
+            - Path=/auth/**
+
+        - id: c-service-A
+          uri: lb://c-service-A
+          predicates:
+            - Path=/service-a/**
+          filters:
+            - AuthenticationFilter</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>at the filter , we take the token and check it infront of the validate rest function ,<br/>
+if valid , we plant the loggedInUser received from the validate rest api in the request and send it to its destination.</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">                if (!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION)) {
+                    throw new RuntimeException("missing authorization header");
+                }
+
+                String authHeader = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
+                if (authHeader != null &amp;&amp; authHeader.startsWith("Bearer ")) {
+                    authHeader = authHeader.substring(7);
+                }
+
+                try {
+
+                    ResponseEntity&lt;String&gt; response = template.getForEntity("http://localhost:8081/auth/validate?token=" + authHeader, String.class);
+                    HttpStatusCode status = response.getStatusCode();
+                    if (status != HttpStatus.OK )
+                        throw new RuntimeException(response.getBody());
+
+                    request = exchange.getRequest().mutate()
+                            .header("loggedInUser",response.getBody()).build(); // add to header name of logged in user
+
+                } catch (Exception e) {
+System.out.println("invalid access...! - " + e.getMessage());
+                    throw new RuntimeException("un authorized access to application");
+                }
+//            return chain.filter(exchange);
+            return chain.filter(exchange.mutate().request(request).build());
+        });</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>FOR THE VARIOUS SECURITY MICROSERVICE VIEW OTHER DOCUMNET</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>ISSUE</strong></p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>use :
+@EnableConfigServer
+@EnableEurekaServer</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>*check config server*
+http://localhost:[port]/[spring.application.name]/default</pre>
+</div>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
-<li>
-<p>the gatway would implement filter that would check the token infront of security</p>
-</li>
-<li>
-<p>the gateway route would route to register &amp; token without blockage</p>
-</li>
-<li>
-<p>if token valid will forword the call ..</p>
-</li>
-<li>
-<p><strong>All the calls do not need to be authenticated</strong> by the security mechanism, however<br/>
-Authentication authenticate = authenticationManager.authenticate in validate func would use authenticate</p>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
 <li>
 <p>it seems gateway would not recognize filter working with config server</p>
 </li>
 <li>
 <p>in gateway could not connect to security with eureka name , so had to approach directly and set fixed port for security</p>
 </li>
-</ol>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_run_test">run test</h4>
-<div class="paragraph">
-<p><mark>#</mark><br/>
-POST <a href="http://localhost:8071/auth/token" class="bare">http://localhost:8071/auth/token</a><br/>
-Content-Type: application/json</p>
-</div>
-<div class="paragraph">
-<p>{<br/>
-"username" : "yossilj",<br/>
-"password" : "123"<br/>
-}</p>
-</div>
-<div class="paragraph">
-<p><mark>#</mark><br/>
-GET <a href="http://localhost:8071/service-a/hello-b" class="bare">http://localhost:8071/service-a/hello-b</a><br/>
-Content-Type: application/json<br/>
-Authorization: Bearer [token]</p>
-</div>
-<div class="paragraph">
-<p><a href="http://localhost:8070/service-a/hello-b" class="bare">http://localhost:8070/service-a/hello-b</a></p>
-</div>
-<div class="ulist">
-<ul>
 <li>
-<p>to add</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>security - user-pass (new - old), jwt ,</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>remarks</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>use :<br/>
-@EnableConfigServer @EnableEurekaServer</p>
-</div>
-<div class="paragraph">
 <p>for config server do not use names with camel case</p>
-</div>
-<div class="paragraph">
-<p>check config server<br/>
-    <a href="http://localhost:">port</a>/[spring.application.name]/default</p>
-</div>
-<div class="paragraph">
-<p>--- end ---</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_in_short">IN SHORT</h2>
-<div class="sectionbody">
-<div class="sect3">
-<h4 id="_1_create_multi_project">1. Create multi project</h4>
-<div class="paragraph">
-<p><em>Create a parent project with inner modules, Use dependency management to control the ver of all the modules dependencies</em></p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_2_project_short_description">2. Project, short description</h4>
-<div class="paragraph">
-<p><strong>MODULES</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>product-service</strong> :<br/>
-shows module working in front of mongodb database.</p>
-</li>
-<li>
-<p><strong>order &amp; inventory services</strong> :<br/>
-shows a service dependent on another service , each order checks inventory before placing order</p>
-</li>
-<li>
-<p><strong>discovery-service</strong> :<br/>
-uses eureka cloud service to register all services , thus allowing access to all modules.<br/>
-<strong>key words</strong> : eureka.<br/>
-<a href="http://localhost:8080/eureka/web">eureka</a> , <strong>user</strong>:eureka; <strong>pass</strong>:pass</p>
-</li>
-<li>
-<p><strong>api-gateway</strong> :<br/>
-uses cloud gateway to map the path to all services , thus all request could approach one gateway uses spring security to secure connections to the services uses keycloak to authorize users based on auth2 authorization process.<br/>
-<a href="http://localhost:8181">keycloak</a> , <strong>user</strong>:admin; <strong>pass</strong>:admin<br/>
-<strong>key words</strong> : cloud gateway. spring security , keycloak</p>
-</li>
-<li>
-<p><strong>notification-service</strong> :<br/>
-uses <strong>kafka</strong> queue managing broker , in order to manage queue for sending messages such as sms / email<br/>
-<strong>key words</strong> : kafka</p>
-</li>
-<li>
-<p><strong>configuration-service</strong> :<br/>
-allows storing of all properties / yaml configuration files in one location instead of each project holding its own configuration, the configuration service would hold and distribute via http socket</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p><strong>ADDED Utilities</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>lombok</strong> :<br/>
-a utility for adding bean utils such as builders ,getters and setters , logs etc..</p>
-</li>
-<li>
-<p><strong>WebClient</strong> :<br/>
-part of spring-boot-starter-webflux , after setting configuration, can use webclient builder to sent http requests between services ..</p>
-</li>
-<li>
-<p><strong>docker(composs)</strong> :<br/>
-Ext installation, tool for building container that will hold all our cloud utilities..</p>
-</li>
-<li>
-<p><strong>actuator</strong> :<br/>
-allows monitoring tools to run on our project.</p>
-</li>
-<li>
-<p><strong>zipkin(sleuth)</strong> :<br/>
-a utility for monitoring http request thought the the verious services<br/>
-<a href="http://localhost:9411/zipkin/">zipkin</a></p>
-</li>
-<li>
-<p><strong>circuit(resilience4j, zookeeper)</strong> :<br/>
-a utility for managing failed http request , allow circuit states, define attempts num &amp; duration , define process for failure ..</p>
-</li>
-<li>
-<p><strong>jib</strong> :<br/>
-pluggin , allows connecting to our docker container</p>
-</li>
-<li>
-<p><strong>prometheus/ grafana</strong><br/>
-allows getting visual information about our projects</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong><em>remarks</em></strong><br/>
-needed installations : mongodb , docker docker container must run keycloak , zipkin , kafka.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_1_set_multi_module_project_with_dependency_management">1. SET MULTI MODULE PROJECT WITH DEPENDENCY MANAGEMENT</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>allows management of a bundle of modules</p>
-</div>
-<div class="sect2">
-<h3 id="_with_maven">with maven</h3>
-<div class="paragraph">
-<p><strong>On top level pom.xml</strong><br/>
-Set parent&#8217;s group:artifact:version declare son modules</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;groupId&gt;com.example&lt;/groupId&gt;
-    &lt;artifactId&gt;mydemo&lt;/artifactId&gt;
-    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-
-    &lt;modules&gt;
-        &lt;module&gt;sonModule1&lt;/module&gt;
-    &lt;/modules&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>set properties</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;properties&gt;
-        &lt;spring-cloud.version&gt;2021.0.2&lt;/spring-cloud.version&gt;
-    &lt;/properties&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>in dependency management, define version for specifig artifact</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;dependencyManagement&gt;
-        &lt;dependencies&gt;
-            &lt;dependency&gt;
-                &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-                &lt;artifactId&gt;spring-cloud-dependencies&lt;/artifactId&gt;
-                &lt;version&gt;${spring-cloud.version}&lt;/version&gt;
-                &lt;type&gt;pom&lt;/type&gt;
-                &lt;scope&gt;import&lt;/scope&gt;
-            &lt;/dependency&gt;
-        &lt;/dependencies&gt;
-    &lt;/dependencyManagement&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>On module pom.xml</strong><br/>
-Set group:artifact:version same as the parent module declare son artifact id , no need for group or version</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">    &lt;parent&gt;
-        &lt;artifactId&gt;mydemo&lt;/artifactId&gt;
-        &lt;groupId&gt;com.example&lt;/groupId&gt;
-        &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;
-    &lt;/parent&gt;
-
-    &lt;artifactId&gt;sonModule1&lt;/artifactId&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>define dependencies without the version, the version would be determined by the ver set on the top level project</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">        &lt;dependency&gt;
-            &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-            &lt;artifactId&gt;spring-cloud-sleuth-zipkin&lt;/artifactId&gt;
-        &lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_with_gradle">with gradle</h3>
-<div class="paragraph">
-<p><strong>DID NOT WORK</strong><br/>
-<strong>On top level pom.xml</strong><br/>
-set property in ext , and set mavenBom for specific artifact</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">ext {
-    springCloudVersion = "2021.0.0"
-}
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>On gradle.build</strong></p>
-</div>
-<div class="paragraph">
-<p>define dependencies without the version, the version would be detarmine by the ver set on the top level project</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-xml" data-lang="xml">dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>when creating module in intellij , new &gt; module if maven , select maven and sepcify parent if gradle, select new module and specify parent</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_2_modules_description">2. MODULES DESCRIPTION</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>Modules role</strong></p>
-</div>
-<div class="sect2">
-<h3 id="_project_product_service">PROJECT Product-service</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>gateway /api/product - post : creates new product record in mongodb</p>
-</li>
-<li>
-<p>gateway /api/product - get : returns all records of products</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_invenroty_service">PROJECT Invenroty-service</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>gateway /api/inventory - get : gets list of products, check if in stock , returns List&lt;InventoryResponse&gt;</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    return inventoryRepository.findBySkuCodeIn(skuCode).stream()
-            .map(inventory -&gt;
-                    InventoryResponse.builder()
-                            .skuCode(inventory.getSkuCode())
-                            .isInStock(inventory.getQuantity() &gt; 0)
-                            .build()
-            ).toList();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_order_service">PROJECT Order-service</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>gateway /api/order - post : creates new order (OrderRequest &gt; List&lt;OrderLineItems&gt; &gt; Order &gt; orderRepository) and saves to mysql in database order-service table order with OneToMany of orderLineList</p>
-</li>
-<li>
-<p>process of checking is in stock by connecting to Invenroty-service implement and configure webflux , allows to send http requests to other gateways connect to /api/inventory that returns InventoryResponse[] (need to create identical InventoryResponse object in both projects ) use uriBuilder to create uri for all skucode in order</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">//map the Strings from the order into a list of sku-codes
-        List&lt;String&gt; skuCodes = order.getOrderLineItemsList().stream()
-                .map(OrderLineItems::getSkuCode)        // the getSkuCode is set in the @Getter(lombok)
-                .toList();
-
-//use webflux webClient to connect to /api/inventory
-        InventoryResponse[] InventoryResponses = webClient.get().
-                            // go to gateway in project inventory-service
-                            //
-                uri("http://localhost:8082/api/inventory", uriBuilder -&gt; uriBuilder.queryParam("skuCode" , skuCodes).build()).
-                retrieve().                                 // get result
-                bodyToMono(InventoryResponse[].class).                  // set result type
-                block();                                    // make sync request
-
-//convert array to boolean
-        boolean allProductsInStock = Arrays.stream(InventoryResponses).allMatch(InventoryResponse::isInStock);</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_discovery_server">PROJECT discovery-server</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>this project implements cloud service eureka all project are registered in this service by implementing the EurekaClient all projects change their port to 0 , meaning the spring with choose a random availiable port for them the gateway would be registered in the discovery server</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>enable on server :<br/>
-@EnableEurekaServer</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">repositories {
-    mavenCentral()
-    maven { url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates' }
-}
-
-dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-}
-
-ext {
-    springCloudVersion = "2022.0.1"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-
-eureka.instance.hostname=localhost
-eureka.client.register-with-eureka=false
-eureka.client.fetch-registry=false
-server.port=8761</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>enable on clients :</p>
-</div>
-<div class="paragraph">
-<p>@EnableEurekaClient - no longer needed on new spring</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">repositories {
-    mavenCentral()
-    maven { url 'https://artifactory-oss.prod.netflix.net/artifactory/maven-oss-candidates' }
-}
-
-dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-}
-
-ext {
-    springCloudVersion = "2022.0.1"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}
-
-eureka.client.service-url.defaultZone=http://localhost:8761/eureka
-spring.application.name=inventory-service</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>can login to the admin site in <a href="http://localhost:8761" class="bare">http://localhost:8761</a></p>
-</div>
-<div class="paragraph">
-<p>request resolve from clients :</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
-public class WebClientConfig {
-
-    @Bean
-    @LoadBalanced                   // the load balanced is for the eureka discovery service
-    public WebClient.Builder webClientBuilder() {
-        return WebClient.builder();
-    }
-
-}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">private final WebClient.Builder webClientBuilder;
-
-//use webflux webClient to connect to /api/inventory
-        InventoryResponse[] InventoryResponses = webClientBuilder.build().get().
-                            // go to gateway in project inventory-service
-                            //
-//                uri("http://localhost:8082/api/inventory",
-                uri("http://inventory-service/api/inventory",
-                                    uriBuilder -&gt; uriBuilder.queryParam("skuCode" , skuCodes).build()).
-                retrieve().                                 // get result
-                bodyToMono(InventoryResponse[].class).                  // set result type
-                block();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_api_gateway">PROJECT api-gateway</h3>
-<div class="paragraph">
-<p><strong>Creates a common gateway that navigates to all projects declaring paths , predicates and filters</strong></p>
-</div>
-<div class="listingblock">
-<div class="title">import cloud service gateway</div>
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
-}
-
-ext {
-    springCloudVersion = "2022.0.1"
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">in application properties build routes to services</div>
-<p><strong>look at the predicates for the statics of the eureka web page , in : predicates[0]=Path=/eureka/</strong>* *</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">## Product Service Route (lb meaning load balance )
-spring.cloud.gateway.routes[0].id=product-service
-spring.cloud.gateway.routes[0].uri=lb://product-service
-spring.cloud.gateway.routes[0].predicates[0]=Path=/api/product
-
-## Discover Server Route
-spring.cloud.gateway.routes[2].id=discovery-server
-spring.cloud.gateway.routes[2].uri=http://localhost:8761
-spring.cloud.gateway.routes[2].predicates[0]=Path=/eureka/web
-spring.cloud.gateway.routes[2].filters[0]=SetPath=/
-
-## Discover Server Static Resources Route
-spring.cloud.gateway.routes[3].id=discovery-server-static
-spring.cloud.gateway.routes[3].uri=http://localhost:8761
-spring.cloud.gateway.routes[3].predicates[0]=Path=/eureka/**</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_secure_api_gateway_with_spring_security_and_keycloak">Secure api-gateway with spring security and keycloak</h3>
-<div class="paragraph">
-<p><a href="https://www.keycloak.org/getting-started/getting-started-docker">keycloak</a></p>
-</div>
-<div class="paragraph">
-<p><em>docker installation with change from default port 8080 to 8181</em><br/>
-docker run -p 8181:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:21.0.1 start-dev</p>
-</div>
-<div class="paragraph">
-<p><em>docker installation with change from default port 8080 to 8181</em><br/>
-docker run --name keycloak -e KEYCLOAK_USER=admin -e KEYCLOAK_PASSWORD=admin -p 8181:8181 jboss/keycloak -Djboss.http.port=8181</p>
-</div>
-<div class="paragraph">
-<p>login to localhost:8181 with admin admin on top combo &gt; create realm - give realm name (Spring-boot-microservices-realm) can view realm in realm settings go to clients and create new clients (Spring-cloud-client)</p>
-</div>
-<div class="paragraph">
-<p>find in client &gt; access type(private) , client protocol</p>
-</div>
-<div class="paragraph">
-<p>for test disable standart flow and direct access grants allow service accounts &gt; by saving we will get a secret in the credentials tab this secret will allow us access</p>
-</div>
-<div class="paragraph">
-<p>after copy go to realm settings &gt; endpoints &gt; openid &#8230;&#8203;<br/>
-copy the issuer</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>view secret : clients &gt; spring-could-client &gt; credentials this credentials should be integrated with the http requests (postman or test )</p>
-</li>
-</ul>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_project_configuration_service">PROJECT configuration service</h3>
-<div class="paragraph">
-<p><strong>Holds and distributes projects configuration via http socket</strong></p>
-</div>
-<div class="paragraph">
-<p><em>Set up service on configuration server</em></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">dependencies {
-	implementation 'org.springframework.cloud:spring-cloud-config-server'
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>service properties</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">server.port=8088
-spring.profiles.active=native       // for use of locale repository ,and not git</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>service enable on server</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@SpringBootApplication
-@EnableConfigServer</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>under resources place all configuration files with the naming convention of [service-name].(proprties / yml)</p>
-</div>
-<div class="paragraph">
-<p><em>Set up service on client projects</em></p>
-</div>
-<div class="paragraph">
-<p>set the local properties only with the naming of the service [should match the file under resources folder]<br/>
-and the url of the config server</p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>the configuration is visable via<br/>
-<a href="http://localhost:${port}/${spring.application.name}/default" class="bare">http://localhost:${port}/${spring.application.name}/default</a><br/>
-<a href="http://localhost:8088/api-gateway/default" class="bare">http://localhost:8088/api-gateway/default</a></p>
-</li>
-</ul>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">spring.application.name=product-service
-spring.config.import=optional:configserver:http://localhost:8088/</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><strong>REMARKS</strong></p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>This would not work for the gateway service ..</p>
-</li>
-<li>
-<p>for gradle projects , need to add the following dependencies in order to allow the projects to connect to the configuration servers</p>
-</li>
-</ol>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">dependencies {
-    implementation 'io.pivotal.spring.cloud:spring-cloud-services-starter-config-client'
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:2.0.1.RELEASE" // ADDED TO ALLOW CONNECTION TO CONFIG SERVER
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>in maven</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">		&lt;dependency&gt;
-			&lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;
-			&lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;
-		&lt;/dependency&gt;</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_3_adding_security_to_gateway">3. ADDING SECURITY TO GATEWAY</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>add to properties</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">spring.security.oauth2.resourceserver.jwt.issuer-uri= http://localhost:8181/realms/Spring-boot-microservices-realm</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>add to gradle</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-implementation 'org.springframework.boot:spring-boot-starter-security'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>add security config *The security config will accept jwt requests authenticated by keycloak OAuth mechanize *</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
-@EnableWebFluxSecurity // we need webflux and not web because it is required by spring cloud gateway
-public class SecurityConfig {
-
-    @Bean
-    public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity serverHttpSecurity) {
-        serverHttpSecurity
-                .csrf().disable()
-                .authorizeExchange(exchange -&gt;
-                        exchange.pathMatchers("/eureka/**")
-                                .permitAll()        // if eureka , allow all , static data for the eureka page
-                                .anyExchange()
-                                .authenticated())   // all the rest needs to be authenticated
-                .oauth2ResourceServer(ServerHttpSecurity.OAuth2ResourceServerSpec::jwt);
-        return serverHttpSecurity.build();
-    }
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_4_generate_auth_with_postman">4. GENERATE AUTH WITH POSTMAN</h2>
-<div class="sectionbody">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>go to authorization tab</p>
-</li>
-<li>
-<p>select Type &gt; OAUth 2.0</p>
-</li>
-<li>
-<p>Grant token &gt; client credentials</p>
-</li>
-<li>
-<p>Acess url token : place token url point from <a href="http://localhost:8181/realms/Spring-boot-microservices-realm/.well-known/openid-configuration" class="bare">http://localhost:8181/realms/Spring-boot-microservices-realm/.well-known/openid-configuration</a><br/>
-Client id - name of client in realm we created Client secret - the secret we got in client credentials</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_allow_access_to_eureka_webpage_via_security_discovery_service">Allow access to eureka webpage via security (DISCOVERY SERVICE)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>In order to allow access to aureka service, we must implement the security on the discovery service as well</strong></p>
-</div>
-<div class="paragraph">
-<p>Example of implementing websecurity with in memory user and password ..</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
-@EnableWebSecurity // need webflux rather than webmvc becuase the spring cloud services work with web flux
-public class SecurityConfig{
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/eureka/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic();
-        return http.build();
-    }
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth    .inMemoryAuthentication()
-            .passwordEncoder(NoOpPasswordEncoder.getInstance()) // do to : check how to add encoding
-                .withUser("eureka").password("password").roles("USER");
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><em>now the page would be accesible via localhost:8080/eureka/web with user and password</em></p>
-</div>
-<div class="paragraph">
-<p>and finally , update the url of eureka service for the gateway service , so that it would include the user and password</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">eureka.client.serviceUrl.defaultZone=http://eureka:password@localhost:8761/eureka</code></pre>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_working_with_circut">working with circut</h4>
-<div class="paragraph">
-<p><strong>The circut mechanize allows us to deal with failed rest calls, by allowing state change , setting timeout and setting retry</strong></p>
-</div>
-<div class="paragraph">
-<p>circuit states :</p>
-</div>
-<div class="paragraph">
-<p>Closed -The circuit breaker is closed and the call goes through Half Open - The circuit breaker is open and the call fails immediately without any attempt to execute the real operation.<br/>
-Open - allows limited number of calls to see if the operation has recovered.</p>
-</div>
-<div class="listingblock">
-<div class="title">add to gradle (actuator is for allowing web view monitoring of the circuit)</div>
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-reactor-resilience4j'
-implementation 'org.springframework.boot:spring-boot-starter-actuator'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">set Resilinece4j.circuit properties in the properties file</div>
-<p><em>in the [name] section, place a common name such as "inventory"</em></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">#Resilinece4j Properties
-resilience4j.circuitbreaker.instances.[name].registerHealthIndicator=true           -- enable circuit
-resilience4j.circuitbreaker.instances.[name].event-consumer-buffer-size=10          -- buffer assign for circuit
-resilience4j.circuitbreaker.instances.[name].slidingWindowType=COUNT_BASED          -- circuit could be count/time based
-resilience4j.circuitbreaker.instances.[name].slidingWindowSize=5                    -- num of event for count
-resilience4j.circuitbreaker.instances.[name].failureRateThreshold=50                -- failre rate (%)
-resilience4j.circuitbreaker.instances.[name].waitDurationInOpenState=5s             -- wait in open state
-resilience4j.circuitbreaker.instances.[name].permittedNumberOfCallsInHalfOpenState=3   -- calls in half open state
-resilience4j.circuitbreaker.instances.[name].automaticTransitionFromOpenToHalfOpenEnabled=true -- allow automatic transition to half open state
-
-#Resilience4J Timeout Properties
-resilience4j.timelimiter.instances.[name].timeout-duration=3s  -- duration for @TimeLimiter(name = "[name]")
-
-#Resilience4J Retry Properties  , for : (@Retry(name = "[name]"))
-resilience4j.retry.instances.[name].max-attempts=3      -- number of retries
-resilience4j.retry.instances.[name].wait-duration=5s    -- retry after</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">set the controller for ciruit use</div>
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    @CircuitBreaker(name="[name]" , fallbackMethod = "fallbackMethod")  // in case of [name] circuit fail , call method fallbackMethod
-    @TimeLimiter(name = "[name]")                                   // use [name] timeout properties
-    @Retry(name = "[name]")                                         // use [name] retry properties
-    public CompletableFuture&lt;String&gt; placeOrder(@RequestBody OrderRequest orderRequest) {
-        return CompletableFuture.supplyAsync(() -&gt; orderService.placeOrder(orderRequest));
-    }
-
-    public CompletableFuture&lt;String&gt; fallbackMethod(OrderRequest orderRequest, RuntimeException runtimeException) {
-        return CompletableFuture.supplyAsync(() -&gt; "Oops! Something went wrong, please order after some time!");
-    }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<div class="title">view circuit in console</div>
-<p><em>localhost:62514/actuator/health</em><br/>
-here we can see information about the circuit and the state</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_distributed_tracing">Distributed tracing</h3>
-<div class="paragraph">
-<p><strong>Zipkin lib allows us to monitor rest request between different services in a console web page</strong></p>
-</div>
-<div class="ulist">
-<ul>
-<li>
-<p>For some reason did not work as expected in spring 3.x since zipkin is depricated and needs to use zipkin brave , the trace id is 32 digits long and can not be found in the</p>
-</li>
-</ul>
-</div>
-<div class="paragraph">
-<p>Download and install zipkin - docker from<br/>
-<a href="https://zipkin.io/pages/quickstart.html" class="bare">https://zipkin.io/pages/quickstart.html</a><br/>
-<em>run command :</em>  docker run -d -p 9411:9411 openzipkin/zipkin</p>
-</div>
-<div class="paragraph">
-<p>add dependencies to all projects</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">OLD VER
-    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    implementation 'org.springframework.cloud:spring-cloud-sleuth-zipkin'
-
-NEW VER
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-    implementation 'io.zipkin.reporter2:zipkin-reporter-brave'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>add to properties connection details to zipkin to all projects</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties"># Distributed tracing
-spring.zipkin.base-url=http://localhost:9411
-spring.sleuth.sampler.probability= 1.0</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>now all http requests could be traced in the sipkin console<br/>
-<a href="http://localhost:9411/zipkin/" class="bare">http://localhost:9411/zipkin/</a></p>
-</div>
-<div class="paragraph">
-<p>Bundling followup requests into on branch</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">Span inventoryServiceLookup = tracer.nextSpan().name("InventoryServiceLookup");
-try (Tracer.SpanInScope isLookup = tracer.withSpanInScope(inventoryServiceLookup.start())) {
-
-// PLACE CALL FROM CURRENT SERVICE TO OTHER SERVICE HERE
-// THIS WILL BUNDLE THE CALL TO THE PARENT THREAD IN THE ZIPKIN CONSOLE
-
-// the trace , could lookup this in the zipkin console
-log.info("trace id : " + this.tracer.currentSpan().context().traceIdString());
-
-} finally {
-    inventoryServiceLookup.flush();
-}</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_kafka">KAFKA</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>KAFKA is a utility for managing a broker for sending messages as email or sms</strong></p>
-</div>
-<div class="paragraph">
-<p>information about kafka can be found here:<br/>
-<a href="https://developer.confluent.io/quickstart/kafka-docker/" class="bare">https://developer.confluent.io/quickstart/kafka-docker/</a></p>
-</div>
-<div class="paragraph">
-<p>add to parent project the file docker-compose.yml</p>
-</div>
-<div class="paragraph">
-<p>set up docker kafka with : docker compose up -d see kafka logs with : docker logs -f broker</p>
-</div>
-<div class="paragraph">
-<p>add kafka implementaion in both client and server services</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">implementation 'org.springframework.kafka:spring-kafka'</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>set a common carrier object in both client and server services for carrying the message use duplicate in order to avoid dependencies between services</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class OrderPlacedEvent {
-    private String orderNumber;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>configure application properties on the client side as serializer<br/>
-[Name of topic] - the broker name that would be used throughout the queue</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">spring.kafka.bootstrap-servers=localhost:9092
-spring.kafka.template.default-topic=[Name of topic]
-spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
-spring.kafka.producer.value-serializer=org.springframework.kafka.support.serializer.JsonSerializer
-spring.kafka.producer.properties.spring.json.type.mapping=[path to carrier object]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>configure application properties on the server side as deserializer<br/>
-[topic group id] - the server needs to also define the group id notice that the mapping id different in both properies as each points to its own identical object</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">spring.kafka.bootstrap-servers=localhost:9092
-spring.kafka.template.default-topic=[Name of topic]
-spring.kafka.consumer.group-id= [topic group id]
-spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
-spring.kafka.consumer.value-deserializer=org.springframework.kafka.support.serializer.JsonDeserializer
-spring.kafka.consumer.properties.spring.json.type.mapping=event:com.example.notificationservice.OrderPlacedEvent</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>define the topic endpoint in the server service</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @KafkaListener(topics = "[Name of topic]")
-    public void handleNotification(OrderPlacedEvent orderPlacedEvent) {
-
-        log.info("Received Notification for Order - {}", orderPlacedEvent.getOrderNumber());
-    }</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>send to queue from client service</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">import org.springframework.kafka.core.KafkaTemplate;
-private final KafkaTemplate&lt;String, OrderPlacedEvent&gt; kafkaTemplate;
-kafkaTemplate.send("[Name of topic]" , new OrderPlacedEvent(order.getOrderNumber()) );</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_docker_and_docker_composs">Docker and Docker composs</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p><strong>here we learn how to integrate our project with docker with by loading our images</strong></p>
-</div>
-<div class="paragraph">
-<p>docker.com/products/docker-desktop/[docker]</p>
-</div>
-<div class="paragraph">
-<p>how to set our project to integrate with docker</p>
-</div>
-<div class="paragraph">
-<p>in our module&#8217;s folder , we need to add the files</p>
-</div>
-<div class="paragraph">
-<p>Dockerfile - specifies jdk , takes the jar from the build and runs it<br/>
-<em>execute this file with :</em> docker build -t apigateway-dockerfile .</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">FROM openjdk:17
-COPY build/*.jar app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Dockerfile.layered - specifies how to build the container and run it ..<br/>
-<em>execute this file with :</em> docker build -t apigateway-layered -f Dockerfile.layered</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">FROM eclipse-temurin:17.0.4.1_1-jre as builder
-WORKDIR extracted
-ADD target/*.jar app.jar
-RUN java -Djarmode=layertools -jar app.jar extract
-
-FROM eclipse-temurin:17.0.4.1_1-jre
-WORKDIR application
-COPY --from=builder extracted/dependencies/ ./
-COPY --from=builder extracted/spring-boot-loader/ ./
-COPY --from=builder extracted/snapshot-dependencies/ ./
-COPY --from=builder extracted/application/ ./
-EXPOSE 8080
-ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><em>run to view the images in docker -</em> docker images</p>
-</div>
-<div class="paragraph">
-<p>Use jib pluggin to connect to docker<br/>
-<a href="https://cloud.google.com/java/getting-started/jib">jib</a></p>
-</div>
-<div class="paragraph">
-<p>set jib in maven the user and password for docker should be set in ~/.m2/settings.xml</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">    &lt;build&gt;
-        &lt;plugins&gt;
-            &lt;plugin&gt;
-                &lt;groupId&gt;com.google.cloud.tools&lt;/groupId&gt;
-                &lt;artifactId&gt;jib-maven-plugin&lt;/artifactId&gt;
-                &lt;version&gt;3.2.1&lt;/version&gt;
-                &lt;configuration&gt;
-                    &lt;from&gt;
-                        &lt;image&gt;eclipse-temurin:17.0.4.1_1-jre&lt;/image&gt;
-                    &lt;/from&gt;
-                    &lt;to&gt;&lt;image&gt;registry.hub.docker.com/saiupadhyayula007/${artifactId}&lt;/image&gt;&lt;/to&gt;
-                &lt;/configuration&gt;
-            &lt;/plugin&gt;
-        &lt;/plugins&gt;
-    &lt;/build&gt;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>set jib in gradle</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-properties" data-lang="properties">plugins {
-    id 'java'
-    id 'org.springframework.boot' version '3.0.4'
-    id 'com.google.cloud.tools.jib' version '3.2.1'
-}
-
-jib {
-    from {
-        image = 'eclipse-temurin:17.0.4.1_1-jre'
-    }
-    to {
-        image = "registry.hub.docker.com/yaniv33/${project.name}"
-        auth {
-            username = 'yaniv33'
-            password = 'zaq1xsw2c'
-        }
-    }
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>docker compose up -d : <em>pull all images required for the docker file pull and run all containters</em></p>
-</div>
-<div class="paragraph">
-<p><em>execute</em>  <strong>jib:build</strong> <em>for build docker image and push docker mvn clean compile</em></p>
-</div>
-<div class="paragraph">
-<p>&#8201;&#8212;&#8201;last add dependencies acuator &amp; prometheus manangement.endpoints.web.exposure.include = prometheus</p>
-</div>
-<div class="paragraph">
-<p>grafana - ui docker logs -f prometheus docker logs -f grafana</p>
-</div>
-<div class="paragraph">
-<p>localhost:9090 - for prometheus ui localhost:3000 - grafana allows viewing the resource usage</p>
-</div>
-<div class="paragraph">
-<p>/actuator/prometheus</p>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-12-24 14:59:43 +0200
+Last updated 2024-02-01 11:04:05 +0200
 </div>
 </div>
 </body>

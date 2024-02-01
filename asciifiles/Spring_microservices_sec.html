@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="generator" content="Asciidoctor 2.0.20"/>
 <meta name="author" content="Yaniv mano"/>
-<title>JPQL Example</title>
+<title>Microservices Example</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"/>
 <style>
 /*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
@@ -436,323 +436,339 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>JPQL Example</h1>
+<h1>Microservices Example</h1>
 <div class="details">
 <span id="author" class="author">Yaniv mano</span><br/>
 </div>
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_use_links">Use links :</a></li>
-<li><a href="#_1_what_is_jpql">1. WHAT IS JPQL</a></li>
-<li><a href="#_2_jpql_examples">2. JPQL examples</a>
-<ul class="sectlevel2">
-<li><a href="#_database_relations">Database relations</a></li>
-<li><a href="#_query_examples">Query examples</a></li>
-<li><a href="#_query_join_one_to_many"><strong>Query Join One to many</strong></a></li>
-<li><a href="#_query_join_many_to_many"><strong>Query Join many to many</strong></a></li>
-<li><a href="#_query_join_combine_one_to_many_many_to_many"><strong>Query Join combine one to many &amp; many to many</strong></a></li>
-<li><a href="#_query_with_variables"><strong>Query with variables</strong></a></li>
-<li><a href="#_entity_example"><strong>Entity example</strong></a></li>
-<li><a href="#_query_for_multiple_objects"><strong>Query for multiple Objects</strong></a></li>
-<li><a href="#_features"><strong>Features</strong></a></li>
+<li><a href="#_process_implemented_by_security_services">Process implemented by security services</a>
+<ul class="sectlevel3">
+<li><a href="#_various_microservices_security">Various microservices security</a></li>
+<li><a href="#_run_tests">run tests</a></li>
 </ul>
 </li>
-<li><a href="#_3_working_with_jpa_entitymanager">3. WORKING WITH JPA EntityManager</a></li>
 </ul>
 </div>
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_use_links">Use links :</h2>
+<h2 id="_process_implemented_by_security_services">Process implemented by security services</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><strong><em>LINKS</em></strong> : <a href="https://www.youtube.com/watch?v=2SV7QODVHAE">Youtube</a></p>
+<p>The gateway microservice would implement a filter , and Rest requests would authenticate in that filter.<br/>
+Each of our security microservices would have to implement the following Rest calls.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_1_what_is_jpql">1. WHAT IS JPQL</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>JPQL is a way to query multiple database types , using the same syntax<br/>
-JPQL comes on top of hibernate , so it would also be object oriented</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_2_jpql_examples">2. JPQL examples</h2>
-<div class="sectionbody">
-<div class="sect2">
-<h3 id="_database_relations">Database relations</h3>
-<div class="paragraph">
-<p><em>First lets set the tables relations</em></p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>register</strong> - register new users.</p>
+</li>
+<li>
+<p><strong>token</strong> - generate token for existing users.</p>
+</li>
+<li>
+<p><strong>validate</strong> -  return whether the token is valid or not</p>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>teacher 1 &lt;&gt; ∞ course - one  to many<br/>
-student ∞ &lt;&gt; ∞ course - many to many</p>
+<p>The gate would work with the security microservices as such:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the gateway would implement filter that would check the token in-front of security</p>
+</li>
+<li>
+<p>requests directed to security would not need to go via the filter</p>
+</li>
+<li>
+<p>requests directed to other microservices would go via the filter.</p>
+</li>
+<li>
+<p>the filter would check the token by the validate controller, if not valid would be declined</p>
+</li>
+</ol>
+</div>
+<div class="sect3">
+<h4 id="_various_microservices_security">Various microservices security</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><strong>b-security-basic</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>spring web + spring security</p>
+</li>
+<li>
+<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
-<p>Set up Teacher</p>
+<p>This microservice would work with memory data, and the SecurityConfig built in <strong>PasswordEncoder</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>the security basically allowes all requests , but is used on <strong>"\token"</strong> rest api would the authenticationManager to authenticate we would generate token only for valid users</p>
+</li>
+</ol>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@Entity(name= "Teacher")            // the name of the table, if missing goes by name of class
-public class Teacher {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)         // create primary id
-    private Long id;
+<pre class="highlight"><code class="language-java" data-lang="java">     @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeHttpRequests((authorize) -&gt; {
+            authorize.
+                    requestMatchers("/auth/**").permitAll().
+                    anyRequest().authenticated();
+        })
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults());  // in case of wanting to use the build in form
+        return http.build();
+    }</code></pre>
+</div>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>register - would convert <strong>CustomUserDetails</strong> user to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
+</li>
+<li>
+<p>token    - would get <strong>CustomUserDetails</strong> user ,token return is username + password(user) generated with  <strong>@Bean PasswordEncoder</strong></p>
+</li>
+<li>
+<p>validate - would seperate the user and pass and run  <strong>@Bean PasswordEncoder</strong>.match(user , pass)</p>
+</li>
+</ol>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p><strong>b-security-JWT</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>spring web + spring security</p>
+</li>
+<li>
+<p>JWT &gt;  io.jsonwebtoken &gt; jjwt-api , jjwt-impl , jjwt-jackson : 0.11.5</p>
+</li>
+<li>
+<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This microservice would work with memory data and JWT to create a token.</p>
+</div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>register - would get <strong>CustomUserDetails</strong> user to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
+</li>
+<li>
+<p>token    - would get <strong>CustomUserDetails</strong> user ,<br/>
+check in-front of <strong>authenticationManager.authenticate</strong> (= @Bean AuthenticationProvider)<br/>
+(the request itself would be allowed by SecurityFilterChain , but here we use to authenticate of <strong>SecurityConfig</strong>)<br/>
+if validated , use <strong>Jwts</strong> to generate a token for user and claims</p>
+</li>
+<li>
+<p>validate - get token , check it in-front of <strong>Jwts</strong> .validateToken and would restore user and send back</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">        Authentication authenticate = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getName(), authRequest.getPassword()));
+        if (authenticate.isAuthenticated()) {
+            return authService.generateToken(authRequest.getName());
+        } else {
+            throw new RuntimeException("invalid access");
+        }</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p><strong>b-security-JWTJpa</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><a href="https://www.youtube.com/watch?v=MWvnmyLRUik">Youtube</a></p>
+</div>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>spring web + spring security</p>
+</li>
+<li>
+<p>JWT &gt;  io.jsonwebtoken &gt; jjwt-api , jjwt-impl , jjwt-jackson : 0.11.5</p>
+</li>
+<li>
+<p>jpa ,mysql ,  lombok</p>
+</li>
+<li>
+<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This microservice would work same as <strong>b-security-JWT</strong> but would work with database and not InMemory</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p><strong>b-security-JWTRsa</strong></p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>spring-boot-starter-web</p>
+</li>
+<li>
+<p>spring-boot-starter-oauth2-resource-server (includes security .. )</p>
+</li>
+<li>
+<p>spring-boot-configuration-processor</p>
+</li>
+<li>
+<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This microservice would use RSA public &lt;&#8594; private key in order to validate user , set with InMemory<br/>
+Security is made of 2 layers where the token generate is dealt with a different mechanise<br/>
+Security is based on httpBasic(withDefaults()) so the generate request should be with basic auth</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">	@Bean
+	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.
+				csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests((authorize) -&gt; {
+					authorize.
+		                requestMatchers("/auth/**").permitAll().
+						anyRequest().authenticated();
+				})
+				.httpBasic(Customizer.withDefaults())
+				.formLogin(Customizer.withDefaults());  // in case of wanting to use the build in form
+		return http.build();
+	}
 
-    @OneToMany(mappedBy = "teacher" , fetch = FetchType.LAZY)
-    private Set&lt;Course&gt; courses;                                // will hold all courses for each teacher
-    private String name;
-    private String tag;
-
-//  &lt; ADD GETTER SETTER HERE &gt;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Set up Course</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name= "Course")
-public class Course{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    private String name;
-
-    @JsonIgnore                             // THIS WILL PREVENT CIRCULAR CONNECTION
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "teacher_id", referencedColumnName = "id")   // set foregin key to teacher id
-    public Teacher teacher;
-
-    @JsonIgnore
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(
-            name = "student_enrolled",                           // create new table for many to many relation
-            joinColumns        = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
-    public Set&lt;Student&gt; enrolledStudents = new HashSet&lt;&gt;();  // this will hold the students on course
-
-//  &lt; ADD MANY TO MANY WITH STUDENT HERE  &gt;
-//  &lt; ADD GETTER SETTER HERE &gt;
-}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Now create student and connect it to the relation table 'student_enrolled'</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name= "Student")        // the name of the table, if missing goes by name of class
-public class Student {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // create primary id
-    private Long id;
-    private String name;
-
-    @JsonIgnore                                     // the json ignore is for preventing recursive issue on insert ..
-    @ManyToMany(mappedBy = "enrolledStudents")      // connect to relation table 'student_enrolled'
-    private Set&lt;Course&gt; courses = new HashSet&lt;&gt;();  // will hold all courses by student
-
-//  &lt; ADD MANY TO MANY WITH STUDENT HERE  &gt;
-
-//  &lt; ADD GETTER SETTER HERE &gt;</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_examples">Query examples</h3>
-<div class="paragraph">
-<p><em>the joinn is not on the entity name but o the inner field in the entity</em></p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_join_one_to_many"><strong>Query Join One to many</strong></h3>
-<div class="paragraph">
-<p>Get all courses conducted by a teacher by teacher name Joe</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT c FROM Course c JOIN c.teacher t WHERE t.name = 'Joe'")
-	List&lt;Course&gt; findCourseByTeacherName();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_join_many_to_many"><strong>Query Join many to many</strong></h3>
-<div class="paragraph">
-<p>Get all students taking the course by the name Hebrew</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT s FROM Course c JOIN c.enrolledStudents s WHERE c.name = 'Hebrew'")
-	List&lt;Student&gt; findCoursesByStudentName();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Get all courses taken by student by the name Avi</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT c FROM Student s JOIN s.courses c WHERE s.name = 'avi'")
-	List&lt;Course&gt; findCoursesByStudentName();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_join_combine_one_to_many_many_to_many"><strong>Query Join combine one to many &amp; many to many</strong></h3>
-<div class="paragraph">
-<p>Get all students taking courses condacted by a teacher by the name of Joe</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT s FROM Teacher t JOIN t.courses c JOIN c.enrolledStudents s WHERE t.name = 'Joe'")
-	List&lt;Student&gt; findStudentsByTeacherName();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_with_variables"><strong>Query with variables</strong></h3>
-<div class="paragraph">
-<p>Position bind valiable query</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT t FROM Teacher WHERE t.name = ?1 AND age = ?2")
-	List&lt;Teacher&gt; findTeacher(String teacherName, int age);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Name bind valiable query</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("SELECT t FROM Teacher WHERE t.name = :teacherName")
-	List&lt;Teacher&gt; findTeacher(@Param("teacherName") String teacherName);</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_entity_example"><strong>Entity example</strong></h3>
-<div class="paragraph">
-<p>dropping the select part would be the same as with the SELECT t</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("FROM Teacher WHERE t.name = 'Joe'")
-	List&lt;Teacher&gt; findTeacher();</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_query_for_multiple_objects"><strong>Query for multiple Objects</strong></h3>
-<div class="paragraph">
-<p>Create a list to query by</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@GetMapping("/studentname2courses")
-	List&lt;Course&gt; getTeacher3(@RequestParam List&lt;String&gt; sname) {
-		return studentRepository.findCoursesByStudentName(sname);
+	/*
+	 * This was added via PR (thanks to @ch4mpy)
+	 * This will allow the /token endpoint to use basic auth and everything else uses the SFC above
+	 */
+	@Order(Ordered.HIGHEST_PRECEDENCE) // this would be first and only serve /auth/token
+	@Bean
+	SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
+		return http
+				.securityMatcher(new AntPathRequestMatcher("/auth/token"))
+				.authorizeHttpRequests(auth -&gt; auth.anyRequest().authenticated())
+				.sessionManagement(session -&gt; session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.csrf(AbstractHttpConfigurer::disable)
+				.exceptionHandling(ex -&gt; {
+					ex.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint());
+					ex.accessDeniedHandler(new BearerTokenAccessDeniedHandler());
+				})
+				.httpBasic(withDefaults())
+				.build();
 	}</code></pre>
 </div>
 </div>
+<div class="olist lowerroman">
+<ol class="lowerroman" type="i">
+<li>
+<p>register - would get <strong>UserCredential</strong> user and convert to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
+</li>
+<li>
+<p>token    - would get <strong>Authentication</strong> usually recevied from built in login page  ,<br/>
+this means that here the <strong>SecurityConfig</strong> would be the one authenticate<br/>
+it would be done with separete <strong>SecurityFilterChain</strong> set with  @Order(Ordered.<strong>HIGHEST_PRECEDENCE</strong>)</p>
+</li>
+<li>
+<p>validate - get token , check it in-front of <strong>Jwts</strong> .validateToken and would restore user and send back</p>
+</li>
+</ol>
+</div>
 <div class="paragraph">
-<p>Return a result based on the list queried</p>
+<p><strong>b-security-auth2</strong><br/>
+.. spring web + spring security<br/>
+.. Auth2 client<br/>
+.. COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+</div>
+<div class="paragraph">
+<p><strong>This service sends us to google to make authentication</strong></p>
+</div>
+<div class="paragraph">
+<p><strong>ISSUES</strong><br/>
+works as a stand alone as I could not set the rest api to work with a gateway as a separate service<br/>
+check maybe integrate with s</p>
+</div>
+<div class="paragraph">
+<p><strong>Dependencies</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>eureka discovery client (spring cloud discovery)</p>
+</li>
+<li>
+<p>config client (spring cloud config)</p>
+</li>
+<li>
+<p>spring zipkin + spring boot actuator</p>
+</li>
+<li>
+<p>spring web</p>
+</li>
+<li>
+<p>spring security</p>
+</li>
+<li>
+<p>Auth2 client</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_run_tests">run tests</h4>
+<div class="paragraph">
+<p>use buiit-in intellij REST requests</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @Query("SELECT c FROM #{#entityName} s JOIN s.courses c WHERE s.name IN :studentNames") // all courses attended by the following students
-    List&lt;Course&gt; findCoursesByStudentName(@Param("studentNames") List&lt;String&gt; studentName);</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If easier , can query the actuall object and not just the field in the object</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @Query("SELECT c FROM #{#entityName} s JOIN s.courses c WHERE s IN :students") // all courses attended by the following students
-    List&lt;Course&gt; findCoursesByStudentName(@Param("studentNames") List&lt;Student&gt; students);</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_features"><strong>Features</strong></h3>
-<div class="paragraph">
-<p>creating like with patterns</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query("FROM Teacher WHERE t.name LIKE %?#{[0].toUpperCase()}% ")
-	List&lt;Teacher&gt; findTeacher();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>using native sql , without JPQL modifications</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@Query(value = "FROM Teacher WHERE t.name = 'Joe' " , nativeQuery = true)
-	List&lt;Teacher&gt; findTeacher();</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_3_working_with_jpa_entitymanager">3. WORKING WITH JPA EntityManager</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>JPA can provide us with entity manager in order to query and execute</p>
-</div>
-<div class="paragraph">
-<p>Calling the entity manager</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	@PersistenceContext  EntityManager em;</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Running a query with entity manager</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">	List&lt;Student&gt; studentList = em.createQuery("SELECT a FROM Student a " , Student.class).getResultList();</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Run insert as a batch with entity manager</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">		List students = Arrays.asList(  new Student("yaniv") ,
-                                        new Student("yaniv2") ,
-                                        new Student("yaniv3") ,
-                                        new Student("yaniv4")
-				);
+<pre class="highlight"><code class="language-java" data-lang="java">###
+POST http://localhost:8071/auth/token
+Content-Type: application/json
 
-		int batchSize = 50;                                 // SIZE OF BATCH
-		for (int i = 0; i &lt; students.size(); i += batchSize) {
-			List&lt;Student&gt; batchList = students.subList(i, Math.min(i + batchSize, students.size()));
-			em.createNativeQuery(
-                    "INSERT INTO Student (studentName) VALUES (:studentName)"
-                )	.setParameter("studentName",
-                    batchList.stream().map(Student::getName)     // need to implement getName();
-                    .collect(Collectors.joining(",")))
-					.executeUpdate();
-		}</code></pre>
+{
+"username" : "yossilj",
+"password" : "123"
+}
+
+###
+GET http://localhost:8071/service-a/hello-b
+Content-Type: application/json
+Authorization: Bearer [token]</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -760,7 +776,7 @@ public class Student {
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-01-30 12:12:56 +0200
+Last updated 2024-02-01 11:04:05 +0200
 </div>
 </div>
 </body>

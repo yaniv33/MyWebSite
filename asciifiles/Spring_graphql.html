@@ -449,12 +449,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_import_dependencies">Import dependencies</a></li>
 <li><a href="#_setting_up_the_schema">Setting up the schema</a></li>
 <li><a href="#_setting_up_the_controller">Setting up the controller</a></li>
-</ul>
-</li>
-<li><a href="#_schemamapping_batchmapping">@SchemaMapping &amp; @BatchMapping</a>
-<ul class="sectlevel3">
-<li><a href="#_use_of_schemamapping">Use of @SchemaMapping</a></li>
-<li><a href="#_use_of_batchmapping">Use of @BatchMapping</a></li>
+<li><a href="#_set_up_gql_query">Set up gql query</a></li>
+<li><a href="#_schemamapping_batchmapping">@SchemaMapping &amp; @BatchMapping</a></li>
 </ul>
 </li>
 <li><a href="#_how_to_query_graphql">How to query GraphQL</a>
@@ -475,11 +471,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><strong><em>LINKS</em></strong> :</p>
 </div>
 <div class="paragraph">
-<p>Topics to cover<br/>
-Importing graphql<br/>
-creating end point<br/>
-connecting via http<br/>
-connecting via fetch</p>
+<p>location of tutorial project</p>
 </div>
 <div class="paragraph">
 <p>E:\buffer\TMP\TUTORIALS\SPRING_\GraphQL\spring-for-graphql-springboot-r2dbc-master\src\main\java\com\springforgraphql\devproblems\SpringForGraphqlR2dbcApplication.java</p>
@@ -507,7 +499,8 @@ and will end with .graphgls or .gqls</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-graphql" data-lang="graphql">type Student {
+<pre class="highlight"><code class="language-graphql" data-lang="graphql"># OBJECT TYPES , DEFINE STRUCTURE
+type Student {
     id: ID!
     name: String
     courses: [Course]
@@ -519,16 +512,19 @@ type Course {
     students: [Student]
 }
 
+# DEFINE ALL QUERIES IN QUERY (HTTP GET)
 type Query {
     getStudents: [Student]
     getCourses:  [Course]
 }
 
+# DEFINE ALL MUTATION HERE (HTTP POST , PUT )
 type Mutation {
     createStudent(request: NewStudentRequest): Student
     ascribeStudentToCourse(request: CourseToStudent): Course
 }
 
+# DEFINE SUBSCRIPTION , SAME AS WEB SOCKET
 type Subscription{
     allStudentSubscribe: Student
 }
@@ -582,15 +578,19 @@ public class BookController {
 }</code></pre>
 </div>
 </div>
-<div class="sect3">
-<h4 id="_set_up_gql_query">Set up gql query</h4>
+</div>
+<div class="sect2">
+<h3 id="_set_up_gql_query">Set up gql query</h3>
 <div class="paragraph">
 <p>Build a query with query name and requested fields</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @QueryMapping // query  { getStudent(studentId: 2) { id name courses{id name}} }
-    Student getStudent(@Argument long studentId) {	return studentRepository.findById(studentId).get(); }</code></pre>
+<pre class="highlight"><code class="language-java" data-lang="java">// query  { getStudent(studentId: 2) { id name courses{id name}} }
+    @QueryMapping
+    Student getStudent(@Argument long studentId) {
+        return studentRepository.findById(studentId).get();
+    }</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -598,27 +598,25 @@ public class BookController {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @MutationMapping    // mutation { createStudent(request: { name: "jhon" }) {id name}}
+<pre class="highlight"><code class="language-java" data-lang="java">// mutation { createStudent(request: { name: "jhon" }) {id name}}
+    @MutationMapping
     Student createStudent(@Argument NewStudentRequest request) {
         Student student = new Student();
         return studentRepository.save(student);
     }
 
-    record CourseToStudent(long studentId, long courseId) {} // due to the use of @JsonManagedReference can not use the entity directly ...</code></pre>
+    record CourseToStudent(long studentId, long courseId) {}
+    // due to the use of @JsonManagedReference can not use the entity directly ...</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_schemamapping_batchmapping">@SchemaMapping &amp; @BatchMapping</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_schemamapping_batchmapping">@SchemaMapping &amp; @BatchMapping</h3>
 <div class="sect3">
 <h4 id="_use_of_schemamapping">Use of @SchemaMapping</h4>
 <div class="paragraph">
 <p>In the case of having an object with another object ,<br/>
-we could use the GraphQL to pupolate the object array<br/>
+we could use the GraphQL to populate the object array<br/>
 <em>(in case the jpa did not populate it for us)</em></p>
 </div>
 <div class="paragraph">
@@ -656,7 +654,7 @@ Teacher teacher(Course course) {
 <div class="sect3">
 <h4 id="_use_of_batchmapping">Use of @BatchMapping</h4>
 <div class="paragraph">
-<p>SchemaMapping is helpfull , however it does cuase issue of N+1 ,<br/>
+<p>SchemaMapping are helpfull , however it does cause issue of N+1 ,<br/>
 meaning one query + one more query per each result<br/>
 to overcome this inefficiency , need to use <strong>@BatchMapping</strong></p>
 </div>
@@ -688,6 +686,7 @@ Map&lt;Course, List&lt;Student&gt;&gt; students(ArrayList&lt;Course&gt; courses)
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_how_to_query_graphql">How to query GraphQL</h2>
 <div class="sectionbody">
@@ -706,7 +705,7 @@ spring.graphql.graphiql.path=/graphiql</code></pre>
 <p>and login to <a href="http://localhost:8080/graphiql" class="bare">http://localhost:8080/graphiql</a></p>
 </div>
 <div class="paragraph">
-<p>This is a built in utility for quering the graphql server</p>
+<p>This is a built-in utility for quering the graphql server</p>
 </div>
 <div class="sect3">
 <h4 id="_query_by_fetch">Query by fetch</h4>
@@ -828,7 +827,8 @@ need to allow websocket by</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">    @SubscriptionMapping    //  subscription {  allStudentSubscribe{id name}}
+<pre class="highlight"><code class="language-java" data-lang="java">    //  subscription {  allStudentSubscribe{id name}}
+    @SubscriptionMapping
     public Flux&lt;Student&gt; allStudentSubscribe() {
         Flux&lt;Student&gt; flux = Flux.fromIterable(getStudents());
         return flux.delayElements(Duration.ofSeconds(3));
@@ -847,8 +847,9 @@ need to allow websocket by</p>
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">class GraphQlServerInterceptor implements WebGraphQlInterceptor {
 
+    // USE TO LOG
     @Override
-    public Mono&lt;WebGraphQlResponse&gt; intercept(WebGraphQlRequest request, Chain chain) { // USE TO LOG ALL GRAPHQL REQUESTS
+    public Mono&lt;WebGraphQlResponse&gt; intercept(WebGraphQlRequest request, Chain chain) {  ALL GRAPHQL REQUESTS
         log.info("interceptor logs {}", request.getDocument());
         return chain.next(request);
     }
@@ -860,7 +861,7 @@ need to allow websocket by</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2023-05-14 15:57:35 +0300
+Last updated 2024-01-30 11:59:03 +0200
 </div>
 </div>
 </body>
