@@ -443,14 +443,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_process_implemented_by_security_services">Process implemented by security services</a></li>
-<li><a href="#_various_microservices_security">Various microservices security</a>
+<li><a href="#_different_ways_to_use_rest_calls">Different ways to use Rest Calls</a>
 <ul class="sectlevel2">
-<li><a href="#_b_security_basic"><strong>b-security-basic</strong></a></li>
-<li><a href="#_b_security_jwt"><strong>b-security-JWT</strong></a></li>
-<li><a href="#_b_security_jwtjpa"><strong>b-security-JWTJpa</strong></a></li>
-<li><a href="#_b_security_jwtrsa"><strong>b-security-JWTRsa</strong></a></li>
-<li><a href="#_b_security_auth2"><strong>b-security-auth2</strong></a></li>
+<li><a href="#_use_resttemplate">Use RestTemplate</a></li>
+<li><a href="#_use_webclient">Use WebClient</a></li>
+<li><a href="#_use_restclient">Use RestClient</a></li>
+</ul>
+</li>
+<li><a href="#_adding_command_runner_rest_info_to_zipking">Adding command runner rest info to zipking</a>
+<ul class="sectlevel2">
+<li><a href="#_add_dependency">Add dependency</a></li>
+<li><a href="#_annotation">annotation</a></li>
+</ul>
+</li>
+<li><a href="#_add_docker_compose_from_the_pom_xml">Add docker compose from the pom.xml</a>
+<ul class="sectlevel2">
+<li><a href="#_add_dependency_2">Add dependency</a></li>
 </ul>
 </li>
 </ul>
@@ -458,318 +466,373 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_process_implemented_by_security_services">Process implemented by security services</h2>
+<h2 id="_different_ways_to_use_rest_calls">Different ways to use Rest Calls</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The gateway microservice would implement a filter , and Rest requests would authenticate in that filter.<br/>
-Each of our security microservices would have to implement the following Rest calls.</p>
+<p>We have 3 main mathods used for rest calls implementation :<br/>
+. RestTemplate - synchronous http client , going to be deprecated.<br/>
+. WebClient - asynchronous http client / non blocking , works with webflux dependency<br/>
+. RestClient - new addition synchronous http client, comes with basic spring from 6.1 ver, newer syntax</p>
 </div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>register</strong> - register new users.</p>
-</li>
-<li>
-<p><strong>token</strong> - generate token for existing users.</p>
-</li>
-<li>
-<p><strong>validate</strong> -  return whether the token is valid or not</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The gate would work with the security microservices as such:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>the gateway would implement filter that would check the token in-front of security</p>
-</li>
-<li>
-<p>requests directed to security would not need to go via the filter</p>
-</li>
-<li>
-<p>requests directed to other microservices would go via the filter.</p>
-</li>
-<li>
-<p>the filter would check the token by the validate controller, if not valid would be declined</p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_various_microservices_security">Various microservices security</h2>
-<div class="sectionbody">
 <div class="sect2">
-<h3 id="_b_security_basic"><strong>b-security-basic</strong></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>spring web + spring security</p>
-</li>
-<li>
-<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
-</li>
-</ol>
-</div>
+<h3 id="_use_resttemplate">Use RestTemplate</h3>
 <div class="paragraph">
-<p>This microservice would work with memory data, and the SecurityConfig built in <strong>PasswordEncoder</strong></p>
+<p>RestTemplate is a part of spring-boot-starter-web</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>the security basically allowes all requests , but is used on <strong>"\token"</strong> rest api would the authenticationManager to authenticate we would generate token only for valid users</p>
+<p>Create a RestTemplate</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The <strong>@LoadBalanced</strong> is for working with eureka server names and gateway routes , and not IP OR DNS resolve</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+public class RestTemplateConfig {
+
+    @LoadBalanced  //  without this , the rest template would not work with eureka server / with this would not work with ip
+    @Bean
+    public RestTemplate template(){
+       return new RestTemplate();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>add  <strong>@Autowired</strong> private RestTemplate restTemplate;<br/>
+Adding this without step 1 would result with :<br/>
+<em>com.otot.bgateway.filter.AuthenticationFilter required a bean of type 'org.springframework.web.client.RestTemplate' that could not be found.</em></p>
+</li>
+<li>
+<p>create a simple REST API call</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>String result = restTemplate.getForObject("LB://c-service-B/service-b/itntermittently", String.class);</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>create a detailed REST API call</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>        HttpHeaders headers = new HttpHeaders();                // Create an instance of HttpHeaders
+        headers.set("loggedInUser", "my_logged_user");          // Set the header names and values
+        HttpHeaders headers =  return new HttpEntity(headers);  // Create an instance of HttpEntity and pass the HttpHeaders
+
+        ResponseEntity&lt;String&gt; rs = restTemplate.exchange("LB://c-service-B/service-b/hello",
+                                                            HttpMethod.GET,
+                                                            headers,
+                                                            String.class);</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_or_use_short_ver">OR , use short ver</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public String  workWithRestTemplate(int post){
+	RestTemplate restTemplate = new RestTemplate();
+	String response = restTemplate.getForObject("https://jsonplaceholder.typicode.com/posts/" + post , String.class);
+	return response;
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_use_webclient">Use WebClient</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>WebClient is in webflux and it should be added to the project</p>
 </li>
 </ol>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests((authorize) -&gt; {
-            authorize.
-                    requestMatchers("/auth/**").permitAll().
-                    anyRequest().authenticated();
-        })
-                .httpBasic(Customizer.withDefaults())
-// in case of wanting to use the build in form
-                .formLogin(Customizer.withDefaults());
-        return http.build();
-    }</code></pre>
+<pre class="highlight"><code class="language-xml" data-lang="xml">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-starter-webflux&lt;/artifactId&gt;
+		&lt;/dependency&gt;</code></pre>
 </div>
 </div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>register - would convert <strong>CustomUserDetails</strong> user to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
-</li>
-<li>
-<p>token    - would get <strong>CustomUserDetails</strong> user ,token return is username + password(user) generated with  <strong>@Bean PasswordEncoder</strong></p>
-</li>
-<li>
-<p>validate - would seperate the user and pass and run  <strong>@Bean PasswordEncoder</strong>.match(user , pass)</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_b_security_jwt"><strong>b-security-JWT</strong></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>spring web + spring security</p>
-</li>
-<li>
-<p>JWT &gt;  io.jsonwebtoken &gt; jjwt-api , jjwt-impl , jjwt-jackson : 0.11.5</p>
-</li>
-<li>
-<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This microservice would work with memory data and JWT to create a token.</p>
-</div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>register - would get <strong>CustomUserDetails</strong> user to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
-</li>
-<li>
-<p>token    - would get <strong>CustomUserDetails</strong> user ,<br/>
-check in-front of <strong>authenticationManager.authenticate</strong> (= @Bean AuthenticationProvider)<br/>
-(the request itself would be allowed by SecurityFilterChain , but here we use to authenticate of <strong>SecurityConfig</strong>)<br/>
-if validated , use <strong>Jwts</strong> to generate a token for user and claims</p>
-</li>
-<li>
-<p>validate - get token , check it in-front of <strong>Jwts</strong> .validateToken and would restore user and send back</p>
+<p>Create Component WebClient</p>
 </li>
 </ol>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">        Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getName(), authRequest.getPassword()));
-        if (authenticate.isAuthenticated()) {
-            return authService.generateToken(authRequest.getName());
-        } else {
-            throw new RuntimeException("invalid access");
-        }</code></pre>
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+public class WebClientFactory {
+    private final WebClient.Builder webClientBuilder;
+
+    public WebClientFactory(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
+    }
+
+    public WebClient get(String baseUrl) {
+// we need to clone builder otherwise filters will be accumulated from different clients
+        return webClientBuilder.clone()
+                .baseUrl(baseUrl)
+ //             .defaultCookie("cookie-name", "cookie-value")
+ //             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
+
+                .build();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Create configuration to implement webClient</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@Configuration
+class serviceCConfig {
+
+    @Autowired
+    private LoadBalancedExchangeFilterFunction filterFunction;
+
+    @Bean
+    public WebClient serviceCWebClient(){
+        return WebClient.builder().baseUrl("http://c-service-c")  // id of service as defined on gateway.yml
+                .filter(filterFunction).build();
+    }
+
+    @Bean
+    public ServiceCClient serviceCClient(){
+        HttpServiceProxyFactory httpServiceProxyFactory =
+                HttpServiceProxyFactory.builder(WebClientAdapter.forClient(serviceCWebClient())).build();
+        return httpServiceProxyFactory.createClient(ServiceCClient.class);
+
+    }
+}</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Create HttpExchange per each microservice</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@HttpExchange
+public interface ServiceCClient {
+
+    @GetExchange("/service-c/hello")
+    public String hello();
+
+    @GetExchange("/service-b/goodbye")
+    public String goodbye();
+
+}</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>create Autowired object to the HttpExchange , and call declared functions</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@Autowired private ServiceCClient serviceCClient;
+ serviceCClient.hello();</pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_or_use_short_ver_2">OR use short ver</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">public String workWithWebClient(int post){
+	WebClient webClient = WebClient.create();
+	Mono&lt;String&gt; response = webClient.get()
+			.uri("https://jsonplaceholder.typicode.com/posts/" + post)
+			.retrieve()
+			.bodyToMono(String.class);
+	return response.toString();
+}</code></pre>
+</div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_b_security_jwtjpa"><strong>b-security-JWTJpa</strong></h3>
-<div class="paragraph">
-<p><a href="https://www.youtube.com/watch?v=MWvnmyLRUik">Youtube</a></p>
-</div>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<h3 id="_use_restclient">Use RestClient</h3>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>spring web + spring security</p>
-</li>
-<li>
-<p>JWT &gt;  io.jsonwebtoken &gt; jjwt-api , jjwt-impl , jjwt-jackson : 0.11.5</p>
-</li>
-<li>
-<p>jpa ,mysql ,  lombok</p>
-</li>
-<li>
-<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+<p>Create interface with @GetExchange end point<br/>
+Note - we include here a record , it must be public</p>
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>This microservice would work same as <strong>b-security-JWT</strong> but would work with database and not InMemory</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">	public record Post(Integer id, Integer userId, String title, String body){};
+
+	public interface JsonPlaceholderService {
+
+		@GetExchange("/posts")
+		List&lt;Post&gt; findAll();
+
+		@GetExchange("/posts/{id}")
+		Post findById(@PathVariable Integer id);
+
+	}</code></pre>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_b_security_jwtrsa"><strong>b-security-JWTRsa</strong></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
+<div class="olist arabic">
+<ol class="arabic" start="2">
 <li>
-<p>spring-boot-starter-web</p>
-</li>
-<li>
-<p>spring-boot-starter-oauth2-resource-server (includes security .. )</p>
-</li>
-<li>
-<p>spring-boot-configuration-processor</p>
-</li>
-<li>
-<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
+<p>Create @Bean JsonPlaceholderService<br/>
+this Bean would assign the URL for the RestClient and would map the result to implement the JsonPlaceholderService interface</p>
 </li>
 </ol>
-</div>
-<div class="paragraph">
-<p>This microservice would use RSA public &lt;&#8594; private key in order to validate user , set with InMemory<br/>
-Security is made of 2 layers where the token generate is dealt with a different mechanise<br/>
-Security is based on httpBasic(withDefaults()) so the generate request should be with basic auth</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-java" data-lang="java">	@Bean
-	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.
-				csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests((authorize) -&gt; {
-					authorize.
-		                requestMatchers("/auth/**").permitAll().
-						anyRequest().authenticated();
-				})
-				.httpBasic(Customizer.withDefaults())
-// in case of wanting to use the build in form
-				.formLogin(Customizer.withDefaults());
-		return http.build();
-	}
-
-	/*
-	 * This will allow the /token endpoint to use basic auth and everything else uses the SFC above
-	 * would be first and only serve /auth/token
-	 */
-	@Order(Ordered.HIGHEST_PRECEDENCE)
-	@Bean
-	SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
-		return http
-				.securityMatcher(new AntPathRequestMatcher("/auth/token"))
-				.authorizeHttpRequests(auth -&gt; auth.anyRequest().authenticated())
-				.sessionManagement(session -&gt; session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-				.csrf(AbstractHttpConfigurer::disable)
-				.exceptionHandling(ex -&gt; {
-					ex.authenticationEntryPoint(new BearerTokenAuthenticationEntryPoint());
-					ex.accessDeniedHandler(new BearerTokenAccessDeniedHandler());
-				})
-				.httpBasic(withDefaults())
-				.build();
+	JsonPlaceholderService jsonPlaceholderService() {
+		RestClient restClient = RestClient.create("https://jsonplaceholder.typicode.com");
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
+		return factory.createClient(JsonPlaceholderService.class);
 	}</code></pre>
 </div>
 </div>
-<div class="olist lowerroman">
-<ol class="lowerroman" type="i">
-<li>
-<p>register - would get <strong>UserCredential</strong> user and convert to <strong>UserDetails</strong> user and would store it in <strong>InMemoryUserDetailsManager</strong> userDetailsManager</p>
-</li>
-<li>
-<p>token    - would get <strong>Authentication</strong> usually recevied from built in login page  ,<br/>
-this means that here the <strong>SecurityConfig</strong> would be the one authenticate<br/>
-it would be done with separete <strong>SecurityFilterChain</strong> set with  @Order(Ordered.<strong>HIGHEST_PRECEDENCE</strong>)</p>
-</li>
-<li>
-<p>validate - get token , check it in-front of <strong>Jwts</strong> .validateToken and would restore user and send back</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_b_security_auth2"><strong>b-security-auth2</strong></h3>
-<div class="olist loweralpha">
-<ol class="loweralpha" type="a">
-<li>
-<p>spring web + spring security</p>
-</li>
-<li>
-<p>Auth2 client</p>
-</li>
-<li>
-<p>COMMON (config client, eureka , zipkin , actuator ,micrometer , prometheus , grafana)</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p><strong>This service sends us to google to make authentication</strong></p>
-</div>
-<div class="paragraph">
-<p><strong>ISSUES</strong><br/>
-works as a stand alone as I could not set the rest api to work with a gateway as a separate service<br/>
-check maybe integrate with s</p>
-</div>
-<div class="paragraph">
-<p><strong>Dependencies</strong></p>
-</div>
 <div class="olist arabic">
-<ol class="arabic">
+<ol class="arabic" start="3">
 <li>
-<p>eureka discovery client (spring cloud discovery)</p>
-</li>
-<li>
-<p>config client (spring cloud config)</p>
-</li>
-<li>
-<p>spring zipkin + spring boot actuator</p>
-</li>
-<li>
-<p>spring web</p>
-</li>
-<li>
-<p>spring security</p>
-</li>
-<li>
-<p>Auth2 client</p>
+<p>Create @Bean JsonPlaceholderService</p>
 </li>
 </ol>
 </div>
-<div class="sect3">
-<h4 id="_run_tests">run tests</h4>
 <div class="paragraph">
-<p>use buiit-in intellij REST requests</p>
+<p>this Bean would assign the URL for the RestClient and would map the result to implement the JsonPlaceholderService interface</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">###
-POST http://localhost:8071/auth/token
-Content-Type: application/json
-
-{
-"username" : "yossilj",
-"password" : "123"
-}
-
-###
-GET http://localhost:8071/service-a/hello-b
-Content-Type: application/json
-Authorization: Bearer [token]</code></pre>
+<pre class="highlight"><code class="language-java" data-lang="java">	@Bean
+	JsonPlaceholderService jsonPlaceholderService() {
+		RestClient restClient = RestClient.create("https://jsonplaceholder.typicode.com");
+		HttpServiceProxyFactory factory = HttpServiceProxyFactory.builderFor(RestClientAdapter.create(restClient)).build();
+		return factory.createClient(JsonPlaceholderService.class);
+	}</code></pre>
 </div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>Autowire and use service</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">	@Autowired JsonPlaceholderService jsonPlaceholderService;
+
+    jsonPlaceholderService.findAll();</code></pre>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_or_use_short_ver_3">OR , use short ver</h4>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    public String workWithRestClient(int post){
+        RestClient restClient = RestClient.create();
+        ResponseEntity&lt;String&gt; response = restClient.get()
+                .uri("https://jsonplaceholder.typicode.com/posts/" + post).retrieve().toEntity(String.class);
+        return response.getBody();
+    }</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_command_runner_rest_info_to_zipking">Adding command runner rest info to zipking</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://www.youtube.com/watch?v=exRkiVLyPpc">Youtube</a></p>
+</div>
+<div class="paragraph">
+<p>This is in order to add to zipking information about rest requests that are not generated by a controller</p>
+</div>
+<div class="sect2">
+<h3 id="_add_dependency">Add dependency</h3>
+<div class="paragraph">
+<p>add actuator with this dependency</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">	&lt;dependency&gt;
+		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+		&lt;artifactId&gt;spring-boot-starter-aop&lt;/artifactId&gt;
+	&lt;/dependency&gt;</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_annotation">annotation</h3>
+<div class="paragraph">
+<p>Here we tell zipkin to also log this barnch of information from the actuator</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">    @Bean
+	@Observed(name = "posts.load-all-posts", contextualName = "post.find-all")
+	CommandLineRunner commandLineRunner(JsonPlaceholderService jsonPlaceholderService) {
+		return args -&gt; {
+			jsonPlaceholderService.findAll();
+		};
+	}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_add_docker_compose_from_the_pom_xml">Add docker compose from the pom.xml</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>It can also be set from the start.spring.io by adding Docker Compose Support<br/>
+this will also create the docker-compose.yml according to the</p>
+</div>
+<div class="sect2">
+<h3 id="_add_dependency_2">Add dependency</h3>
+<div class="paragraph">
+<p>this will add the docker comps built in at run time</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-xml" data-lang="xml">		&lt;dependency&gt;
+			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+			&lt;artifactId&gt;spring-boot-docker-compose&lt;/artifactId&gt;
+			&lt;scope&gt;runtime&lt;/scope&gt;
+			&lt;optional&gt;true&lt;/optional&gt;
+		&lt;/dependency&gt;</code></pre>
 </div>
 </div>
 </div>
@@ -778,7 +841,7 @@ Authorization: Bearer [token]</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-01 11:25:17 +0200
+Last updated 2024-02-12 10:30:13 +0200
 </div>
 </div>
 </body>

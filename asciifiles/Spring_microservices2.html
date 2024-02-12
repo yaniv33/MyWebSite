@@ -450,8 +450,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </ul>
 </li>
 <li><a href="#_implementing_gateway_in_front_of_security_micorservices">implementing gateway in-front of security micorservices</a>
-<ul class="sectlevel3">
+<ul class="sectlevel2">
 <li><a href="#_set_approch_to_filter_on_gateway">set approch to filter on gateway</a></li>
+</ul>
+</li>
+<li><a href="#_docker_compose_use_development_services">Docker compose - Use development services</a></li>
+<li><a href="#_appendix">Appendix</a>
+<ul class="sectlevel2">
+<li><a href="#_config_server_hierarchy">Config server hierarchy</a></li>
+<li><a href="#_view_telemetry">View telemetry</a></li>
+<li><a href="#_handle_exceptions">Handle exceptions</a></li>
 </ul>
 </li>
 </ul>
@@ -571,8 +579,8 @@ However in this project the gateway and security are seperated, so that we could
 <p>The gateway microservice would implement a filter , and Rest requests would authenticate in that filter.<br/>
 Each of our security microservices would have to implement the following Rest calls.</p>
 </div>
-<div class="sect3">
-<h4 id="_set_approch_to_filter_on_gateway">set approch to filter on gateway</h4>
+<div class="sect2">
+<h3 id="_set_approch_to_filter_on_gateway">set approch to filter on gateway</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -640,6 +648,351 @@ System.out.println("invalid access...! - " + e.getMessage());
 <div class="paragraph">
 <p><strong>FOR THE VARIOUS SECURITY MICROSERVICE VIEW OTHER DOCUMNET</strong></p>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_docker_compose_use_development_services">Docker compose - Use development services</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Docker compose allows as to run all services needed for our code in a simple container</p>
+</div>
+<div class="paragraph">
+<p><strong>List of services we currently use:</strong></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><em>zipkin</em> -<br/>
+by planting dependncy <strong>zipkin-reporter-brave</strong> in the project<br/>
+this server running by default on port 9411 would gether info about each rest request</p>
+</li>
+<li>
+<p><em>prometheus</em> -<br/>
+this server relays on dependency <strong>spring-boot-starter-actuator</strong><br/>
+that exposes endpoint /actuator/env</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>*<em>more info is on telemetry section</em></p>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p><em>grafana</em> -<br/>
+grafana is a server that aggregates info coming from prometheus endpoints<br/>
+and can display it in graphical format.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>docker-compose.yml</strong> is a file running once in order to create the container<br/>
+after running the container and its services available on docker desktop</p>
+</div>
+<div class="paragraph">
+<p>for the prometheus server we need to transfer to the configuration file to the container</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_appendix">Appendix</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_config_server_hierarchy">Config server hierarchy</h3>
+<div class="sect4">
+<h5 id="_setting_in_the_service_side">Setting in the service side</h5>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>add spring-cloud-starter-config to the pom.xml</p>
+</li>
+<li>
+<p>add to the application.yml a pointer to the config server</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">spring:
+  application:
+    name: c-service-A
+  config:
+    import: "optional:configserver:http://localhost:8088,optional:file:./config/"</code></pre>
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_setting_in_the_config_server_side">Setting in the config server side</h5>
+<div class="paragraph">
+<p>The config server could work on git originated properties file, or from local configuration</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>settings the config server to work on locale files as such</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">spring:
+  application:
+    name: a-config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          searchLocations: classpath:config/</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>creating a folder named resources/config and adding yml files that correspand to the name of the services set on the application files</p>
+</li>
+<li>
+<p>in the corresponding files set a profile called common</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-properties" data-lang="properties">spring:
+  profiles:
+    include: common</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="4">
+<li>
+<p>create a file for common profile properties named application-common that will hold common properties for services with common profile</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>the properties proiority would be as follows</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>for the common profile file</p>
+</li>
+<li>
+<p>for the config server property file</p>
+</li>
+<li>
+<p>for microservice property file</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><strong>REMARK</strong> - file:./config/ was added to create an additional resource to get properties that would get higher priority than the config server , but it did not work!</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_view_telemetry">View telemetry</h3>
+<div class="paragraph">
+<p>By adding the dependency <strong>spring-boot-starter-actuator</strong> to the pom.xml<br/>
+we will get new endpoints added to the project that would reveal info about the performance of the project<br/>
+this endpoints would be available in the endpoints as  /actuator/env &amp; /actuator/metrics</p>
+</div>
+<div class="paragraph">
+<p>for exmaple by viewing <a href="http://localhost:8080/actuator/metrics/http.server.requests" class="bare">http://localhost:8080/actuator/metrics/http.server.requests</a> we could see how many http requests were made</p>
+</div>
+<div class="paragraph">
+<p>By adding dependency <strong>micrometer</strong> we would get more endpoint with info about the project</p>
+</div>
+<div class="paragraph">
+<p>there are 2 micrometer packeges</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>sluth - deprecated<br/>
+This is the bases for <strong>Open telemetry</strong> and <strong>Hystrix</strong> tools</p>
+</li>
+<li>
+<p>brave -<br/>
+this is the base for <strong>Prometheus</strong> and <strong>Resilience4j</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p><em><strong>Prometheus</strong></em><br/>
+by adding dependency <strong>micrometer-registry-prometheus</strong> in the project<br/>
+that will expose additional endpoint /actuator/env/prometheus</p>
+</div>
+<div class="paragraph">
+<p>the prometheus server needs a configuration file<br/>
+in it, we declare all endpoints that the prometheus server needs to aggregate data from</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dockerfile" data-lang="dockerfile">  - job_name: "service-a"
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ["host.docker.internal:9091"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>prometheus can also collect information about the machine status by installing on the machine <strong>windows exporter tool</strong><br/>
+and adding this job to the prometheus.yml</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dockerfile" data-lang="dockerfile">  - job_name: "hvhost01"
+    static_configs:
+      - targets: ["host.docker.internal:9182"]</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>a tool like Grafana can collect information from resources like prometheus and show them in graphs</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_handle_exceptions">Handle exceptions</h3>
+<div class="sect3">
+<h4 id="_deal_with_exception_with_globalexceptionhandler">Deal with exception with GlobalExceptionHandler</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>create a class with @RestControllerAdvice</p>
+</li>
+<li>
+<p>this class would implement functions with @ExceptionHandler(ServiceException.class)</p>
+</li>
+<li>
+<p>when ever an exception would be thorwen of the declared type, it would end up in the ascribed function that would return a HTTP response for this specific error.</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>@RestControllerAdvice
+@Slf4j
+public class ServiceGlobalExceptionHandler {
+
+    @ExceptionHandler(ServiceException.class)
+    public ResponseEntity&lt;?&gt; handleSwiggyServiceException(ServiceException ex) throws JsonProcessingException {
+        log.error("ServiceGlobalExceptionHandler::handleSwiggyServiceException exception caught {}",ex.getMessage());
+        CustomErrorResponse errorResponse = new ObjectMapper().readValue(ex.getMessage(), CustomErrorResponse.class);
+        return ResponseEntity.internalServerError().body(errorResponse);
+//        return new ResponseEntity("This is just foo", HttpStatus.PAYMENT_REQUIRED);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity&lt;?&gt; handleGenericException(Exception ex){
+        CustomErrorResponse errorResponse= CustomErrorResponse.builder()
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .errorCode(HttpStatus.INTERNAL_SERVER_ERROR)
+                .errorMessage(ex.getMessage())
+                .build()  ;
+log.error("A-ServiceGlobalExceptionHandler::handleGenericException exception caught {}",ex.getMessage());
+        return ResponseEntity.internalServerError().body(errorResponse);
+    }
+}</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>usually create custom exception do be dealt with</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>public class ServiceException extends RuntimeException{
+
+    public ServiceException(String message) {
+        super(message);
+    }
+}</pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_deal_with_exception_with_resilience4jcircutbreaker">Deal with exception with Resilience4j:CircutBreaker</h4>
+<div class="paragraph">
+<p><em>View working with fallback on section -  "Working with Resilience4j"</em></p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_working_with_resilience4j">Working with Resilience4j</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>adding dependencies <strong>spring-cloud-starter-circuitbreaker-resilience4j</strong> and <strong>micrometer-tracing-bridge-brave</strong></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Resilience4j allows us to delcare @CircuitBreaker<br/>
+this means the following function is calling another REST API and that describes how to deal with issues of http calls<br/>
+also it allows us to declare fallback in case of faliure</p>
+</div>
+<div class="paragraph">
+<p>Resilience states :<br/>
+. Closed  - the remote http server works fine , forword requests<br/>
+. Open -    the remote http server not responding , go to fallback<br/>
+. Other -   after Open timeout set , attempt again and if false , go back to Open</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_setting_up_resilience4j">Setting up Resilience4j</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>After adding dependencies , set properties</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>set the Circuit breaker name and fallback funciton</p>
+</li>
+</ol>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>    @CircuitBreaker(name="randomActivity" , fallbackMethod = "fallback")
+    @GetMapping("hello-b-c/{name}")
+    public String helloToBWithPathVariable(@PathVariable String name) {
+        log.info("got to hello b-c .. ");
+//        SpanCustomizer customizer = span.customizer();
+
+        return "Service A - " + serviceBClient.helloWithPathVar(name);
+    }
+
+    public String fallback(Throwable throwable) { // did not work , but does go to
+        return "Service not reachable: " + throwable.getMessage();
+    }</pre>
+</div>
+</div>
 <div class="paragraph">
 <p><strong>ISSUE</strong></p>
 </div>
@@ -667,7 +1020,17 @@ http://localhost:[port]/[spring.application.name]/default</pre>
 <li>
 <p>for config server do not use names with camel case</p>
 </li>
+<li>
+<p>for some reason had to add to each on eureka.instance.hostname=localhost</p>
+</li>
 </ol>
+</div>
+<div class="paragraph">
+<p><strong>Depricated</strong><br/>
+. Hystrix is dashbord to view rest calls between microservices. deprecated is up to java 11 .<br/>
+. Sluth micrometer was replaced by brave.<br/>
+. Open telemetry uses Sluth , now this is replaced by grafana.</p>
+</div>
 </div>
 </div>
 </div>
@@ -675,7 +1038,7 @@ http://localhost:[port]/[spring.application.name]/default</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-01 11:04:05 +0200
+Last updated 2024-02-12 10:30:13 +0200
 </div>
 </div>
 </body>

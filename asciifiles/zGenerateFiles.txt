@@ -10,3 +10,5 @@ asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\springDemo\src\main\java\c
 asciidoctor -b xhtml5 F:\WEB_PROJECTS\angular2\myDemo\microservice\README.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_microservices1.html
 asciidoctor -b xhtml5 E:\buffer\TMP\TUTORIALS\SPRING_\microservice_pom\README.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_microservices2.html
 asciidoctor -b xhtml5 E:\buffer\TMP\TUTORIALS\SPRING_\microservice_pom\b-security\README-security.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_microservices_sec.html
+asciidoctor -b xhtml5 E:\buffer\TMP\TUTORIALS\SPRING_\microservice_pom\README_spring_miscellaneous.adoc -o E:\buffer\TMP\TUTORIALS\GIT\MyWebSite\asciifiles\Spring_miscellaneous.html
+
